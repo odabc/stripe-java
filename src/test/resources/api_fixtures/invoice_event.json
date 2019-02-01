@@ -1,0 +1,108 @@
+{
+  "id": "evt_1Dz9XQ2eZvKYlo2CeA8b6C27",
+  "object": "event",
+  "account": null,
+  "api_version": "2012-09-24",
+  "created": 1549056424,
+  "data": {
+    "object": {
+      "id": "in_1DwEmi2eZvKYlo2C5EbZEeaM",
+      "object": "invoice",
+      "amount_due": 999,
+      "amount_paid": 0,
+      "amount_remaining": 999,
+      "application_fee": null,
+      "attempt_count": 3,
+      "attempted": true,
+      "billing": "charge_automatically",
+      "billing_reason": "subscription_update",
+      "charge": "ch_1Dz9XQ2eZvKYlo2CkWv9POQi",
+      "currency": "usd",
+      "custom_fields": null,
+      "customer": "cus_9zZwdLtstkEvpp",
+      "closed": false,
+      "date": 1548361608,
+      "default_source": null,
+      "description": null,
+      "discount": null,
+      "due_date": null,
+      "ending_balance": 0,
+      "finalized_at": 1548365218,
+      "footer": null,
+      "forgiven": true,
+      "hosted_invoice_url": "https://pay.stripe.com/invoice/invst_8XL4wSoMCpr7nPUmM4N3eZypIk",
+      "invoice_pdf": "https://pay.stripe.com/invoice/invst_8XL4wSoMCpr7nPUmM4N3eZypIk/pdf",
+      "lines": [
+        {
+          "id": "sli_bafe225afaacb6",
+          "object": "line_item",
+          "amount": 999,
+          "currency": "usd",
+          "discountable": true,
+          "livemode": false,
+          "metadata": {},
+          "period": {
+            "end": 1551039949,
+            "start": 1548361549
+          },
+          "plan": {
+            "id": "titanium-extended-891",
+            "object": "plan",
+            "active": true,
+            "aggregate_usage": null,
+            "amount": 999,
+            "billing_scheme": "per_unit",
+            "created": 1485289310,
+            "currency": "usd",
+            "interval": "month",
+            "interval_count": 1,
+            "livemode": false,
+            "metadata": {},
+            "nickname": null,
+            "product": "prod_BThb0OwVdsDwGl",
+            "tiers": null,
+            "tiers_mode": null,
+            "transform_usage": null,
+            "trial_period_days": null,
+            "usage_type": "licensed"
+          },
+          "proration": false,
+          "quantity": 1,
+          "subscription": "sub_9za1uI017nq6JK",
+          "subscription_item": "si_19farR2eZvKYlo2CfAS8fdzW",
+          "type": "subscription"
+        }
+      ],
+      "livemode": false,
+      "metadata": {},
+      "next_payment_attempt": 1549661224,
+      "number": "9B974FB-0024",
+      "paid": false,
+      "period_end": 1548361549,
+      "period_start": 1545683149,
+      "receipt_number": null,
+      "starting_balance": 0,
+      "statement_descriptor": null,
+      "subscription": "sub_9za1uI017nq6JK",
+      "subtotal": 999,
+      "tax": 0,
+      "tax_percent": null,
+      "total": 999,
+      "webhooks_delivered_at": 1548361608
+    },
+    "previous_attributes": {
+      "charge": "ch_1DxL9f2eZvKYlo2CmBLG5gV6",
+      "next_payment_attempt": {
+        "value": "1549056423"
+      }
+    }
+  },
+  "livemode": false,
+  "pending_webhooks": 0,
+  "request": {
+    "id": null,
+    "idempotency_key": null
+  },
+  "type": "invoice.updated",
+  "user_id": null
+}
