@@ -9,6 +9,7 @@ import static org.junit.Assert.assertNull;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonPrimitive;
 import com.stripe.BaseStripeTest;
@@ -33,8 +34,22 @@ public class EventDataObjectDeserializerTest extends BaseStripeTest {
     final String invoiceEvent = getResourceAsString("/api_fixtures/invoice_event.json");
     Event event = ApiResource.GSON.fromJson(invoiceEvent, Event.class);
 
-    EventDataObjectDeserializer dataObjectDeserializer = event.getDataObjectDeserializer();
+    // In practice, you may only rely on a few fields from the event, and those fields are
+    // fully compatible with the current schema. You should be able to access those fields, not
+    // because of a few legacy fields are failing the entire event deserialization.
 
+    // This is a deprecated approach, and not recommended because you will
+    // get JSON parse exception upon schema incompatibility
+    try {
+      event.getData().getObject();
+      fail("Getting old events through deprecated method should fail");
+    } catch (JsonParseException e) {
+      // verified that deprecated get object fails
+    }
+
+    // Here's an example of a best-attempt approach to get access to the information you
+    // need from the object
+    EventDataObjectDeserializer dataObjectDeserializer = event.getDataObjectDeserializer();
     String invoiceId = null;
     if (dataObjectDeserializer.deserialize()) {
       Invoice invoice = (Invoice) dataObjectDeserializer.getObject();
