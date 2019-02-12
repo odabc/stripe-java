@@ -6,6 +6,7 @@ import static org.junit.Assert.assertNotNull;
 import com.stripe.BaseStripeTest;
 import com.stripe.net.ApiResource;
 
+import com.sun.java.swing.action.NextAction;
 import org.junit.Test;
 
 public class PaymentIntentTest extends BaseStripeTest {
@@ -17,11 +18,11 @@ public class PaymentIntentTest extends BaseStripeTest {
     assertNotNull(resource);
     assertNotNull(resource.getId());
 
-    PaymentIntentSourceAction action =  resource.getNextSourceAction();
+    PaymentIntentNextAction action =  resource.getNextAction();
     assertNotNull(action);
 
     assertEquals("authorize_with_url", action.getType());
-    PaymentIntentSourceActionValueAuthorizeWithUrl actionAuthorize = action.getAuthorizeWithUrl();
+    PaymentIntentNextActionValueRedirectToUrl actionAuthorize = action.getRedirectToUrl();
     assertNotNull(actionAuthorize);
     assertEquals("https://stripe.com", actionAuthorize.getUrl());
     assertEquals("https://stripe.com/return", actionAuthorize.getReturnUrl());
