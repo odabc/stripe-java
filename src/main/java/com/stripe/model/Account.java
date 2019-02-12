@@ -7,6 +7,12 @@ import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.param.AccountCreateParams;
+import com.stripe.param.AccountListParams;
+import com.stripe.param.AccountPersonsParams;
+import com.stripe.param.AccountRejectParams;
+import com.stripe.param.AccountRetrieveParams;
+import com.stripe.param.AccountUpdateParams;
 import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
@@ -30,8 +36,8 @@ public class Account extends ApiResource implements PaymentSource, MetadataStore
   String applicationUrl;
 
   /**
-   * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) A logo for this account (at
-   * least 128px x 128px).
+   * (ID of a [file upload](https://stripe.com/docs/guides/file-upload))va A logo for this account
+   * (at least 128px x 128px).
    */
   @SerializedName("business_logo")
   @Getter(lombok.AccessLevel.NONE)
@@ -221,36 +227,51 @@ public class Account extends ApiResource implements PaymentSource, MetadataStore
     this.businessLogo = new ExpandableField<File>(expandableObject.getId(), expandableObject);
   }
 
-  /** Retrieves the details of the account. */
+  /** Retrieves the details of an account. */
   public static Account retrieve() throws StripeException {
     return retrieve((Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Retrieves the details of the account. */
+  /** Retrieves the details of an account. */
   public static Account retrieve(RequestOptions options) throws StripeException {
     return retrieve((Map<String, Object>) null, options);
   }
 
-  /** Retrieves the details of the account. */
+  /** Retrieves the details of an account. */
   public static Account retrieve(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/account");
     return request(ApiResource.RequestMethod.GET, url, params, Account.class, options);
   }
 
-  /** Retrieves the details of the account. */
+  /** Retrieves the details of an account. */
+  public static Account retrieve(AccountRetrieveParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/account");
+    return request(ApiResource.RequestMethod.GET, url, params, Account.class, options);
+  }
+
+  /** Retrieves the details of an account. */
   public static Account retrieve(String account) throws StripeException {
     return retrieve(account, (Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Retrieves the details of the account. */
+  /** Retrieves the details of an account. */
   public static Account retrieve(String account, RequestOptions options) throws StripeException {
     return retrieve(account, (Map<String, Object>) null, options);
   }
 
-  /** Retrieves the details of the account. */
+  /** Retrieves the details of an account. */
   public static Account retrieve(String account, Map<String, Object> params, RequestOptions options)
       throws StripeException {
+    String url =
+        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/accounts/%s", account));
+    return request(ApiResource.RequestMethod.GET, url, params, Account.class, options);
+  }
+
+  /** Retrieves the details of an account. */
+  public static Account retrieve(
+      String account, AccountRetrieveParams params, RequestOptions options) throws StripeException {
     String url =
         String.format("%s%s", Stripe.getApiBase(), String.format("/v1/accounts/%s", account));
     return request(ApiResource.RequestMethod.GET, url, params, Account.class, options);
@@ -291,6 +312,24 @@ public class Account extends ApiResource implements PaymentSource, MetadataStore
   }
 
   /**
+   * Updates a connected <a href="/docs/connect/accounts">Express or Custom account</a> by setting
+   * the values of the parameters passed. Any parameters not provided are left unchanged. Most
+   * parameters can be changed only for Custom accounts. (These are marked <strong>Custom
+   * Only</strong> below.) Parameters marked <strong>Custom and Express</strong> are supported by
+   * both account types.
+   *
+   * <p>To update your own account, use the <a
+   * href="https://dashboard.stripe.com/account">Dashboard</a>. Refer to our <a
+   * href="/docs/connect/updating-accounts">Connect</a> documentation to learn more about updating
+   * accounts.
+   */
+  public Account update(AccountUpdateParams params, RequestOptions options) throws StripeException {
+    String url =
+        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/accounts/%s", this.getId()));
+    return request(ApiResource.RequestMethod.POST, url, params, Account.class, options);
+  }
+
+  /**
    * Returns a list of accounts connected to your platform via <a href="/docs/connect">Connect</a>.
    * If you’re not a platform, the list is empty.
    */
@@ -303,6 +342,16 @@ public class Account extends ApiResource implements PaymentSource, MetadataStore
    * If you’re not a platform, the list is empty.
    */
   public static AccountCollection list(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/accounts");
+    return requestCollection(url, params, AccountCollection.class, options);
+  }
+
+  /**
+   * Returns a list of accounts connected to your platform via <a href="/docs/connect">Connect</a>.
+   * If you’re not a platform, the list is empty.
+   */
+  public static AccountCollection list(AccountListParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/accounts");
     return requestCollection(url, params, AccountCollection.class, options);
@@ -331,6 +380,21 @@ public class Account extends ApiResource implements PaymentSource, MetadataStore
    * complete.
    */
   public static Account create(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/accounts");
+    return request(ApiResource.RequestMethod.POST, url, params, Account.class, options);
+  }
+
+  /**
+   * With <a href="/docs/connect">Connect</a>, you can create Stripe accounts for your users. To do
+   * this, you’ll first need to <a
+   * href="https://dashboard.stripe.com/account/applications/settings">register your platform</a>.
+   *
+   * <p>For Standard accounts, parameters other than <code>country</code>, <code>email</code>, and
+   * <code>type</code> are used to prefill the account application that we ask the account holder to
+   * complete.
+   */
+  public static Account create(AccountCreateParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/accounts");
     return request(ApiResource.RequestMethod.POST, url, params, Account.class, options);
@@ -414,6 +478,19 @@ public class Account extends ApiResource implements PaymentSource, MetadataStore
   }
 
   /**
+   * With <a href="/docs/connect">Connect</a>, you may flag accounts as suspicious.
+   *
+   * <p>Test-mode Custom and Express accounts can be rejected at any time. Accounts created using
+   * live-mode keys may only be rejected once all balances are zero.
+   */
+  public Account reject(AccountRejectParams params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s", Stripe.getApiBase(), String.format("/v1/accounts/%s/reject", this.getId()));
+    return request(ApiResource.RequestMethod.POST, url, params, Account.class, options);
+  }
+
+  /**
    * Returns a list of people associated with the account’s legal entity. The people are returned
    * sorted by creation date, with the most recent people appearing first.
    */
@@ -434,6 +511,18 @@ public class Account extends ApiResource implements PaymentSource, MetadataStore
    * sorted by creation date, with the most recent people appearing first.
    */
   public PersonCollection persons(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s", Stripe.getApiBase(), String.format("/v1/accounts/%s/persons", this.getId()));
+    return requestCollection(url, params, PersonCollection.class, options);
+  }
+
+  /**
+   * Returns a list of people associated with the account’s legal entity. The people are returned
+   * sorted by creation date, with the most recent people appearing first.
+   */
+  public PersonCollection persons(AccountPersonsParams params, RequestOptions options)
       throws StripeException {
     String url =
         String.format(

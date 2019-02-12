@@ -7,6 +7,13 @@ import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.param.PaymentIntentCancelParams;
+import com.stripe.param.PaymentIntentCaptureParams;
+import com.stripe.param.PaymentIntentConfirmParams;
+import com.stripe.param.PaymentIntentCreateParams;
+import com.stripe.param.PaymentIntentListParams;
+import com.stripe.param.PaymentIntentRetrieveParams;
+import com.stripe.param.PaymentIntentUpdateParams;
 import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
@@ -17,10 +24,6 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class PaymentIntent extends ApiResource implements HasId, MetadataStore<PaymentIntent> {
-  /** The list of source types (e.g. card) that this PaymentIntent is allowed to use. */
-  @SerializedName("allowed_source_types")
-  List<String> allowedSourceTypes;
-
   /** Amount intended to be collected by this PaymentIntent. */
   @SerializedName("amount")
   Long amount;
@@ -54,8 +57,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   Long canceledAt;
 
   /**
-   * User-given reason for cancellation of this PaymentIntent, one of `duplicate`, `fraudulent`, or
-   * `requested_by_customer`.
+   * User-given reason for cancellation of this PaymentIntent, one of `duplicate`, `fraudulent`,
+   * `requested_by_customer`, or `failed_invoice`.
    */
   @SerializedName("cancellation_reason")
   String cancellationReason;
@@ -133,8 +136,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * If present, this property tells you what actions you need to take in order for your customer to
    * fulfill a payment using the provided source.
    */
-  @SerializedName("next_source_action")
-  PaymentIntentSourceAction nextSourceAction;
+  @SerializedName("next_action")
+  PaymentIntentNextAction nextAction;
 
   /** String representing the object's type. Objects of the same type share the same value. */
   @SerializedName("object")
@@ -148,6 +151,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Account> onBehalfOf;
+
+  /** The list of payment method types (e.g. card) that this PaymentIntent is allowed to use. */
+  @SerializedName("payment_method_types")
+  List<String> paymentMethodTypes;
 
   /** Email address that the receipt for the resulting payment will be sent to. */
   @SerializedName("receipt_email")
@@ -177,8 +184,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   String statementDescriptor;
 
   /**
-   * Status of this PaymentIntent, one of `requires_source`, `requires_confirmation`,
-   * `requires_source_action`, `processing`, `requires_capture`, `canceled`, or `succeeded`.
+   * Status of this PaymentIntent, one of `requires_payment_method`, `requires_confirmation`,
+   * `requires_action`, `processing`, `requires_capture`, `canceled`, or `succeeded`.
    */
   @SerializedName("status")
   String status;
@@ -299,6 +306,13 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     return request(ApiResource.RequestMethod.POST, url, params, PaymentIntent.class, options);
   }
 
+  /** Creates a PaymentIntent object. */
+  public static PaymentIntent create(PaymentIntentCreateParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/payment_intents");
+    return request(ApiResource.RequestMethod.POST, url, params, PaymentIntent.class, options);
+  }
+
   /** Returns a list of PaymentIntents. */
   public static PaymentIntentCollection list(Map<String, Object> params) throws StripeException {
     return list(params, (RequestOptions) null);
@@ -306,6 +320,13 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
 
   /** Returns a list of PaymentIntents. */
   public static PaymentIntentCollection list(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/payment_intents");
+    return requestCollection(url, params, PaymentIntentCollection.class, options);
+  }
+
+  /** Returns a list of PaymentIntents. */
+  public static PaymentIntentCollection list(PaymentIntentListParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/payment_intents");
     return requestCollection(url, params, PaymentIntentCollection.class, options);
@@ -357,6 +378,24 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     return request(ApiResource.RequestMethod.GET, url, params, PaymentIntent.class, options);
   }
 
+  /**
+   * Retrieves the details of a PaymentIntent that has previously been created.
+   *
+   * <p>Client-side retrieval using a publishable key is allowed when the <code>client_secret</code>
+   * is provided in the query string.
+   *
+   * <p>When retrieved with a publishable key, only a subset of properties will be returned. Please
+   * refer to the <a href="#payment_intent_object">payment intent</a> object reference for more
+   * details.
+   */
+  public static PaymentIntent retrieve(
+      String intent, PaymentIntentRetrieveParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/payment_intents/%s", intent));
+    return request(ApiResource.RequestMethod.GET, url, params, PaymentIntent.class, options);
+  }
+
   /** Updates a PaymentIntent object. */
   public PaymentIntent update(Map<String, Object> params) throws StripeException {
     return update(params, (RequestOptions) null);
@@ -371,14 +410,23 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     return request(ApiResource.RequestMethod.POST, url, params, PaymentIntent.class, options);
   }
 
+  /** Updates a PaymentIntent object. */
+  public PaymentIntent update(PaymentIntentUpdateParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s", Stripe.getApiBase(), String.format("/v1/payment_intents/%s", this.getId()));
+    return request(ApiResource.RequestMethod.POST, url, params, PaymentIntent.class, options);
+  }
+
   /**
    * Confirm that your customer intends to pay with current or provided <code>source</code>. Upon
    * confirmation, the PaymentIntent will attempt to initiate a payment.
    *
    * <p>If the selected <code>source</code> requires additional authentication steps, the
-   * PaymentIntent will transition to the <code>requires_source_action</code> status and suggest
-   * additional actions via <code>next_source_action</code>. If payment fails, the PaymentIntent
-   * will transition to the <code>requires_source</code> status. If payment succeeds, the
+   * PaymentIntent will transition to the <code>requires_action</code> status and suggest additional
+   * actions via <code>next_source_action</code>. If payment fails, the PaymentIntent will
+   * transition to the <code>requires_payment_method</code> status. If payment succeeds, the
    * PaymentIntent will transition to the <code>succeeded</code> status (or <code>requires_capture
    * </code>, if <code>capture_method</code> is set to <code>manual</code>).
    *
@@ -395,9 +443,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * confirmation, the PaymentIntent will attempt to initiate a payment.
    *
    * <p>If the selected <code>source</code> requires additional authentication steps, the
-   * PaymentIntent will transition to the <code>requires_source_action</code> status and suggest
-   * additional actions via <code>next_source_action</code>. If payment fails, the PaymentIntent
-   * will transition to the <code>requires_source</code> status. If payment succeeds, the
+   * PaymentIntent will transition to the <code>requires_action</code> status and suggest additional
+   * actions via <code>next_source_action</code>. If payment fails, the PaymentIntent will
+   * transition to the <code>requires_payment_method</code> status. If payment succeeds, the
    * PaymentIntent will transition to the <code>succeeded</code> status (or <code>requires_capture
    * </code>, if <code>capture_method</code> is set to <code>manual</code>).
    *
@@ -414,9 +462,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * confirmation, the PaymentIntent will attempt to initiate a payment.
    *
    * <p>If the selected <code>source</code> requires additional authentication steps, the
-   * PaymentIntent will transition to the <code>requires_source_action</code> status and suggest
-   * additional actions via <code>next_source_action</code>. If payment fails, the PaymentIntent
-   * will transition to the <code>requires_source</code> status. If payment succeeds, the
+   * PaymentIntent will transition to the <code>requires_action</code> status and suggest additional
+   * actions via <code>next_source_action</code>. If payment fails, the PaymentIntent will
+   * transition to the <code>requires_payment_method</code> status. If payment succeeds, the
    * PaymentIntent will transition to the <code>succeeded</code> status (or <code>requires_capture
    * </code>, if <code>capture_method</code> is set to <code>manual</code>).
    *
@@ -433,9 +481,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * confirmation, the PaymentIntent will attempt to initiate a payment.
    *
    * <p>If the selected <code>source</code> requires additional authentication steps, the
-   * PaymentIntent will transition to the <code>requires_source_action</code> status and suggest
-   * additional actions via <code>next_source_action</code>. If payment fails, the PaymentIntent
-   * will transition to the <code>requires_source</code> status. If payment succeeds, the
+   * PaymentIntent will transition to the <code>requires_action</code> status and suggest additional
+   * actions via <code>next_source_action</code>. If payment fails, the PaymentIntent will
+   * transition to the <code>requires_payment_method</code> status. If payment succeeds, the
    * PaymentIntent will transition to the <code>succeeded</code> status (or <code>requires_capture
    * </code>, if <code>capture_method</code> is set to <code>manual</code>).
    *
@@ -453,8 +501,32 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   }
 
   /**
-   * A PaymentIntent object can be canceled when it is in one of these statuses: requires_source,
-   * requires_capture, requires_confirmation, requires_source_action.
+   * Confirm that your customer intends to pay with current or provided <code>source</code>. Upon
+   * confirmation, the PaymentIntent will attempt to initiate a payment.
+   *
+   * <p>If the selected <code>source</code> requires additional authentication steps, the
+   * PaymentIntent will transition to the <code>requires_action</code> status and suggest additional
+   * actions via <code>next_source_action</code>. If payment fails, the PaymentIntent will
+   * transition to the <code>requires_payment_method</code> status. If payment succeeds, the
+   * PaymentIntent will transition to the <code>succeeded</code> status (or <code>requires_capture
+   * </code>, if <code>capture_method</code> is set to <code>manual</code>).
+   *
+   * <p>When using a publishable key, the <a
+   * href="#payment_intent_object-client_secret">client_secret</a> must be provided to confirm the
+   * PaymentIntent.
+   */
+  public PaymentIntent confirm(PaymentIntentConfirmParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(), String.format("/v1/payment_intents/%s/confirm", this.getId()));
+    return request(ApiResource.RequestMethod.POST, url, params, PaymentIntent.class, options);
+  }
+
+  /**
+   * A PaymentIntent object can be canceled when it is in one of these statuses:
+   * requires_payment_method, requires_capture, requires_confirmation, requires_action.
    *
    * <p>Once canceled, no additional charges will be made by the PaymentIntent and any operations on
    * the PaymentIntent will fail with an error. For PaymentIntents with <code>
@@ -466,8 +538,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   }
 
   /**
-   * A PaymentIntent object can be canceled when it is in one of these statuses: requires_source,
-   * requires_capture, requires_confirmation, requires_source_action.
+   * A PaymentIntent object can be canceled when it is in one of these statuses:
+   * requires_payment_method, requires_capture, requires_confirmation, requires_action.
    *
    * <p>Once canceled, no additional charges will be made by the PaymentIntent and any operations on
    * the PaymentIntent will fail with an error. For PaymentIntents with <code>
@@ -479,8 +551,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   }
 
   /**
-   * A PaymentIntent object can be canceled when it is in one of these statuses: requires_source,
-   * requires_capture, requires_confirmation, requires_source_action.
+   * A PaymentIntent object can be canceled when it is in one of these statuses:
+   * requires_payment_method, requires_capture, requires_confirmation, requires_action.
    *
    * <p>Once canceled, no additional charges will be made by the PaymentIntent and any operations on
    * the PaymentIntent will fail with an error. For PaymentIntents with <code>
@@ -492,8 +564,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   }
 
   /**
-   * A PaymentIntent object can be canceled when it is in one of these statuses: requires_source,
-   * requires_capture, requires_confirmation, requires_source_action.
+   * A PaymentIntent object can be canceled when it is in one of these statuses:
+   * requires_payment_method, requires_capture, requires_confirmation, requires_action.
    *
    * <p>Once canceled, no additional charges will be made by the PaymentIntent and any operations on
    * the PaymentIntent will fail with an error. For PaymentIntents with <code>
@@ -501,6 +573,24 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * automatically be refunded.
    */
   public PaymentIntent cancel(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(), String.format("/v1/payment_intents/%s/cancel", this.getId()));
+    return request(ApiResource.RequestMethod.POST, url, params, PaymentIntent.class, options);
+  }
+
+  /**
+   * A PaymentIntent object can be canceled when it is in one of these statuses:
+   * requires_payment_method, requires_capture, requires_confirmation, requires_action.
+   *
+   * <p>Once canceled, no additional charges will be made by the PaymentIntent and any operations on
+   * the PaymentIntent will fail with an error. For PaymentIntents with <code>
+   * status='requires_capture'</code>, the remaining <code>amount_capturable</code> will
+   * automatically be refunded.
+   */
+  public PaymentIntent cancel(PaymentIntentCancelParams params, RequestOptions options)
       throws StripeException {
     String url =
         String.format(
@@ -546,6 +636,21 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * <p>Uncaptured PaymentIntents will be canceled exactly seven days after they are created.
    */
   public PaymentIntent capture(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(), String.format("/v1/payment_intents/%s/capture", this.getId()));
+    return request(ApiResource.RequestMethod.POST, url, params, PaymentIntent.class, options);
+  }
+
+  /**
+   * Capture the funds of an existing uncaptured PaymentIntent where <code>
+   * required_action="requires_capture"</code>.
+   *
+   * <p>Uncaptured PaymentIntents will be canceled exactly seven days after they are created.
+   */
+  public PaymentIntent capture(PaymentIntentCaptureParams params, RequestOptions options)
       throws StripeException {
     String url =
         String.format(

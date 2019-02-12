@@ -10,7 +10,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class PaymentIntentSourceActionValueAuthorizeWithUrl extends StripeObject {
+public class PaymentIntentNextActionValueRedirectToUrl extends StripeObject {
   /**
    * If the customer does not exit their browser while authenticating, they will be redirected to
    * this specified URL after completion.

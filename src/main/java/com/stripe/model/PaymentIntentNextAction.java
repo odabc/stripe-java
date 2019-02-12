@@ -11,11 +11,11 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class PaymentIntentSourceAction extends StripeObject {
-  @SerializedName("authorize_with_url")
-  PaymentIntentSourceActionValueAuthorizeWithUrl authorizeWithUrl;
+public class PaymentIntentNextAction extends StripeObject {
+  @SerializedName("redirect_to_url")
+  PaymentIntentNextActionValueRedirectToUrl redirectToUrl;
 
-  /** Type of the next source action to perform, one of `authorize_with_url` or `use_stripe_sdk`. */
+  /** Type of the next action to perform, one of `redirect_to_url` or `use_stripe_sdk`. */
   @SerializedName("type")
   String type;
 
