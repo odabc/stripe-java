@@ -10,6 +10,8 @@ import com.stripe.model.Sku;
 import com.stripe.model.SkuCollection;
 import com.stripe.net.ApiResource;
 
+import com.stripe.net.RequestOptions;
+import com.stripe.param.SkuCreateParams;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -48,6 +50,32 @@ public class SkuTest extends BaseStripeTest {
         ApiResource.RequestMethod.POST,
         "/v1/skus",
         params
+    );
+  }
+
+  @Test
+  public void testCreateWithParams() throws StripeException {
+    SkuCreateParams.Inventory.Builder inventoryBuilder = SkuCreateParams.Inventory.newBuilder()
+        .setType(SkuCreateParams.Inventory.Type.BUCKET)
+        .setValue(SkuCreateParams.Inventory.Value.LIMITED);
+
+    SkuCreateParams createParams = SkuCreateParams.newBuilder()
+        .setActive(true)
+        .putAttributes("attr1", "va1")
+        .putAttributes("attr2", "val2")
+        .setPrice(449L)
+        .setCurrency("usd")
+        .setInventory(inventoryBuilder)
+        .setProduct("prod_123")
+        .setImage("http://example.com/foo.png").build();
+
+    final Sku sku = Sku.create(createParams, RequestOptions.getDefault());
+
+    assertNotNull(sku);
+    verifyRequest(
+        ApiResource.RequestMethod.POST,
+        "/v1/skus",
+        createParams.toMap()
     );
   }
 
