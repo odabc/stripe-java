@@ -18,7 +18,6 @@ public class ChargeTest extends BaseStripeTest {
     assertNotNull(charge.getId());
     assertEquals("charge", charge.getObject());
     assertNull(charge.getApplicationObject());
-    assertNull(charge.getApplicationFeeObject());
     assertNull(charge.getBalanceTransactionObject());
     assertNull(charge.getCustomerObject());
     assertNull(charge.getDestinationObject());
@@ -35,7 +34,6 @@ public class ChargeTest extends BaseStripeTest {
   public void testDeserializeWithExpansions() throws Exception {
     final String[] expansions = {
       "application",
-      "application_fee",
       "balance_transaction",
       "customer",
       "destination",
@@ -55,10 +53,6 @@ public class ChargeTest extends BaseStripeTest {
     assertNotNull(application);
     assertNotNull(application.getId());
     assertEquals(charge.getApplication(), application.getId());
-    final ApplicationFee applicationFee = charge.getApplicationFeeObject();
-    assertNotNull(applicationFee);
-    assertNotNull(applicationFee.getId());
-    assertEquals(charge.getApplicationFee(), applicationFee.getId());
     final BalanceTransaction balanceTransaction = charge.getBalanceTransactionObject();
     assertNotNull(balanceTransaction);
     assertNotNull(balanceTransaction.getId());
