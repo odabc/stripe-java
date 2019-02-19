@@ -3,15 +3,22 @@ package com.stripe.functional;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import com.google.common.collect.ImmutableMap;
 import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Invoice;
 import com.stripe.model.InvoiceCollection;
 import com.stripe.net.ApiResource;
 
+import com.stripe.net.RequestOptions;
+import com.stripe.param.InvoiceUpcomingParams;
+import com.stripe.param.InvoiceUpdateParams;
+import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 
@@ -66,6 +73,71 @@ public class InvoiceTest extends BaseStripeTest {
         ApiResource.RequestMethod.POST,
         String.format("/v1/invoices/%s", invoice.getId()),
         params
+    );
+  }
+
+  /**
+   * TODO: Currently stripe-mock fails to accept `anyOf` list. Test now fails on `custom_fields`
+   * that can take both list or empty string. Remove ignore after merging fix
+   * https://github.com/stripe/stripe-mock/pull/141
+   */
+  @Ignore
+  @Test
+  public void testUpdateWithTypeParams() throws StripeException {
+    final Invoice invoice = getInvoiceFixture();
+
+    final Map<String, String> metadata = new HashMap<>();
+    metadata.put("key", "value");
+    final Map<String, String> customField1 = new HashMap<>();
+    customField1.put("name", "foo1");
+    customField1.put("value", "val1");
+    final Map<String, String> customField2 = new HashMap<>();
+    customField2.put("name", "foo2");
+    customField2.put("value", "val2");
+
+    final Map<String, Object> params = new HashMap<>();
+    params.put("custom_fields", Arrays.asList(customField1, customField2));
+    params.put("tax_percent", new BigDecimal("12.45333"));
+    params.put("metadata", metadata);
+
+    InvoiceUpdateParams.CustomFields typedCustomField1 = InvoiceUpdateParams.CustomFields.builder()
+        .setName("foo1").setValue("val1").build();
+
+    InvoiceUpdateParams.CustomFields typedCustomField2 = InvoiceUpdateParams.CustomFields.builder()
+        .setName("foo2").setValue("val2").build();
+
+    InvoiceUpdateParams typedParams = InvoiceUpdateParams.builder()
+        // currently stripe-mock will fail to accept `anyOf` with list
+        .setCustomFields(Arrays.asList(typedCustomField1, typedCustomField2))
+        .setTaxPercent(new BigDecimal("12.45333"))
+        .putMetadata("key", "value")
+        .build();
+
+    Invoice updatedInvoice = invoice.update(typedParams, RequestOptions.getDefault());
+
+    assertNotNull(updatedInvoice);
+    verifyRequest(
+        ApiResource.RequestMethod.POST,
+        String.format("/v1/invoices/%s", invoice.getId()),
+        params
+    );
+
+    InvoiceUpdateParams typedParamsWithEmpty = InvoiceUpdateParams.builder()
+        .setCustomFields(InvoiceUpdateParams.Empty.EMPTY)
+        .setTaxPercent(InvoiceUpdateParams.Empty.EMPTY)
+        .build();
+
+    updatedInvoice = invoice.update(typedParamsWithEmpty, RequestOptions.getDefault());
+
+    Map<String, Object> paramsWithEmpty = new HashMap<>();
+    paramsWithEmpty.put("custom_fields", null);
+    paramsWithEmpty.put("tax_percent", null);
+
+    assertNotNull(updatedInvoice);
+    verifyRequest(
+        ApiResource.RequestMethod.POST,
+        String.format("/v1/invoices/%s", invoice.getId()),
+        paramsWithEmpty
     );
   }
 
@@ -155,6 +227,37 @@ public class InvoiceTest extends BaseStripeTest {
     params.put("customer", "cus_123");
 
     final Invoice upcomingInvoice = Invoice.upcoming(params);
+
+    assertNotNull(upcomingInvoice);
+    verifyRequest(
+        ApiResource.RequestMethod.GET,
+        "/v1/invoices/upcoming",
+        params
+    );
+  }
+
+  @Test
+  public void testUpcomingWithTypedParams() throws StripeException {
+    InvoiceUpcomingParams.InvoiceItems item = InvoiceUpcomingParams.InvoiceItems.builder()
+        .setAmount(123L)
+        .setCurrency("usd")
+        .build();
+    InvoiceUpcomingParams.InvoiceItems item2 = InvoiceUpcomingParams.InvoiceItems.builder()
+        .setAmount(456L)
+        .setCurrency("jpy")
+        .build();
+    InvoiceUpcomingParams typedParams = InvoiceUpcomingParams.builder()
+        .addInvoiceItems(item)
+        .addInvoiceItems(item2).build();
+
+    final Invoice upcomingInvoice = Invoice.upcoming(typedParams, RequestOptions.getDefault());
+
+    Map<String, Object> params = new HashMap<>();
+    params.put("invoice_items",
+        Arrays.asList(
+            ImmutableMap.of("amount", 123L, "currency", "usd"),
+            ImmutableMap.of("amount", 456L, "currency", "jpy")
+        ));
 
     assertNotNull(upcomingInvoice);
     verifyRequest(
