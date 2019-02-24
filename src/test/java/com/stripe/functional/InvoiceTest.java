@@ -18,7 +18,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 
@@ -94,10 +93,10 @@ public class InvoiceTest extends BaseStripeTest {
     params.put("tax_percent", new BigDecimal("12.45333"));
     params.put("metadata", metadata);
 
-    InvoiceUpdateParams.CustomFields typedCustomField1 = InvoiceUpdateParams.CustomFields.builder()
+    InvoiceUpdateParams.CustomField typedCustomField1 = InvoiceUpdateParams.CustomField.builder()
         .setName("foo1").setValue("val1").build();
 
-    InvoiceUpdateParams.CustomFields typedCustomField2 = InvoiceUpdateParams.CustomFields.builder()
+    InvoiceUpdateParams.CustomField typedCustomField2 = InvoiceUpdateParams.CustomField.builder()
         .setName("foo2").setValue("val2").build();
 
     InvoiceUpdateParams typedParams = InvoiceUpdateParams.builder()
@@ -231,17 +230,17 @@ public class InvoiceTest extends BaseStripeTest {
 
   @Test
   public void testUpcomingWithTypedParams() throws StripeException {
-    InvoiceUpcomingParams.InvoiceItems item = InvoiceUpcomingParams.InvoiceItems.builder()
+    InvoiceUpcomingParams.InvoiceItem item = InvoiceUpcomingParams.InvoiceItem.builder()
         .setAmount(123L)
         .setCurrency("usd")
         .build();
-    InvoiceUpcomingParams.InvoiceItems item2 = InvoiceUpcomingParams.InvoiceItems.builder()
+    InvoiceUpcomingParams.InvoiceItem item2 = InvoiceUpcomingParams.InvoiceItem.builder()
         .setAmount(456L)
         .setCurrency("jpy")
         .build();
     InvoiceUpcomingParams typedParams = InvoiceUpcomingParams.builder()
-        .addInvoiceItems(item)
-        .addInvoiceItems(item2).build();
+        .addInvoiceItem(item)
+        .addInvoiceItem(item2).build();
 
     final Invoice upcomingInvoice = Invoice.upcoming(typedParams, RequestOptions.getDefault());
 
