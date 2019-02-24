@@ -1782,7 +1782,7 @@ public class TokenCreateParams extends ApiRequestParams {
     String name;
 
     @SerializedName("object")
-    Object object;
+    ObjectType object;
 
     @SerializedName("pk_token")
     String pkToken;
@@ -1810,7 +1810,7 @@ public class TokenCreateParams extends ApiRequestParams {
         String addressState,
         String addressZip,
         String name,
-        Object object,
+        ObjectType object,
         String pkToken,
         String tokenCryptogram,
         Long tokenCryptogramAmount,
@@ -1852,7 +1852,7 @@ public class TokenCreateParams extends ApiRequestParams {
 
       private String name;
 
-      private Object object;
+      private ObjectType object;
 
       private String pkToken;
 
@@ -1920,7 +1920,7 @@ public class TokenCreateParams extends ApiRequestParams {
         return this;
       }
 
-      public Builder setObject(Object object) {
+      public Builder setObject(ObjectType object) {
         this.object = object;
         return this;
       }
@@ -1956,13 +1956,13 @@ public class TokenCreateParams extends ApiRequestParams {
       }
     }
 
-    public enum Object implements ApiRequestParams.Enum {
+    public enum ObjectType implements ApiRequestParams.Enum {
       @SerializedName("card")
       CARD("card");
 
       @Getter private final String value;
 
-      Object(String value) {
+      ObjectType(String value) {
         this.value = value;
       }
     }
@@ -2025,7 +2025,7 @@ public class TokenCreateParams extends ApiRequestParams {
     Boolean numberLuhnValid;
 
     @SerializedName("object")
-    Object object;
+    ObjectType object;
 
     @SerializedName("3d_secure")
     ThreeDSecure threeDSecure;
@@ -2052,7 +2052,7 @@ public class TokenCreateParams extends ApiRequestParams {
         String number,
         Boolean numberLooksValid,
         Boolean numberLuhnValid,
-        Object object,
+        ObjectType object,
         ThreeDSecure threeDSecure,
         String tokenizationMethod) {
       this.addressCity = addressCity;
@@ -2119,7 +2119,7 @@ public class TokenCreateParams extends ApiRequestParams {
 
       private Boolean numberLuhnValid;
 
-      private Object object;
+      private ObjectType object;
 
       private ThreeDSecure threeDSecure;
 
@@ -2249,7 +2249,7 @@ public class TokenCreateParams extends ApiRequestParams {
         return this;
       }
 
-      public Builder setObject(Object object) {
+      public Builder setObject(ObjectType object) {
         this.object = object;
         return this;
       }
@@ -2340,13 +2340,13 @@ public class TokenCreateParams extends ApiRequestParams {
       }
     }
 
-    public enum Object implements ApiRequestParams.Enum {
+    public enum ObjectType implements ApiRequestParams.Enum {
       @SerializedName("card")
       CARD("card");
 
       @Getter private final String value;
 
-      Object(String value) {
+      ObjectType(String value) {
         this.value = value;
       }
     }
