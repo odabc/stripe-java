@@ -1,5 +1,7 @@
 # Changelog
 
+## 8.0.0-beta - 2019-02-24
+* [TODO]
 ## 7.23.0 - 2019-02-19
 * [#660](https://github.com/stripe/stripe-java/pull/660) Add support for API version `2019-02-19` and related changes to `Account` and `Person`.
 
