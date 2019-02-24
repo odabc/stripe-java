@@ -17,15 +17,15 @@ public class InvoiceCreateParams extends ApiRequestParams {
    * A fee in %s that will be applied to the invoice and transferred to the application owner's
    * Stripe account. The request must be made with an OAuth key or the Stripe-Account header in
    * order to take an application fee. For more information, see the application fees
-   * [documentation](/docs/connect/subscriptions#invoices).
+   * [documentation](https://stripe.com/docs/connect/subscriptions#invoices).
    */
   @SerializedName("application_fee_amount")
   Long applicationFeeAmount;
 
   /**
    * Controls whether Stripe will perform [automatic
-   * collection](/docs/billing/invoices/workflow/#auto_advance) of the invoice. When `false`, the
-   * invoice's state will not automatically advance without an explicit action.
+   * collection](https://stripe.com/docs/billing/invoices/workflow/#auto_advance) of the invoice.
+   * When `false`, the invoice's state will not automatically advance without an explicit action.
    */
   @SerializedName("auto_advance")
   Boolean autoAdvance;
@@ -235,7 +235,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
      * A fee in %s that will be applied to the invoice and transferred to the application owner's
      * Stripe account. The request must be made with an OAuth key or the Stripe-Account header in
      * order to take an application fee. For more information, see the application fees
-     * [documentation](/docs/connect/subscriptions#invoices).
+     * [documentation](https://stripe.com/docs/connect/subscriptions#invoices).
      */
     public Builder setApplicationFeeAmount(Long applicationFeeAmount) {
       this.applicationFeeAmount = applicationFeeAmount;
@@ -244,8 +244,8 @@ public class InvoiceCreateParams extends ApiRequestParams {
 
     /**
      * Controls whether Stripe will perform [automatic
-     * collection](/docs/billing/invoices/workflow/#auto_advance) of the invoice. When `false`, the
-     * invoice's state will not automatically advance without an explicit action.
+     * collection](https://stripe.com/docs/billing/invoices/workflow/#auto_advance) of the invoice.
+     * When `false`, the invoice's state will not automatically advance without an explicit action.
      */
     public Builder setAutoAdvance(Boolean autoAdvance) {
       this.autoAdvance = autoAdvance;

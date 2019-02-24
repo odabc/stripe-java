@@ -172,7 +172,7 @@ public class Source extends ApiResource implements PaymentSource, MetadataStore<
    * `eps`, `giropay`, `ideal`, `multibanco`, `p24`, `paper_check`, `sepa_credit_transfer`,
    * `sepa_debit`, `sofort`, `three_d_secure`, or `wechat`. An additional hash is included on the
    * source with a name matching this value. It contains additional information specific to the
-   * [payment method](/docs/sources) used.
+   * [payment method](https://stripe.com/docs/sources) used.
    */
   @SerializedName("type")
   String type;

@@ -56,8 +56,8 @@ public class WebhookEndpoint extends ApiResource implements HasId {
   String object;
 
   /**
-   * The endpoint's secret, used to generate [webhook signatures](/docs/webhooks/signatures). Only
-   * returned at creation.
+   * The endpoint's secret, used to generate [webhook
+   * signatures](https://stripe.com/docs/webhooks/signatures). Only returned at creation.
    */
   @SerializedName("secret")
   String secret;

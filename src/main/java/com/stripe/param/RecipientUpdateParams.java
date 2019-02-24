@@ -14,20 +14,20 @@ import lombok.Getter;
 public class RecipientUpdateParams extends ApiRequestParams {
   /**
    * A bank account to attach to the recipient. You can provide either a token, like the ones
-   * returned by [Stripe.js](/docs/stripe-js), or a dictionary containing a user's bank account
-   * details, with the options described below.
+   * returned by [Stripe.js](https://stripe.com/docs/stripe-js), or a dictionary containing a user's
+   * bank account details, with the options described below.
    */
   @SerializedName("bank_account")
   Object bankAccount;
 
   /**
    * A U.S. Visa or MasterCard debit card (not prepaid) to attach to the recipient. You can provide
-   * either a token, like the ones returned by [Stripe.js](/docs/stripe-js), or a dictionary
-   * containing a user's debit card details, with the options described below. Passing `card` will
-   * create a new card, make it the new recipient default card, and delete the old recipient default
-   * (if one exists). If you want to add additional debit cards instead of replacing the existing
-   * default, use the [card creation API](#create_card). Whenever you attach a card to a recipient,
-   * Stripe will automatically validate the debit card.
+   * either a token, like the ones returned by [Stripe.js](https://stripe.com/docs/stripe-js), or a
+   * dictionary containing a user's debit card details, with the options described below. Passing
+   * `card` will create a new card, make it the new recipient default card, and delete the old
+   * recipient default (if one exists). If you want to add additional debit cards instead of
+   * replacing the existing default, use the [card creation API](#create_card). Whenever you attach
+   * a card to a recipient, Stripe will automatically validate the debit card.
    */
   @SerializedName("card")
   Object card;
@@ -163,8 +163,8 @@ public class RecipientUpdateParams extends ApiRequestParams {
 
     /**
      * A bank account to attach to the recipient. You can provide either a token, like the ones
-     * returned by [Stripe.js](/docs/stripe-js), or a dictionary containing a user's bank account
-     * details, with the options described below.
+     * returned by [Stripe.js](https://stripe.com/docs/stripe-js), or a dictionary containing a
+     * user's bank account details, with the options described below.
      */
     public Builder setBankAccount(String bankAccount) {
       this.bankAccount = bankAccount;
@@ -173,8 +173,8 @@ public class RecipientUpdateParams extends ApiRequestParams {
 
     /**
      * A bank account to attach to the recipient. You can provide either a token, like the ones
-     * returned by [Stripe.js](/docs/stripe-js), or a dictionary containing a user's bank account
-     * details, with the options described below.
+     * returned by [Stripe.js](https://stripe.com/docs/stripe-js), or a dictionary containing a
+     * user's bank account details, with the options described below.
      */
     public Builder setBankAccount(Map<String, Object> bankAccount) {
       this.bankAccount = bankAccount;
@@ -183,12 +183,13 @@ public class RecipientUpdateParams extends ApiRequestParams {
 
     /**
      * A U.S. Visa or MasterCard debit card (not prepaid) to attach to the recipient. You can
-     * provide either a token, like the ones returned by [Stripe.js](/docs/stripe-js), or a
-     * dictionary containing a user's debit card details, with the options described below. Passing
-     * `card` will create a new card, make it the new recipient default card, and delete the old
-     * recipient default (if one exists). If you want to add additional debit cards instead of
-     * replacing the existing default, use the [card creation API](#create_card). Whenever you
-     * attach a card to a recipient, Stripe will automatically validate the debit card.
+     * provide either a token, like the ones returned by
+     * [Stripe.js](https://stripe.com/docs/stripe-js), or a dictionary containing a user's debit
+     * card details, with the options described below. Passing `card` will create a new card, make
+     * it the new recipient default card, and delete the old recipient default (if one exists). If
+     * you want to add additional debit cards instead of replacing the existing default, use the
+     * [card creation API](#create_card). Whenever you attach a card to a recipient, Stripe will
+     * automatically validate the debit card.
      */
     public Builder setCard(String card) {
       this.card = card;
@@ -197,12 +198,13 @@ public class RecipientUpdateParams extends ApiRequestParams {
 
     /**
      * A U.S. Visa or MasterCard debit card (not prepaid) to attach to the recipient. You can
-     * provide either a token, like the ones returned by [Stripe.js](/docs/stripe-js), or a
-     * dictionary containing a user's debit card details, with the options described below. Passing
-     * `card` will create a new card, make it the new recipient default card, and delete the old
-     * recipient default (if one exists). If you want to add additional debit cards instead of
-     * replacing the existing default, use the [card creation API](#create_card). Whenever you
-     * attach a card to a recipient, Stripe will automatically validate the debit card.
+     * provide either a token, like the ones returned by
+     * [Stripe.js](https://stripe.com/docs/stripe-js), or a dictionary containing a user's debit
+     * card details, with the options described below. Passing `card` will create a new card, make
+     * it the new recipient default card, and delete the old recipient default (if one exists). If
+     * you want to add additional debit cards instead of replacing the existing default, use the
+     * [card creation API](#create_card). Whenever you attach a card to a recipient, Stripe will
+     * automatically validate the debit card.
      */
     public Builder setCard(Map<String, Object> card) {
       this.card = card;

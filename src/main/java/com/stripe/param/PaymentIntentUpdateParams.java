@@ -18,7 +18,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
   /**
    * The amount of the application fee (if any) for the resulting payment. See the PaymentIntents
-   * [Connect usage guide](/docs/payments/payment-intents/usage#connect) for details.
+   * [Connect usage guide](https://stripe.com/docs/payments/payment-intents/usage#connect) for
+   * details.
    */
   @SerializedName("application_fee_amount")
   Long applicationFeeAmount;
@@ -42,7 +43,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
   @SerializedName("expand")
   List<String> expand;
 
-  /** The [Level III data](/docs/level3) associated with this payment. */
+  /** The [Level III data](https://stripe.com/docs/level3) associated with this payment. */
   @SerializedName("level3")
   Level3 level3;
 
@@ -81,7 +82,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
   /**
    * A string that identifies the resulting payment as part of a group. `transfer_group` may only be
    * provided if it has not been set. See the PaymentIntents [Connect usage
-   * guide](/docs/payments/payment-intents/usage#connect) for details.
+   * guide](https://stripe.com/docs/payments/payment-intents/usage#connect) for details.
    */
   @SerializedName("transfer_group")
   String transferGroup;
@@ -216,7 +217,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
     /**
      * The amount of the application fee (if any) for the resulting payment. See the PaymentIntents
-     * [Connect usage guide](/docs/payments/payment-intents/usage#connect) for details.
+     * [Connect usage guide](https://stripe.com/docs/payments/payment-intents/usage#connect) for
+     * details.
      */
     public Builder setApplicationFeeAmount(Long applicationFeeAmount) {
       this.applicationFeeAmount = applicationFeeAmount;
@@ -244,7 +246,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The [Level III data](/docs/level3) associated with this payment. */
+    /** The [Level III data](https://stripe.com/docs/level3) associated with this payment. */
     public Builder setLevel3(Level3 level3) {
       this.level3 = level3;
       return this;
@@ -282,7 +284,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     /**
      * A string that identifies the resulting payment as part of a group. `transfer_group` may only
      * be provided if it has not been set. See the PaymentIntents [Connect usage
-     * guide](/docs/payments/payment-intents/usage#connect) for details.
+     * guide](https://stripe.com/docs/payments/payment-intents/usage#connect) for details.
      */
     public Builder setTransferGroup(String transferGroup) {
       this.transferGroup = transferGroup;

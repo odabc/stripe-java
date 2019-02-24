@@ -71,9 +71,9 @@ public class AccountCreateParams extends ApiRequestParams {
 
   /**
    * A card or bank account to attach to the account. You can provide either a token, like the ones
-   * returned by [Stripe.js](/docs/stripe.js), or a dictionary, as documented in the
-   * `external_account` parameter for [bank account](/docs/api#account_create_bank_account)
-   * creation. <br>
+   * returned by [Stripe.js](https://stripe.com/docs/stripe.js), or a dictionary, as documented in
+   * the `external_account` parameter for [bank
+   * account](https://stripe.com/docs/api#account_create_bank_account) creation. <br>
    * <br>
    * By default, providing an external account sets it as the new default external account for its
    * currency, and deletes the old default if one exists. To add additional external accounts
@@ -114,17 +114,17 @@ public class AccountCreateParams extends ApiRequestParams {
 
   /**
    * Details on the account's acceptance of the [Stripe Services
-   * Agreement](/docs/connect/updating-accounts#tos-acceptance).
+   * Agreement](https://stripe.com/docs/connect/updating-accounts#tos-acceptance).
    */
   @SerializedName("tos_acceptance")
   TosAcceptance tosAcceptance;
 
   /**
-   * Whether you'd like to create a [Standard or Custom](/docs/connect/accounts) account. Standard
-   * accounts are normal Stripe accounts: Stripe will email the account holder to set up a username
-   * and password, and will handle all account management directly with them. Custom accounts have
-   * extra parameters available to them, and require that you, the platform, handle all
-   * communication with the account holder. Possible values are `standard` and `custom`.
+   * Whether you'd like to create a [Standard or Custom](https://stripe.com/docs/connect/accounts)
+   * account. Standard accounts are normal Stripe accounts: Stripe will email the account holder to
+   * set up a username and password, and will handle all account management directly with them.
+   * Custom accounts have extra parameters available to them, and require that you, the platform,
+   * handle all communication with the account holder. Possible values are `standard` and `custom`.
    */
   @SerializedName("type")
   Type type;
@@ -347,9 +347,9 @@ public class AccountCreateParams extends ApiRequestParams {
 
     /**
      * A card or bank account to attach to the account. You can provide either a token, like the
-     * ones returned by [Stripe.js](/docs/stripe.js), or a dictionary, as documented in the
-     * `external_account` parameter for [bank account](/docs/api#account_create_bank_account)
-     * creation. <br>
+     * ones returned by [Stripe.js](https://stripe.com/docs/stripe.js), or a dictionary, as
+     * documented in the `external_account` parameter for [bank
+     * account](https://stripe.com/docs/api#account_create_bank_account) creation. <br>
      * <br>
      * By default, providing an external account sets it as the new default external account for its
      * currency, and deletes the old default if one exists. To add additional external accounts
@@ -363,9 +363,9 @@ public class AccountCreateParams extends ApiRequestParams {
 
     /**
      * A card or bank account to attach to the account. You can provide either a token, like the
-     * ones returned by [Stripe.js](/docs/stripe.js), or a dictionary, as documented in the
-     * `external_account` parameter for [bank account](/docs/api#account_create_bank_account)
-     * creation. <br>
+     * ones returned by [Stripe.js](https://stripe.com/docs/stripe.js), or a dictionary, as
+     * documented in the `external_account` parameter for [bank
+     * account](https://stripe.com/docs/api#account_create_bank_account) creation. <br>
      * <br>
      * By default, providing an external account sets it as the new default external account for its
      * currency, and deletes the old default if one exists. To add additional external accounts
@@ -399,7 +399,7 @@ public class AccountCreateParams extends ApiRequestParams {
 
     /**
      * Details on the account's acceptance of the [Stripe Services
-     * Agreement](/docs/connect/updating-accounts#tos-acceptance).
+     * Agreement](https://stripe.com/docs/connect/updating-accounts#tos-acceptance).
      */
     public Builder setTosAcceptance(TosAcceptance tosAcceptance) {
       this.tosAcceptance = tosAcceptance;
@@ -407,11 +407,12 @@ public class AccountCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Whether you'd like to create a [Standard or Custom](/docs/connect/accounts) account. Standard
-     * accounts are normal Stripe accounts: Stripe will email the account holder to set up a
-     * username and password, and will handle all account management directly with them. Custom
-     * accounts have extra parameters available to them, and require that you, the platform, handle
-     * all communication with the account holder. Possible values are `standard` and `custom`.
+     * Whether you'd like to create a [Standard or Custom](https://stripe.com/docs/connect/accounts)
+     * account. Standard accounts are normal Stripe accounts: Stripe will email the account holder
+     * to set up a username and password, and will handle all account management directly with them.
+     * Custom accounts have extra parameters available to them, and require that you, the platform,
+     * handle all communication with the account holder. Possible values are `standard` and
+     * `custom`.
      */
     public Builder setType(Type type) {
       this.type = type;
@@ -2237,7 +2238,7 @@ public class AccountCreateParams extends ApiRequestParams {
       /**
        * A Boolean indicating whether Stripe should try to reclaim negative balances from an
        * attached bank account. For details, see [Understanding Connect Account
-       * Balances](/docs/connect/account-balances).
+       * Balances](https://stripe.com/docs/connect/account-balances).
        */
       @SerializedName("debit_negative_balances")
       Boolean debitNegativeBalances;
@@ -2245,7 +2246,7 @@ public class AccountCreateParams extends ApiRequestParams {
       /**
        * Details on when funds from charges are available, and when they are paid out to an external
        * account. For details, see our [Setting Bank and Debit Card
-       * Payouts](/docs/connect/bank-transfers#payout-information) documentation.
+       * Payouts](https://stripe.com/docs/connect/bank-transfers#payout-information) documentation.
        */
       @SerializedName("schedule")
       Schedule schedule;
@@ -2283,7 +2284,7 @@ public class AccountCreateParams extends ApiRequestParams {
         /**
          * A Boolean indicating whether Stripe should try to reclaim negative balances from an
          * attached bank account. For details, see [Understanding Connect Account
-         * Balances](/docs/connect/account-balances).
+         * Balances](https://stripe.com/docs/connect/account-balances).
          */
         public Builder setDebitNegativeBalances(Boolean debitNegativeBalances) {
           this.debitNegativeBalances = debitNegativeBalances;
@@ -2293,7 +2294,8 @@ public class AccountCreateParams extends ApiRequestParams {
         /**
          * Details on when funds from charges are available, and when they are paid out to an
          * external account. For details, see our [Setting Bank and Debit Card
-         * Payouts](/docs/connect/bank-transfers#payout-information) documentation.
+         * Payouts](https://stripe.com/docs/connect/bank-transfers#payout-information)
+         * documentation.
          */
         public Builder setSchedule(Schedule schedule) {
           this.schedule = schedule;

@@ -23,7 +23,7 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
    * to the application owner's Stripe account. To use an application fee, the request must be made
    * on behalf of another account, using the `Stripe-Account` header or an OAuth key. For more
    * information, see the PaymentIntents [Connect usage
-   * guide](/docs/payments/payment-intents/usage#connect).
+   * guide](https://stripe.com/docs/payments/payment-intents/usage#connect).
    */
   @SerializedName("application_fee_amount")
   Long applicationFeeAmount;
@@ -32,7 +32,7 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
   @SerializedName("expand")
   List<String> expand;
 
-  /** The [Level III data](/docs/level3) associated with this payment. */
+  /** The [Level III data](https://stripe.com/docs/level3) associated with this payment. */
   @SerializedName("level3")
   Level3 level3;
 
@@ -91,14 +91,14 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
      * transferred to the application owner's Stripe account. To use an application fee, the request
      * must be made on behalf of another account, using the `Stripe-Account` header or an OAuth key.
      * For more information, see the PaymentIntents [Connect usage
-     * guide](/docs/payments/payment-intents/usage#connect).
+     * guide](https://stripe.com/docs/payments/payment-intents/usage#connect).
      */
     public Builder setApplicationFeeAmount(Long applicationFeeAmount) {
       this.applicationFeeAmount = applicationFeeAmount;
       return this;
     }
 
-    /** The [Level III data](/docs/level3) associated with this payment. */
+    /** The [Level III data](https://stripe.com/docs/level3) associated with this payment. */
     public Builder setLevel3(Level3 level3) {
       this.level3 = level3;
       return this;

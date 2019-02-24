@@ -52,7 +52,7 @@ public class Charge extends ApiResource implements BalanceTransactionSource, Met
 
   /**
    * The application fee (if any) for the charge. [See the Connect
-   * documentation](/docs/connect/direct-charges#collecting-fees) for details.
+   * documentation](https://stripe.com/docs/connect/direct-charges#collecting-fees) for details.
    */
   @SerializedName("application_fee")
   @Getter(lombok.AccessLevel.NONE)
@@ -61,7 +61,7 @@ public class Charge extends ApiResource implements BalanceTransactionSource, Met
 
   /**
    * The amount of the application fee (if any) for the charge. [See the Connect
-   * documentation](/docs/connect/direct-charges#collecting-fees) for details.
+   * documentation](https://stripe.com/docs/connect/direct-charges#collecting-fees) for details.
    */
   @SerializedName("application_fee_amount")
   Long applicationFeeAmount;
@@ -115,7 +115,7 @@ public class Charge extends ApiResource implements BalanceTransactionSource, Met
 
   /**
    * Error code explaining reason for charge failure if available (see [the errors
-   * section](/docs/api#errors) for a list of codes).
+   * section](https://stripe.com/docs/api#errors) for a list of codes).
    */
   @SerializedName("failure_code")
   String failureCode;
@@ -163,7 +163,7 @@ public class Charge extends ApiResource implements BalanceTransactionSource, Met
 
   /**
    * The account (if any) the charge was made on behalf of without triggering an automatic transfer.
-   * See the [Connect documentation](/docs/connect/charges-transfers) for details.
+   * See the [Connect documentation](https://stripe.com/docs/connect/charges-transfers) for details.
    */
   @SerializedName("on_behalf_of")
   @Getter(lombok.AccessLevel.NONE)
@@ -178,7 +178,7 @@ public class Charge extends ApiResource implements BalanceTransactionSource, Met
 
   /**
    * Details about whether the payment was accepted, and why. See [understanding
-   * declines](/docs/declines) for details.
+   * declines](https://stripe.com/docs/declines) for details.
    */
   @SerializedName("outcome")
   Outcome outcome;
@@ -236,7 +236,8 @@ public class Charge extends ApiResource implements BalanceTransactionSource, Met
 
   /**
    * The transfer ID which created this charge. Only present if the charge came from another Stripe
-   * account. [See the Connect documentation](/docs/connect/destination-charges) for details.
+   * account. [See the Connect documentation](https://stripe.com/docs/connect/destination-charges)
+   * for details.
    */
   @SerializedName("source_transfer")
   @Getter(lombok.AccessLevel.NONE)
@@ -265,15 +266,16 @@ public class Charge extends ApiResource implements BalanceTransactionSource, Met
 
   /**
    * An optional dictionary including the account to automatically transfer to as part of a
-   * destination charge. [See the Connect documentation](/docs/connect/destination-charges) for
-   * details.
+   * destination charge. [See the Connect
+   * documentation](https://stripe.com/docs/connect/destination-charges) for details.
    */
   @SerializedName("transfer_data")
   TransferData transferData;
 
   /**
    * A string that identifies this transaction as part of a group. See the [Connect
-   * documentation](/docs/connect/charges-transfers#grouping-transactions) for details.
+   * documentation](https://stripe.com/docs/connect/charges-transfers#grouping-transactions) for
+   * details.
    */
   @SerializedName("transfer_group")
   String transferGroup;
@@ -833,8 +835,8 @@ public class Charge extends ApiResource implements BalanceTransactionSource, Met
     /**
      * Possible values are `approved_by_network`, `declined_by_network`, `not_sent_to_network`, and
      * `reversed_after_approval`. The value `reversed_after_approval` indicates the payment was
-     * [blocked by Stripe](/docs/declines#blocked-payments) after bank authorization, and may
-     * temporarily appear as "pending" on a cardholder's statement.
+     * [blocked by Stripe](https://stripe.com/docs/declines#blocked-payments) after bank
+     * authorization, and may temporarily appear as "pending" on a cardholder's statement.
      */
     @SerializedName("network_status")
     String networkStatus;
@@ -844,7 +846,7 @@ public class Charge extends ApiResource implements BalanceTransactionSource, Met
      * blocked by Radar's default block rule have the value `highest_risk_level`. Charges placed in
      * review by Radar's default review rule have the value `elevated_risk_level`. Charges
      * authorized, blocked, or placed in review by custom rules have the value `rule`. See
-     * [understanding declines](/docs/declines) for more details.
+     * [understanding declines](https://stripe.com/docs/declines) for more details.
      */
     @SerializedName("reason")
     String reason;
@@ -882,8 +884,8 @@ public class Charge extends ApiResource implements BalanceTransactionSource, Met
 
     /**
      * Possible values are `authorized`, `manual_review`, `issuer_declined`, `blocked`, and
-     * `invalid`. See [understanding declines](/docs/declines) and [Radar reviews](radar/review) for
-     * details.
+     * `invalid`. See [understanding declines](https://stripe.com/docs/declines) and [Radar
+     * reviews](radar/review) for details.
      */
     @SerializedName("type")
     String type;

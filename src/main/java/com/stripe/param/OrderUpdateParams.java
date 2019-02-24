@@ -44,7 +44,8 @@ public class OrderUpdateParams extends ApiRequestParams {
 
   /**
    * Current order status. One of `created`, `paid`, `canceled`, `fulfilled`, or `returned`. More
-   * detail in the [Orders Guide](/docs/orders/guide#understanding-order-statuses).
+   * detail in the [Orders
+   * Guide](https://stripe.com/docs/orders/guide#understanding-order-statuses).
    */
   @SerializedName("status")
   Status status;
@@ -145,7 +146,8 @@ public class OrderUpdateParams extends ApiRequestParams {
 
     /**
      * Current order status. One of `created`, `paid`, `canceled`, `fulfilled`, or `returned`. More
-     * detail in the [Orders Guide](/docs/orders/guide#understanding-order-statuses).
+     * detail in the [Orders
+     * Guide](https://stripe.com/docs/orders/guide#understanding-order-statuses).
      */
     public Builder setStatus(Status status) {
       this.status = status;

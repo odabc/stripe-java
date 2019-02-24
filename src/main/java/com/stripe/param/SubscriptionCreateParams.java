@@ -34,9 +34,9 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
   /**
    * A future timestamp to anchor the subscription's [billing
-   * cycle](/docs/subscriptions/billing-cycle). This is used to determine the date of the first full
-   * invoice, and, for plans with `month` or `year` intervals, the day of the month for subsequent
-   * invoices.
+   * cycle](https://stripe.com/docs/subscriptions/billing-cycle). This is used to determine the date
+   * of the first full invoice, and, for plans with `month` or `year` intervals, the day of the
+   * month for subsequent invoices.
    */
   @SerializedName("billing_cycle_anchor")
   String billingCycleAnchor;
@@ -97,10 +97,10 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
   /**
    * Boolean (defaults to `true`) telling us whether to [credit for unused
-   * time](/docs/subscriptions/billing-cycle#prorations) when the billing cycle changes (e.g. when
-   * switching plans, resetting `billing_cycle_anchor=now`, or starting a trial), or if an item's
-   * `quantity` changes. If `false`, the anchor period will be free (similar to a trial) and no
-   * proration adjustments will be created.
+   * time](https://stripe.com/docs/subscriptions/billing-cycle#prorations) when the billing cycle
+   * changes (e.g. when switching plans, resetting `billing_cycle_anchor=now`, or starting a trial),
+   * or if an item's `quantity` changes. If `false`, the anchor period will be free (similar to a
+   * trial) and no proration adjustments will be created.
    */
   @SerializedName("prorate")
   Boolean prorate;
@@ -304,9 +304,9 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
     /**
      * A future timestamp to anchor the subscription's [billing
-     * cycle](/docs/subscriptions/billing-cycle). This is used to determine the date of the first
-     * full invoice, and, for plans with `month` or `year` intervals, the day of the month for
-     * subsequent invoices.
+     * cycle](https://stripe.com/docs/subscriptions/billing-cycle). This is used to determine the
+     * date of the first full invoice, and, for plans with `month` or `year` intervals, the day of
+     * the month for subsequent invoices.
      */
     public Builder setBillingCycleAnchor(String billingCycleAnchor) {
       this.billingCycleAnchor = billingCycleAnchor;
@@ -386,10 +386,10 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
     /**
      * Boolean (defaults to `true`) telling us whether to [credit for unused
-     * time](/docs/subscriptions/billing-cycle#prorations) when the billing cycle changes (e.g. when
-     * switching plans, resetting `billing_cycle_anchor=now`, or starting a trial), or if an item's
-     * `quantity` changes. If `false`, the anchor period will be free (similar to a trial) and no
-     * proration adjustments will be created.
+     * time](https://stripe.com/docs/subscriptions/billing-cycle#prorations) when the billing cycle
+     * changes (e.g. when switching plans, resetting `billing_cycle_anchor=now`, or starting a
+     * trial), or if an item's `quantity` changes. If `false`, the anchor period will be free
+     * (similar to a trial) and no proration adjustments will be created.
      */
     public Builder setProrate(Boolean prorate) {
       this.prorate = prorate;

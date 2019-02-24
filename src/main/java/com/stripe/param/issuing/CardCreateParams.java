@@ -14,14 +14,15 @@ import lombok.Getter;
 public class CardCreateParams extends ApiRequestParams {
   /**
    * Spending rules that give you some control over how your cards can be used. Refer to our
-   * [authorizations](/docs/issuing/authorizations) documentation for more details.
+   * [authorizations](https://stripe.com/docs/issuing/authorizations) documentation for more
+   * details.
    */
   @SerializedName("authorization_controls")
   AuthorizationControls authorizationControls;
 
   /**
-   * The [Cardholder](/docs/api#issuing_cardholder_object) object with which the card will be
-   * associated.
+   * The [Cardholder](https://stripe.com/docs/api#issuing_cardholder_object) object with which the
+   * card will be associated.
    */
   @SerializedName("cardholder")
   String cardholder;
@@ -136,7 +137,8 @@ public class CardCreateParams extends ApiRequestParams {
 
     /**
      * Spending rules that give you some control over how your cards can be used. Refer to our
-     * [authorizations](/docs/issuing/authorizations) documentation for more details.
+     * [authorizations](https://stripe.com/docs/issuing/authorizations) documentation for more
+     * details.
      */
     public Builder setAuthorizationControls(AuthorizationControls authorizationControls) {
       this.authorizationControls = authorizationControls;
@@ -144,8 +146,8 @@ public class CardCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The [Cardholder](/docs/api#issuing_cardholder_object) object with which the card will be
-     * associated.
+     * The [Cardholder](https://stripe.com/docs/api#issuing_cardholder_object) object with which the
+     * card will be associated.
      */
     public Builder setCardholder(String cardholder) {
       this.cardholder = cardholder;
@@ -187,16 +189,16 @@ public class CardCreateParams extends ApiRequestParams {
   public static class AuthorizationControls {
     /**
      * Array of strings containing
-     * [categories](/docs/api#issuing_authorization_object-merchant_data-category) of authorizations
-     * permitted on this card.
+     * [categories](https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category)
+     * of authorizations permitted on this card.
      */
     @SerializedName("allowed_categories")
     List<AllowedCategory> allowedCategories;
 
     /**
      * Array of strings containing
-     * [categories](/docs/api#issuing_authorization_object-merchant_data-category) of authorizations
-     * to always decline on this card.
+     * [categories](https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category)
+     * of authorizations to always decline on this card.
      */
     @SerializedName("blocked_categories")
     List<BlockedCategory> blockedCategories;

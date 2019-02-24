@@ -72,8 +72,8 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
 
   /**
    * Controls whether Stripe will perform [automatic
-   * collection](/docs/billing/invoices/workflow/#auto_advance) of the invoice. When `false`, the
-   * invoice's state will not automatically advance without an explicit action.
+   * collection](https://stripe.com/docs/billing/invoices/workflow/#auto_advance) of the invoice.
+   * When `false`, the invoice's state will not automatically advance without an explicit action.
    */
   @SerializedName("auto_advance")
   Boolean autoAdvance;

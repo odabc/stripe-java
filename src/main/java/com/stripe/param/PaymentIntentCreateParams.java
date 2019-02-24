@@ -21,7 +21,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
    * to the application owner's Stripe account. To use an application fee, the request must be made
    * on behalf of another account, using the `Stripe-Account` header or an OAuth key. For more
    * information, see the PaymentIntents [Connect usage
-   * guide](/docs/payments/payment-intents/usage#connect).
+   * guide](https://stripe.com/docs/payments/payment-intents/usage#connect).
    */
   @SerializedName("application_fee_amount")
   Long applicationFeeAmount;
@@ -56,7 +56,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
   @SerializedName("expand")
   List<String> expand;
 
-  /** The [Level III data](/docs/level3) associated with this payment. */
+  /** The [Level III data](https://stripe.com/docs/level3) associated with this payment. */
   @SerializedName("level3")
   Level3 level3;
 
@@ -69,7 +69,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
   /**
    * The Stripe account ID for which these funds are intended. For details, see the PaymentIntents
-   * [Connect usage guide](/docs/payments/payment-intents/usage#connect).
+   * [Connect usage guide](https://stripe.com/docs/payments/payment-intents/usage#connect).
    */
   @SerializedName("on_behalf_of")
   String onBehalfOf;
@@ -117,14 +117,15 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
   /**
    * The parameters used to automatically create a Transfer when the payment succeeds. For more
    * information, see the PaymentIntents [Connect usage
-   * guide](/docs/payments/payment-intents/usage#connect).
+   * guide](https://stripe.com/docs/payments/payment-intents/usage#connect).
    */
   @SerializedName("transfer_data")
   TransferData transferData;
 
   /**
    * A string that identifies the resulting payment as part of a group. See the PaymentIntents
-   * [Connect usage guide](/docs/payments/payment-intents/usage#connect) for details.
+   * [Connect usage guide](https://stripe.com/docs/payments/payment-intents/usage#connect) for
+   * details.
    */
   @SerializedName("transfer_group")
   String transferGroup;
@@ -292,7 +293,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
      * transferred to the application owner's Stripe account. To use an application fee, the request
      * must be made on behalf of another account, using the `Stripe-Account` header or an OAuth key.
      * For more information, see the PaymentIntents [Connect usage
-     * guide](/docs/payments/payment-intents/usage#connect).
+     * guide](https://stripe.com/docs/payments/payment-intents/usage#connect).
      */
     public Builder setApplicationFeeAmount(Long applicationFeeAmount) {
       this.applicationFeeAmount = applicationFeeAmount;
@@ -335,7 +336,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The [Level III data](/docs/level3) associated with this payment. */
+    /** The [Level III data](https://stripe.com/docs/level3) associated with this payment. */
     public Builder setLevel3(Level3 level3) {
       this.level3 = level3;
       return this;
@@ -343,7 +344,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
     /**
      * The Stripe account ID for which these funds are intended. For details, see the PaymentIntents
-     * [Connect usage guide](/docs/payments/payment-intents/usage#connect).
+     * [Connect usage guide](https://stripe.com/docs/payments/payment-intents/usage#connect).
      */
     public Builder setOnBehalfOf(String onBehalfOf) {
       this.onBehalfOf = onBehalfOf;
@@ -402,7 +403,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     /**
      * The parameters used to automatically create a Transfer when the payment succeeds. For more
      * information, see the PaymentIntents [Connect usage
-     * guide](/docs/payments/payment-intents/usage#connect).
+     * guide](https://stripe.com/docs/payments/payment-intents/usage#connect).
      */
     public Builder setTransferData(TransferData transferData) {
       this.transferData = transferData;
@@ -411,7 +412,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
     /**
      * A string that identifies the resulting payment as part of a group. See the PaymentIntents
-     * [Connect usage guide](/docs/payments/payment-intents/usage#connect) for details.
+     * [Connect usage guide](https://stripe.com/docs/payments/payment-intents/usage#connect) for
+     * details.
      */
     public Builder setTransferGroup(String transferGroup) {
       this.transferGroup = transferGroup;

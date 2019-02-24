@@ -14,8 +14,8 @@ public class UsageRecordCreateOnSubscriptionItemParams extends ApiRequestParams 
    * Valid values are `increment` (default) or `set`. When using `increment` the specified
    * `quantity` will be added to the usage at the specified timestamp. The `set` action will
    * overwrite the usage quantity at that timestamp. If the subscription has [billing
-   * thresholds](/docs/api/subscriptions/object#subscription_object-billing_thresholds), `increment`
-   * is the only allowed value.
+   * thresholds](https://stripe.com/docs/api/subscriptions/object#subscription_object-billing_thresholds),
+   * `increment` is the only allowed value.
    */
   @SerializedName("action")
   Action action;
@@ -79,7 +79,7 @@ public class UsageRecordCreateOnSubscriptionItemParams extends ApiRequestParams 
      * Valid values are `increment` (default) or `set`. When using `increment` the specified
      * `quantity` will be added to the usage at the specified timestamp. The `set` action will
      * overwrite the usage quantity at that timestamp. If the subscription has [billing
-     * thresholds](/docs/api/subscriptions/object#subscription_object-billing_thresholds),
+     * thresholds](https://stripe.com/docs/api/subscriptions/object#subscription_object-billing_thresholds),
      * `increment` is the only allowed value.
      */
     public Builder setAction(Action action) {

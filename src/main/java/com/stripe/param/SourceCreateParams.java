@@ -101,7 +101,8 @@ public class SourceCreateParams extends ApiRequestParams {
 
   /**
    * The `type` of the source to create. Required unless `customer` and `original_source` are
-   * specified (see the [Shared card Sources](/docs/sources/connect#shared-card-sources) guide)
+   * specified (see the [Shared card
+   * Sources](https://stripe.com/docs/sources/connect#shared-card-sources) guide)
    */
   @SerializedName("type")
   String type;
@@ -323,7 +324,8 @@ public class SourceCreateParams extends ApiRequestParams {
 
     /**
      * The `type` of the source to create. Required unless `customer` and `original_source` are
-     * specified (see the [Shared card Sources](/docs/sources/connect#shared-card-sources) guide)
+     * specified (see the [Shared card
+     * Sources](https://stripe.com/docs/sources/connect#shared-card-sources) guide)
      */
     public Builder setType(String type) {
       this.type = type;

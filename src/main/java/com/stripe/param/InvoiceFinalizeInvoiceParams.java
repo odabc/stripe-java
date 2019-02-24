@@ -12,8 +12,8 @@ import lombok.Getter;
 public class InvoiceFinalizeInvoiceParams extends ApiRequestParams {
   /**
    * Controls whether Stripe will perform [automatic
-   * collection](/docs/billing/invoices/workflow/#auto_advance) of the invoice. When `false`, the
-   * invoice's state will not automatically advance without an explicit action.
+   * collection](https://stripe.com/docs/billing/invoices/workflow/#auto_advance) of the invoice.
+   * When `false`, the invoice's state will not automatically advance without an explicit action.
    */
   @SerializedName("auto_advance")
   Boolean autoAdvance;
@@ -56,8 +56,8 @@ public class InvoiceFinalizeInvoiceParams extends ApiRequestParams {
 
     /**
      * Controls whether Stripe will perform [automatic
-     * collection](/docs/billing/invoices/workflow/#auto_advance) of the invoice. When `false`, the
-     * invoice's state will not automatically advance without an explicit action.
+     * collection](https://stripe.com/docs/billing/invoices/workflow/#auto_advance) of the invoice.
+     * When `false`, the invoice's state will not automatically advance without an explicit action.
      */
     public Builder setAutoAdvance(Boolean autoAdvance) {
       this.autoAdvance = autoAdvance;

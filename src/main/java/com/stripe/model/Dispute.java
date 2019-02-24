@@ -100,7 +100,7 @@ public class Dispute extends ApiResource
    * `subscription_canceled`, `product_unacceptable`, `product_not_received`, `unrecognized`,
    * `credit_not_processed`, `general`, `incorrect_account_details`, `insufficient_funds`,
    * `bank_cannot_process`, `debit_not_authorized`, or `customer_initiated`. Read more about
-   * [dispute reasons](/docs/disputes/categories).
+   * [dispute reasons](https://stripe.com/docs/disputes/categories).
    */
   @SerializedName("reason")
   String reason;

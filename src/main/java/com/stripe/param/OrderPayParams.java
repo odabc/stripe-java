@@ -46,10 +46,11 @@ public class OrderPayParams extends ApiRequestParams {
   String shippingMethod;
 
   /**
-   * A [Token](/docs/api#tokens)'s or a [Source](/docs/api#sources)'s ID, as returned by
-   * [Elements](/docs/elements). If no customer was attached to the order at creation, either
-   * `source` or `customer is required. Otherwise, the specified source will be charged intead of
-   * the customer attached to the order.
+   * A [Token](https://stripe.com/docs/api#tokens)'s or a
+   * [Source](https://stripe.com/docs/api#sources)'s ID, as returned by
+   * [Elements](https://stripe.com/docs/elements). If no customer was attached to the order at
+   * creation, either `source` or `customer is required. Otherwise, the specified source will be
+   * charged intead of the customer attached to the order.
    */
   @SerializedName("source")
   Object source;
@@ -158,10 +159,11 @@ public class OrderPayParams extends ApiRequestParams {
     }
 
     /**
-     * A [Token](/docs/api#tokens)'s or a [Source](/docs/api#sources)'s ID, as returned by
-     * [Elements](/docs/elements). If no customer was attached to the order at creation, either
-     * `source` or `customer is required. Otherwise, the specified source will be charged intead of
-     * the customer attached to the order.
+     * A [Token](https://stripe.com/docs/api#tokens)'s or a
+     * [Source](https://stripe.com/docs/api#sources)'s ID, as returned by
+     * [Elements](https://stripe.com/docs/elements). If no customer was attached to the order at
+     * creation, either `source` or `customer is required. Otherwise, the specified source will be
+     * charged intead of the customer attached to the order.
      */
     public Builder setSource(String source) {
       this.source = source;
@@ -169,10 +171,11 @@ public class OrderPayParams extends ApiRequestParams {
     }
 
     /**
-     * A [Token](/docs/api#tokens)'s or a [Source](/docs/api#sources)'s ID, as returned by
-     * [Elements](/docs/elements). If no customer was attached to the order at creation, either
-     * `source` or `customer is required. Otherwise, the specified source will be charged intead of
-     * the customer attached to the order.
+     * A [Token](https://stripe.com/docs/api#tokens)'s or a
+     * [Source](https://stripe.com/docs/api#sources)'s ID, as returned by
+     * [Elements](https://stripe.com/docs/elements). If no customer was attached to the order at
+     * creation, either `source` or `customer is required. Otherwise, the specified source will be
+     * charged intead of the customer attached to the order.
      */
     public Builder setSource(Map<String, Object> source) {
       this.source = source;

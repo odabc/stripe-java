@@ -54,7 +54,7 @@ public class PlanUpdateParams extends ApiRequestParams {
 
   /**
    * Default number of trial days when subscribing a customer to this plan using
-   * [`trial_from_plan=true`](/docs/api#create_subscription-trial_from_plan).
+   * [`trial_from_plan=true`](https://stripe.com/docs/api#create_subscription-trial_from_plan).
    */
   @SerializedName("trial_period_days")
   Long trialPeriodDays;
@@ -179,7 +179,7 @@ public class PlanUpdateParams extends ApiRequestParams {
 
     /**
      * Default number of trial days when subscribing a customer to this plan using
-     * [`trial_from_plan=true`](/docs/api#create_subscription-trial_from_plan).
+     * [`trial_from_plan=true`](https://stripe.com/docs/api#create_subscription-trial_from_plan).
      */
     public Builder setTrialPeriodDays(Long trialPeriodDays) {
       this.trialPeriodDays = trialPeriodDays;

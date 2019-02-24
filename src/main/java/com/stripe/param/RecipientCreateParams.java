@@ -14,8 +14,8 @@ import lombok.Getter;
 public class RecipientCreateParams extends ApiRequestParams {
   /**
    * A bank account to attach to the recipient. You can provide either a token, like the ones
-   * returned by [Stripe.js](/docs/stripe-js), or a dictionary containing a user's bank account
-   * details, with the options described below.
+   * returned by [Stripe.js](https://stripe.com/docs/stripe-js), or a dictionary containing a user's
+   * bank account details, with the options described below.
    */
   @SerializedName("bank_account")
   Object bankAccount;
@@ -23,9 +23,9 @@ public class RecipientCreateParams extends ApiRequestParams {
   /**
    * A U.S. Visa or MasterCard debit card (_not_ prepaid) to attach to the recipient. If the debit
    * card is not valid, recipient creation will fail. You can provide either a token, like the ones
-   * returned by [Stripe.js](/docs/stripe-js), or a dictionary containing a user's debit card
-   * details, with the options described below. Although not all information is required, the extra
-   * info helps prevent fraud.
+   * returned by [Stripe.js](https://stripe.com/docs/stripe-js), or a dictionary containing a user's
+   * debit card details, with the options described below. Although not all information is required,
+   * the extra info helps prevent fraud.
    */
   @SerializedName("card")
   Object card;
@@ -161,8 +161,8 @@ public class RecipientCreateParams extends ApiRequestParams {
 
     /**
      * A bank account to attach to the recipient. You can provide either a token, like the ones
-     * returned by [Stripe.js](/docs/stripe-js), or a dictionary containing a user's bank account
-     * details, with the options described below.
+     * returned by [Stripe.js](https://stripe.com/docs/stripe-js), or a dictionary containing a
+     * user's bank account details, with the options described below.
      */
     public Builder setBankAccount(String bankAccount) {
       this.bankAccount = bankAccount;
@@ -171,8 +171,8 @@ public class RecipientCreateParams extends ApiRequestParams {
 
     /**
      * A bank account to attach to the recipient. You can provide either a token, like the ones
-     * returned by [Stripe.js](/docs/stripe-js), or a dictionary containing a user's bank account
-     * details, with the options described below.
+     * returned by [Stripe.js](https://stripe.com/docs/stripe-js), or a dictionary containing a
+     * user's bank account details, with the options described below.
      */
     public Builder setBankAccount(Map<String, Object> bankAccount) {
       this.bankAccount = bankAccount;
@@ -182,9 +182,9 @@ public class RecipientCreateParams extends ApiRequestParams {
     /**
      * A U.S. Visa or MasterCard debit card (_not_ prepaid) to attach to the recipient. If the debit
      * card is not valid, recipient creation will fail. You can provide either a token, like the
-     * ones returned by [Stripe.js](/docs/stripe-js), or a dictionary containing a user's debit card
-     * details, with the options described below. Although not all information is required, the
-     * extra info helps prevent fraud.
+     * ones returned by [Stripe.js](https://stripe.com/docs/stripe-js), or a dictionary containing a
+     * user's debit card details, with the options described below. Although not all information is
+     * required, the extra info helps prevent fraud.
      */
     public Builder setCard(String card) {
       this.card = card;
@@ -194,9 +194,9 @@ public class RecipientCreateParams extends ApiRequestParams {
     /**
      * A U.S. Visa or MasterCard debit card (_not_ prepaid) to attach to the recipient. If the debit
      * card is not valid, recipient creation will fail. You can provide either a token, like the
-     * ones returned by [Stripe.js](/docs/stripe-js), or a dictionary containing a user's debit card
-     * details, with the options described below. Although not all information is required, the
-     * extra info helps prevent fraud.
+     * ones returned by [Stripe.js](https://stripe.com/docs/stripe-js), or a dictionary containing a
+     * user's debit card details, with the options described below. Although not all information is
+     * required, the extra info helps prevent fraud.
      */
     public Builder setCard(Map<String, Object> card) {
       this.card = card;

@@ -46,9 +46,10 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
 
   /**
    * For new subscriptions, a future timestamp to anchor the subscription's [billing
-   * cycle](/docs/subscriptions/billing-cycle). This is used to determine the date of the first full
-   * invoice, and, for plans with `month` or `year` intervals, the day of the month for subsequent
-   * invoices. For existing subscriptions, the value can only be set to `now` or `unchanged`.
+   * cycle](https://stripe.com/docs/subscriptions/billing-cycle). This is used to determine the date
+   * of the first full invoice, and, for plans with `month` or `year` intervals, the day of the
+   * month for subsequent invoices. For existing subscriptions, the value can only be set to `now`
+   * or `unchanged`.
    */
   @SerializedName("subscription_billing_cycle_anchor")
   Object subscriptionBillingCycleAnchor;
@@ -249,10 +250,10 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
 
     /**
      * For new subscriptions, a future timestamp to anchor the subscription's [billing
-     * cycle](/docs/subscriptions/billing-cycle). This is used to determine the date of the first
-     * full invoice, and, for plans with `month` or `year` intervals, the day of the month for
-     * subsequent invoices. For existing subscriptions, the value can only be set to `now` or
-     * `unchanged`.
+     * cycle](https://stripe.com/docs/subscriptions/billing-cycle). This is used to determine the
+     * date of the first full invoice, and, for plans with `month` or `year` intervals, the day of
+     * the month for subsequent invoices. For existing subscriptions, the value can only be set to
+     * `now` or `unchanged`.
      */
     public Builder setSubscriptionBillingCycleAnchor(
         SubscriptionBillingCycleAnchor subscriptionBillingCycleAnchor) {
@@ -262,10 +263,10 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
 
     /**
      * For new subscriptions, a future timestamp to anchor the subscription's [billing
-     * cycle](/docs/subscriptions/billing-cycle). This is used to determine the date of the first
-     * full invoice, and, for plans with `month` or `year` intervals, the day of the month for
-     * subsequent invoices. For existing subscriptions, the value can only be set to `now` or
-     * `unchanged`.
+     * cycle](https://stripe.com/docs/subscriptions/billing-cycle). This is used to determine the
+     * date of the first full invoice, and, for plans with `month` or `year` intervals, the day of
+     * the month for subsequent invoices. For existing subscriptions, the value can only be set to
+     * `now` or `unchanged`.
      */
     public Builder setSubscriptionBillingCycleAnchor(Long subscriptionBillingCycleAnchor) {
       this.subscriptionBillingCycleAnchor = subscriptionBillingCycleAnchor;

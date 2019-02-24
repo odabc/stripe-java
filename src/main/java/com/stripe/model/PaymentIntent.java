@@ -44,7 +44,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
 
   /**
    * The amount of the application fee (if any) for the resulting payment. See the PaymentIntents
-   * [Connect usage guide](/docs/payments/payment-intents/usage#connect) for details.
+   * [Connect usage guide](https://stripe.com/docs/payments/payment-intents/usage#connect) for
+   * details.
    */
   @SerializedName("application_fee_amount")
   Long applicationFeeAmount;
@@ -73,8 +74,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
 
   /**
    * The client secret of this PaymentIntent. Used for client-side retrieval using a publishable
-   * key. Please refer to [dynamic authentication](/docs/payments/dynamic-authentication) guide on
-   * how `client_secret` should be handled.
+   * key. Please refer to [dynamic
+   * authentication](https://stripe.com/docs/payments/dynamic-authentication) guide on how
+   * `client_secret` should be handled.
    */
   @SerializedName("client_secret")
   String clientSecret;
@@ -113,7 +115,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("last_payment_error")
   StripeError lastPaymentError;
 
-  /** The [Level III data](/docs/level3) associated with this payment. */
+  /** The [Level III data](https://stripe.com/docs/level3) associated with this payment. */
   @SerializedName("level3")
   Level3 level3;
 
@@ -127,7 +129,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   /**
    * Set of key-value pairs that you can attach to an object. This can be useful for storing
    * additional information about the object in a structured format. For more information, see the
-   * [documentation](/docs/payments/payment-intents/creating-payment-intents#storing-information-in-metadata).
+   * [documentation](https://stripe.com/docs/payments/payment-intents/creating-payment-intents#storing-information-in-metadata).
    */
   @Getter(onMethod = @__({@Override}))
   @SerializedName("metadata")
@@ -146,7 +148,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
 
   /**
    * The account (if any) for which the funds of the PaymentIntent are intended. See the
-   * PaymentIntents [Connect usage guide](/docs/payments/payment-intents/usage#connect) for details.
+   * PaymentIntents [Connect usage
+   * guide](https://stripe.com/docs/payments/payment-intents/usage#connect) for details.
    */
   @SerializedName("on_behalf_of")
   @Getter(lombok.AccessLevel.NONE)
@@ -193,14 +196,16 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
 
   /**
    * The data with which to automatically create a Transfer when the payment is finalized. See the
-   * PaymentIntents [Connect usage guide](/docs/payments/payment-intents/usage#connect) for details.
+   * PaymentIntents [Connect usage
+   * guide](https://stripe.com/docs/payments/payment-intents/usage#connect) for details.
    */
   @SerializedName("transfer_data")
   TransferData transferData;
 
   /**
    * A string that identifies the resulting payment as part of a group. See the PaymentIntents
-   * [Connect usage guide](/docs/payments/payment-intents/usage#connect) for details.
+   * [Connect usage guide](https://stripe.com/docs/payments/payment-intents/usage#connect) for
+   * details.
    */
   @SerializedName("transfer_group")
   String transferGroup;

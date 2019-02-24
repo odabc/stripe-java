@@ -35,8 +35,8 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
   String plan;
 
   /**
-   * Flag indicating whether to [prorate](/docs/billing/subscriptions/prorations) switching plans
-   * during a billing cycle.
+   * Flag indicating whether to [prorate](https://stripe.com/docs/billing/subscriptions/prorations)
+   * switching plans during a billing cycle.
    */
   @SerializedName("prorate")
   Boolean prorate;
@@ -161,8 +161,9 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Flag indicating whether to [prorate](/docs/billing/subscriptions/prorations) switching plans
-     * during a billing cycle.
+     * Flag indicating whether to
+     * [prorate](https://stripe.com/docs/billing/subscriptions/prorations) switching plans during a
+     * billing cycle.
      */
     public Builder setProrate(Boolean prorate) {
       this.prorate = prorate;

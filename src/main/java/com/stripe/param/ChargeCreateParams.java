@@ -14,9 +14,9 @@ import lombok.Getter;
 public class ChargeCreateParams extends ApiRequestParams {
   /**
    * A positive integer representing how much to charge, in the [smallest currency
-   * unit](/docs/currencies#zero-decimal) (e.g., `100` cents to charge $1.00, or `100` to charge
-   * ¥100, a zero-decimal currency). The minimum amount is $0.50 USD or [equivalent in charge
-   * currency](/docs/currencies#minimum-and-maximum-charge-amounts).
+   * unit](https://stripe.com/docs/currencies#zero-decimal) (e.g., `100` cents to charge $1.00, or
+   * `100` to charge ¥100, a zero-decimal currency). The minimum amount is $0.50 USD or [equivalent
+   * in charge currency](https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts).
    */
   @SerializedName("amount")
   Long amount;
@@ -28,7 +28,7 @@ public class ChargeCreateParams extends ApiRequestParams {
    * A fee in %s that will be applied to the charge and transferred to the application owner's
    * Stripe account. The request must be made with an OAuth key or the `Stripe-Account` header in
    * order to take an application fee. For more information, see the application fees
-   * [documentation](/docs/connect/direct-charges#collecting-fees).
+   * [documentation](https://stripe.com/docs/connect/direct-charges#collecting-fees).
    */
   @SerializedName("application_fee_amount")
   Long applicationFeeAmount;
@@ -37,7 +37,7 @@ public class ChargeCreateParams extends ApiRequestParams {
    * Whether to immediately capture the charge. Defaults to `true`. When `false`, the charge issues
    * an authorization (or pre-authorization), and will need to be [captured](#capture_charge) later.
    * Uncaptured charges expire in _seven days_. For more information, see the [authorizing charges
-   * and settling later](/docs/charges#auth-and-capture) documentation.
+   * and settling later](https://stripe.com/docs/charges#auth-and-capture) documentation.
    */
   @SerializedName("capture")
   Boolean capture;
@@ -83,17 +83,18 @@ public class ChargeCreateParams extends ApiRequestParams {
   /**
    * The Stripe account ID for which these funds are intended. Automatically set if you use the
    * `destination` parameter. For details, see [Creating Separate Charges and
-   * Transfers](/docs/connect/charges-transfers#on-behalf-of).
+   * Transfers](https://stripe.com/docs/connect/charges-transfers#on-behalf-of).
    */
   @SerializedName("on_behalf_of")
   String onBehalfOf;
 
   /**
-   * The email address to which this charge's [receipt](/docs/dashboard/receipts) will be sent. The
-   * receipt will not be sent until the charge is paid, and no receipts will be sent for test mode
-   * charges. If this charge is for a [Customer](/docs/api/customers/object), the email address
-   * specified here will override the customer's email address. If `receipt_email` is specified for
-   * a charge in live mode, a receipt will be sent regardless of your [email
+   * The email address to which this charge's [receipt](https://stripe.com/docs/dashboard/receipts)
+   * will be sent. The receipt will not be sent until the charge is paid, and no receipts will be
+   * sent for test mode charges. If this charge is for a
+   * [Customer](https://stripe.com/docs/api/customers/object), the email address specified here will
+   * override the customer's email address. If `receipt_email` is specified for a charge in live
+   * mode, a receipt will be sent regardless of your [email
    * settings](https://dashboard.stripe.com/account/emails).
    */
   @SerializedName("receipt_email")
@@ -104,12 +105,16 @@ public class ChargeCreateParams extends ApiRequestParams {
   Shipping shipping;
 
   /**
-   * A payment source to be charged. This can be the ID of a [card](/docs/api#cards) (i.e., credit
-   * or debit card), a [bank account](/docs/api#bank_accounts), a [source](/docs/api#sources), a
-   * [token](/docs/api#tokens), or a [connected
-   * account](/docs/connect/account-debits#charging-a-connected-account). For certain
-   * sources---namely, [cards](/docs/api#cards), [bank accounts](/docs/api#bank_accounts), and
-   * attached [sources](/docs/api#sources)---you must also pass the ID of the associated customer.
+   * A payment source to be charged. This can be the ID of a
+   * [card](https://stripe.com/docs/api#cards) (i.e., credit or debit card), a [bank
+   * account](https://stripe.com/docs/api#bank_accounts), a
+   * [source](https://stripe.com/docs/api#sources), a [token](https://stripe.com/docs/api#tokens),
+   * or a [connected
+   * account](https://stripe.com/docs/connect/account-debits#charging-a-connected-account). For
+   * certain sources---namely, [cards](https://stripe.com/docs/api#cards), [bank
+   * accounts](https://stripe.com/docs/api#bank_accounts), and attached
+   * [sources](https://stripe.com/docs/api#sources)---you must also pass the ID of the associated
+   * customer.
    */
   @SerializedName("source")
   Object source;
@@ -128,15 +133,15 @@ public class ChargeCreateParams extends ApiRequestParams {
 
   /**
    * An optional dictionary including the account to automatically transfer to as part of a
-   * destination charge. [See the Connect documentation](/docs/connect/destination-charges) for
-   * details.
+   * destination charge. [See the Connect
+   * documentation](https://stripe.com/docs/connect/destination-charges) for details.
    */
   @SerializedName("transfer_data")
   TransferData transferData;
 
   /**
    * A string that identifies this transaction as part of a group. For details, see [Grouping
-   * transactions](/docs/connect/charges-transfers#grouping-transactions).
+   * transactions](https://stripe.com/docs/connect/charges-transfers#grouping-transactions).
    */
   @SerializedName("transfer_group")
   String transferGroup;
@@ -272,9 +277,10 @@ public class ChargeCreateParams extends ApiRequestParams {
 
     /**
      * A positive integer representing how much to charge, in the [smallest currency
-     * unit](/docs/currencies#zero-decimal) (e.g., `100` cents to charge $1.00, or `100` to charge
-     * ¥100, a zero-decimal currency). The minimum amount is $0.50 USD or [equivalent in charge
-     * currency](/docs/currencies#minimum-and-maximum-charge-amounts).
+     * unit](https://stripe.com/docs/currencies#zero-decimal) (e.g., `100` cents to charge $1.00, or
+     * `100` to charge ¥100, a zero-decimal currency). The minimum amount is $0.50 USD or
+     * [equivalent in charge
+     * currency](https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts).
      */
     public Builder setAmount(Long amount) {
       this.amount = amount;
@@ -285,7 +291,7 @@ public class ChargeCreateParams extends ApiRequestParams {
      * A fee in %s that will be applied to the charge and transferred to the application owner's
      * Stripe account. The request must be made with an OAuth key or the `Stripe-Account` header in
      * order to take an application fee. For more information, see the application fees
-     * [documentation](/docs/connect/direct-charges#collecting-fees).
+     * [documentation](https://stripe.com/docs/connect/direct-charges#collecting-fees).
      */
     public Builder setApplicationFeeAmount(Long applicationFeeAmount) {
       this.applicationFeeAmount = applicationFeeAmount;
@@ -301,8 +307,8 @@ public class ChargeCreateParams extends ApiRequestParams {
      * Whether to immediately capture the charge. Defaults to `true`. When `false`, the charge
      * issues an authorization (or pre-authorization), and will need to be
      * [captured](#capture_charge) later. Uncaptured charges expire in _seven days_. For more
-     * information, see the [authorizing charges and settling later](/docs/charges#auth-and-capture)
-     * documentation.
+     * information, see the [authorizing charges and settling
+     * later](https://stripe.com/docs/charges#auth-and-capture) documentation.
      */
     public Builder setCapture(Boolean capture) {
       this.capture = capture;
@@ -361,7 +367,7 @@ public class ChargeCreateParams extends ApiRequestParams {
     /**
      * The Stripe account ID for which these funds are intended. Automatically set if you use the
      * `destination` parameter. For details, see [Creating Separate Charges and
-     * Transfers](/docs/connect/charges-transfers#on-behalf-of).
+     * Transfers](https://stripe.com/docs/connect/charges-transfers#on-behalf-of).
      */
     public Builder setOnBehalfOf(String onBehalfOf) {
       this.onBehalfOf = onBehalfOf;
@@ -369,11 +375,12 @@ public class ChargeCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The email address to which this charge's [receipt](/docs/dashboard/receipts) will be sent.
-     * The receipt will not be sent until the charge is paid, and no receipts will be sent for test
-     * mode charges. If this charge is for a [Customer](/docs/api/customers/object), the email
-     * address specified here will override the customer's email address. If `receipt_email` is
-     * specified for a charge in live mode, a receipt will be sent regardless of your [email
+     * The email address to which this charge's
+     * [receipt](https://stripe.com/docs/dashboard/receipts) will be sent. The receipt will not be
+     * sent until the charge is paid, and no receipts will be sent for test mode charges. If this
+     * charge is for a [Customer](https://stripe.com/docs/api/customers/object), the email address
+     * specified here will override the customer's email address. If `receipt_email` is specified
+     * for a charge in live mode, a receipt will be sent regardless of your [email
      * settings](https://dashboard.stripe.com/account/emails).
      */
     public Builder setReceiptEmail(String receiptEmail) {
@@ -388,12 +395,16 @@ public class ChargeCreateParams extends ApiRequestParams {
     }
 
     /**
-     * A payment source to be charged. This can be the ID of a [card](/docs/api#cards) (i.e., credit
-     * or debit card), a [bank account](/docs/api#bank_accounts), a [source](/docs/api#sources), a
-     * [token](/docs/api#tokens), or a [connected
-     * account](/docs/connect/account-debits#charging-a-connected-account). For certain
-     * sources---namely, [cards](/docs/api#cards), [bank accounts](/docs/api#bank_accounts), and
-     * attached [sources](/docs/api#sources)---you must also pass the ID of the associated customer.
+     * A payment source to be charged. This can be the ID of a
+     * [card](https://stripe.com/docs/api#cards) (i.e., credit or debit card), a [bank
+     * account](https://stripe.com/docs/api#bank_accounts), a
+     * [source](https://stripe.com/docs/api#sources), a [token](https://stripe.com/docs/api#tokens),
+     * or a [connected
+     * account](https://stripe.com/docs/connect/account-debits#charging-a-connected-account). For
+     * certain sources---namely, [cards](https://stripe.com/docs/api#cards), [bank
+     * accounts](https://stripe.com/docs/api#bank_accounts), and attached
+     * [sources](https://stripe.com/docs/api#sources)---you must also pass the ID of the associated
+     * customer.
      */
     public Builder setSource(Source source) {
       this.source = source;
@@ -401,12 +412,16 @@ public class ChargeCreateParams extends ApiRequestParams {
     }
 
     /**
-     * A payment source to be charged. This can be the ID of a [card](/docs/api#cards) (i.e., credit
-     * or debit card), a [bank account](/docs/api#bank_accounts), a [source](/docs/api#sources), a
-     * [token](/docs/api#tokens), or a [connected
-     * account](/docs/connect/account-debits#charging-a-connected-account). For certain
-     * sources---namely, [cards](/docs/api#cards), [bank accounts](/docs/api#bank_accounts), and
-     * attached [sources](/docs/api#sources)---you must also pass the ID of the associated customer.
+     * A payment source to be charged. This can be the ID of a
+     * [card](https://stripe.com/docs/api#cards) (i.e., credit or debit card), a [bank
+     * account](https://stripe.com/docs/api#bank_accounts), a
+     * [source](https://stripe.com/docs/api#sources), a [token](https://stripe.com/docs/api#tokens),
+     * or a [connected
+     * account](https://stripe.com/docs/connect/account-debits#charging-a-connected-account). For
+     * certain sources---namely, [cards](https://stripe.com/docs/api#cards), [bank
+     * accounts](https://stripe.com/docs/api#bank_accounts), and attached
+     * [sources](https://stripe.com/docs/api#sources)---you must also pass the ID of the associated
+     * customer.
      */
     public Builder setSource(String source) {
       this.source = source;
@@ -414,12 +429,16 @@ public class ChargeCreateParams extends ApiRequestParams {
     }
 
     /**
-     * A payment source to be charged. This can be the ID of a [card](/docs/api#cards) (i.e., credit
-     * or debit card), a [bank account](/docs/api#bank_accounts), a [source](/docs/api#sources), a
-     * [token](/docs/api#tokens), or a [connected
-     * account](/docs/connect/account-debits#charging-a-connected-account). For certain
-     * sources---namely, [cards](/docs/api#cards), [bank accounts](/docs/api#bank_accounts), and
-     * attached [sources](/docs/api#sources)---you must also pass the ID of the associated customer.
+     * A payment source to be charged. This can be the ID of a
+     * [card](https://stripe.com/docs/api#cards) (i.e., credit or debit card), a [bank
+     * account](https://stripe.com/docs/api#bank_accounts), a
+     * [source](https://stripe.com/docs/api#sources), a [token](https://stripe.com/docs/api#tokens),
+     * or a [connected
+     * account](https://stripe.com/docs/connect/account-debits#charging-a-connected-account). For
+     * certain sources---namely, [cards](https://stripe.com/docs/api#cards), [bank
+     * accounts](https://stripe.com/docs/api#bank_accounts), and attached
+     * [sources](https://stripe.com/docs/api#sources)---you must also pass the ID of the associated
+     * customer.
      */
     public Builder setSource(Map<String, Object> source) {
       this.source = source;
@@ -442,8 +461,8 @@ public class ChargeCreateParams extends ApiRequestParams {
 
     /**
      * An optional dictionary including the account to automatically transfer to as part of a
-     * destination charge. [See the Connect documentation](/docs/connect/destination-charges) for
-     * details.
+     * destination charge. [See the Connect
+     * documentation](https://stripe.com/docs/connect/destination-charges) for details.
      */
     public Builder setTransferData(TransferData transferData) {
       this.transferData = transferData;
@@ -452,7 +471,7 @@ public class ChargeCreateParams extends ApiRequestParams {
 
     /**
      * A string that identifies this transaction as part of a group. For details, see [Grouping
-     * transactions](/docs/connect/charges-transfers#grouping-transactions).
+     * transactions](https://stripe.com/docs/connect/charges-transfers#grouping-transactions).
      */
     public Builder setTransferGroup(String transferGroup) {
       this.transferGroup = transferGroup;

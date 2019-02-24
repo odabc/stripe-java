@@ -35,7 +35,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
   /**
    * Either `now` or `unchanged`. Setting the value to `now` resets the subscription's billing cycle
    * anchor to the current time. For more information, see the billing cycle
-   * [documentation](/docs/billing/subscriptions/billing-cycle).
+   * [documentation](https://stripe.com/docs/billing/subscriptions/billing-cycle).
    */
   @SerializedName("billing_cycle_anchor")
   String billingCycleAnchor;
@@ -92,10 +92,10 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
   /**
    * Boolean (defaults to `true`) telling us whether to [credit for unused
-   * time](/docs/subscriptions/billing-cycle#prorations) when the billing cycle changes (e.g. when
-   * switching plans, resetting `billing_cycle_anchor=now`, or starting a trial), or if an item's
-   * `quantity` changes. If `false`, the anchor period will be free (similar to a trial) and no
-   * proration adjustments will be created.
+   * time](https://stripe.com/docs/subscriptions/billing-cycle#prorations) when the billing cycle
+   * changes (e.g. when switching plans, resetting `billing_cycle_anchor=now`, or starting a trial),
+   * or if an item's `quantity` changes. If `false`, the anchor period will be free (similar to a
+   * trial) and no proration adjustments will be created.
    */
   @SerializedName("prorate")
   Boolean prorate;
@@ -298,7 +298,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     /**
      * Either `now` or `unchanged`. Setting the value to `now` resets the subscription's billing
      * cycle anchor to the current time. For more information, see the billing cycle
-     * [documentation](/docs/billing/subscriptions/billing-cycle).
+     * [documentation](https://stripe.com/docs/billing/subscriptions/billing-cycle).
      */
     public Builder setBillingCycleAnchor(String billingCycleAnchor) {
       this.billingCycleAnchor = billingCycleAnchor;
@@ -372,10 +372,10 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
     /**
      * Boolean (defaults to `true`) telling us whether to [credit for unused
-     * time](/docs/subscriptions/billing-cycle#prorations) when the billing cycle changes (e.g. when
-     * switching plans, resetting `billing_cycle_anchor=now`, or starting a trial), or if an item's
-     * `quantity` changes. If `false`, the anchor period will be free (similar to a trial) and no
-     * proration adjustments will be created.
+     * time](https://stripe.com/docs/subscriptions/billing-cycle#prorations) when the billing cycle
+     * changes (e.g. when switching plans, resetting `billing_cycle_anchor=now`, or starting a
+     * trial), or if an item's `quantity` changes. If `false`, the anchor period will be free
+     * (similar to a trial) and no proration adjustments will be created.
      */
     public Builder setProrate(Boolean prorate) {
       this.prorate = prorate;

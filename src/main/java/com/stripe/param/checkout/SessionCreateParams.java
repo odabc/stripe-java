@@ -339,7 +339,7 @@ public class SessionCreateParams extends ApiRequestParams {
      * transferred to the application owner's Stripe account. To use an application fee, the request
      * must be made on behalf of another account, using the `Stripe-Account` header or an OAuth key.
      * For more information, see the PaymentIntents [Connect usage
-     * guide](/docs/payments/payment-intents/usage#connect).
+     * guide](https://stripe.com/docs/payments/payment-intents/usage#connect).
      */
     @SerializedName("application_fee_amount")
     Long applicationFeeAmount;
@@ -357,7 +357,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
     /**
      * The Stripe account ID for which these funds are intended. For details, see the PaymentIntents
-     * [Connect usage guide](/docs/payments/payment-intents/usage#connect).
+     * [Connect usage guide](https://stripe.com/docs/payments/payment-intents/usage#connect).
      */
     @SerializedName("on_behalf_of")
     String onBehalfOf;
@@ -380,7 +380,7 @@ public class SessionCreateParams extends ApiRequestParams {
     /**
      * The parameters used to automatically create a Transfer when the payment succeeds. For more
      * information, see the PaymentIntents [Connect usage
-     * guide](/docs/payments/payment-intents/usage#connect).
+     * guide](https://stripe.com/docs/payments/payment-intents/usage#connect).
      */
     @SerializedName("transfer_data")
     TransferData transferData;
@@ -456,7 +456,7 @@ public class SessionCreateParams extends ApiRequestParams {
        * transferred to the application owner's Stripe account. To use an application fee, the
        * request must be made on behalf of another account, using the `Stripe-Account` header or an
        * OAuth key. For more information, see the PaymentIntents [Connect usage
-       * guide](/docs/payments/payment-intents/usage#connect).
+       * guide](https://stripe.com/docs/payments/payment-intents/usage#connect).
        */
       public Builder setApplicationFeeAmount(Long applicationFeeAmount) {
         this.applicationFeeAmount = applicationFeeAmount;
@@ -471,7 +471,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
       /**
        * The Stripe account ID for which these funds are intended. For details, see the
-       * PaymentIntents [Connect usage guide](/docs/payments/payment-intents/usage#connect).
+       * PaymentIntents [Connect usage
+       * guide](https://stripe.com/docs/payments/payment-intents/usage#connect).
        */
       public Builder setOnBehalfOf(String onBehalfOf) {
         this.onBehalfOf = onBehalfOf;
@@ -502,7 +503,7 @@ public class SessionCreateParams extends ApiRequestParams {
       /**
        * The parameters used to automatically create a Transfer when the payment succeeds. For more
        * information, see the PaymentIntents [Connect usage
-       * guide](/docs/payments/payment-intents/usage#connect).
+       * guide](https://stripe.com/docs/payments/payment-intents/usage#connect).
        */
       public Builder setTransferData(TransferData transferData) {
         this.transferData = transferData;

@@ -16,7 +16,7 @@ public class TransferCreateParams extends ApiRequestParams {
   @SerializedName("amount")
   Long amount;
 
-  /** 3-letter [ISO code for currency](/docs/payouts). */
+  /** 3-letter [ISO code for currency](https://stripe.com/docs/payouts). */
   @SerializedName("currency")
   String currency;
 
@@ -47,7 +47,8 @@ public class TransferCreateParams extends ApiRequestParams {
    * You can use this parameter to transfer funds from a charge before they are added to your
    * available balance. A pending balance will transfer immediately but the funds will not become
    * available until the original charge becomes available. [See the Connect
-   * documentation](/docs/connect/charges-transfers#transfer-availability) for details.
+   * documentation](https://stripe.com/docs/connect/charges-transfers#transfer-availability) for
+   * details.
    */
   @SerializedName("source_transaction")
   String sourceTransaction;
@@ -61,7 +62,8 @@ public class TransferCreateParams extends ApiRequestParams {
 
   /**
    * A string that identifies this transaction as part of a group. See the [Connect
-   * documentation](/docs/connect/charges-transfers#grouping-transactions) for details.
+   * documentation](https://stripe.com/docs/connect/charges-transfers#grouping-transactions) for
+   * details.
    */
   @SerializedName("transfer_group")
   String transferGroup;
@@ -156,7 +158,7 @@ public class TransferCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** 3-letter [ISO code for currency](/docs/payouts). */
+    /** 3-letter [ISO code for currency](https://stripe.com/docs/payouts). */
     public Builder setCurrency(String currency) {
       this.currency = currency;
       return this;
@@ -181,7 +183,8 @@ public class TransferCreateParams extends ApiRequestParams {
      * You can use this parameter to transfer funds from a charge before they are added to your
      * available balance. A pending balance will transfer immediately but the funds will not become
      * available until the original charge becomes available. [See the Connect
-     * documentation](/docs/connect/charges-transfers#transfer-availability) for details.
+     * documentation](https://stripe.com/docs/connect/charges-transfers#transfer-availability) for
+     * details.
      */
     public Builder setSourceTransaction(String sourceTransaction) {
       this.sourceTransaction = sourceTransaction;
@@ -199,7 +202,8 @@ public class TransferCreateParams extends ApiRequestParams {
 
     /**
      * A string that identifies this transaction as part of a group. See the [Connect
-     * documentation](/docs/connect/charges-transfers#grouping-transactions) for details.
+     * documentation](https://stripe.com/docs/connect/charges-transfers#grouping-transactions) for
+     * details.
      */
     public Builder setTransferGroup(String transferGroup) {
       this.transferGroup = transferGroup;

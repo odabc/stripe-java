@@ -54,8 +54,8 @@ public class ChargeCaptureParams extends ApiRequestParams {
 
   /**
    * An optional dictionary including the account to automatically transfer to as part of a
-   * destination charge. [See the Connect documentation](/docs/connect/destination-charges) for
-   * details.
+   * destination charge. [See the Connect
+   * documentation](https://stripe.com/docs/connect/destination-charges) for details.
    */
   @SerializedName("transfer_data")
   TransferData transferData;
@@ -63,7 +63,8 @@ public class ChargeCaptureParams extends ApiRequestParams {
   /**
    * A string that identifies this transaction as part of a group. `transfer_group` may only be
    * provided if it has not been set. See the [Connect
-   * documentation](/docs/connect/charges-transfers#grouping-transactions) for details.
+   * documentation](https://stripe.com/docs/connect/charges-transfers#grouping-transactions) for
+   * details.
    */
   @SerializedName("transfer_group")
   String transferGroup;
@@ -185,8 +186,8 @@ public class ChargeCaptureParams extends ApiRequestParams {
 
     /**
      * An optional dictionary including the account to automatically transfer to as part of a
-     * destination charge. [See the Connect documentation](/docs/connect/destination-charges) for
-     * details.
+     * destination charge. [See the Connect
+     * documentation](https://stripe.com/docs/connect/destination-charges) for details.
      */
     public Builder setTransferData(TransferData transferData) {
       this.transferData = transferData;
@@ -196,7 +197,8 @@ public class ChargeCaptureParams extends ApiRequestParams {
     /**
      * A string that identifies this transaction as part of a group. `transfer_group` may only be
      * provided if it has not been set. See the [Connect
-     * documentation](/docs/connect/charges-transfers#grouping-transactions) for details.
+     * documentation](https://stripe.com/docs/connect/charges-transfers#grouping-transactions) for
+     * details.
      */
     public Builder setTransferGroup(String transferGroup) {
       this.transferGroup = transferGroup;
