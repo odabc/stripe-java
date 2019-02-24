@@ -71,6 +71,9 @@ public class TokenTest extends BaseStripeTest {
   @Test
   public void testCreateWithApplePayTypedParams() throws StripeException {
     TokenCreateParams.ApplePay applePay = TokenCreateParams.ApplePay.builder()
+        /**
+         * TODO: change to objectType instead.
+         */
         .setObject(TokenCreateParams.ApplePay.Object.CARD)
         .setAddressCity("San Francisco")
         .setAddressCountry("USA")
