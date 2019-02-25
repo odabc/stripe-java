@@ -126,9 +126,48 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Add an element to `expand` list. A list is initialized for the first call, and subsequent
-     * calls adds additional elements to the original list. See {@link SessionCreateParams#expand}
-     * for the field documentation.
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * SessionCreateParams#expand} for the field documentation.
+     */
+    public Builder addAllExpand(List<String> elements) {
+      if (this.expand == null) {
+        this.expand = new ArrayList<>();
+      }
+      this.expand.addAll(elements);
+      return this;
+    }
+
+    /**
+     * Add all elements to `lineItems` list. A list is initialized for the first `add/addAll` call,
+     * and subsequent calls adds additional elements to the original list. See {@link
+     * SessionCreateParams#lineItems} for the field documentation.
+     */
+    public Builder addAllLineItem(List<LineItem> elements) {
+      if (this.lineItems == null) {
+        this.lineItems = new ArrayList<>();
+      }
+      this.lineItems.addAll(elements);
+      return this;
+    }
+
+    /**
+     * Add all elements to `paymentMethodTypes` list. A list is initialized for the first
+     * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+     * {@link SessionCreateParams#paymentMethodTypes} for the field documentation.
+     */
+    public Builder addAllPaymentMethodType(List<PaymentMethodType> elements) {
+      if (this.paymentMethodTypes == null) {
+        this.paymentMethodTypes = new ArrayList<>();
+      }
+      this.paymentMethodTypes.addAll(elements);
+      return this;
+    }
+
+    /**
+     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * SessionCreateParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -139,8 +178,8 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Add an element to `lineItems` list. A list is initialized for the first call, and subsequent
-     * calls adds additional elements to the original list. See {@link
+     * Add an element to `lineItems` list. A list is initialized for the first `add/addAll` call,
+     * and subsequent calls adds additional elements to the original list. See {@link
      * SessionCreateParams#lineItems} for the field documentation.
      */
     public Builder addLineItem(LineItem element) {
@@ -152,8 +191,8 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Add an element to `paymentMethodTypes` list. A list is initialized for the first call, and
-     * subsequent calls adds additional elements to the original list. See {@link
+     * Add an element to `paymentMethodTypes` list. A list is initialized for the first `add/addAll`
+     * call, and subsequent calls adds additional elements to the original list. See {@link
      * SessionCreateParams#paymentMethodTypes} for the field documentation.
      */
     public Builder addPaymentMethodType(PaymentMethodType element) {
@@ -285,9 +324,22 @@ public class SessionCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Add an element to `images` list. A list is initialized for the first call, and subsequent
-       * calls adds additional elements to the original list. See {@link LineItem#images} for the
-       * field documentation.
+       * Add all elements to `images` list. A list is initialized for the first `add/addAll` call,
+       * and subsequent calls adds additional elements to the original list. See {@link
+       * LineItem#images} for the field documentation.
+       */
+      public Builder addAllImage(List<String> elements) {
+        if (this.images == null) {
+          this.images = new ArrayList<>();
+        }
+        this.images.addAll(elements);
+        return this;
+      }
+
+      /**
+       * Add an element to `images` list. A list is initialized for the first `add/addAll` call, and
+       * subsequent calls adds additional elements to the original list. See {@link LineItem#images}
+       * for the field documentation.
        */
       public Builder addImage(String element) {
         if (this.images == null) {
@@ -439,8 +491,21 @@ public class SessionCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Add a key/value pair to `metadata` map. A map is initialized for the first call, and
-       * subsequent calls adds additional key/value pairs to the original map. See {@link
+       * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentIntentData#metadata} for the field documentation.
+       */
+      public Builder putAllMetadata(Map<String, String> map) {
+        if (this.metadata == null) {
+          this.metadata = new HashMap<>();
+        }
+        this.metadata.putAll(map);
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
        * PaymentIntentData#metadata} for the field documentation.
        */
       public Builder putMetadata(String key, String value) {
@@ -778,9 +843,22 @@ public class SessionCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Add an element to `items` list. A list is initialized for the first call, and subsequent
-       * calls adds additional elements to the original list. See {@link SubscriptionData#items} for
-       * the field documentation.
+       * Add all elements to `items` list. A list is initialized for the first `add/addAll` call,
+       * and subsequent calls adds additional elements to the original list. See {@link
+       * SubscriptionData#items} for the field documentation.
+       */
+      public Builder addAllItem(List<Item> elements) {
+        if (this.items == null) {
+          this.items = new ArrayList<>();
+        }
+        this.items.addAll(elements);
+        return this;
+      }
+
+      /**
+       * Add an element to `items` list. A list is initialized for the first `add/addAll` call, and
+       * subsequent calls adds additional elements to the original list. See {@link
+       * SubscriptionData#items} for the field documentation.
        */
       public Builder addItem(Item element) {
         if (this.items == null) {
@@ -791,8 +869,21 @@ public class SessionCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Add a key/value pair to `metadata` map. A map is initialized for the first call, and
-       * subsequent calls adds additional key/value pairs to the original map. See {@link
+       * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SubscriptionData#metadata} for the field documentation.
+       */
+      public Builder putAllMetadata(Map<String, String> map) {
+        if (this.metadata == null) {
+          this.metadata = new HashMap<>();
+        }
+        this.metadata.putAll(map);
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
        * SubscriptionData#metadata} for the field documentation.
        */
       public Builder putMetadata(String key, String value) {

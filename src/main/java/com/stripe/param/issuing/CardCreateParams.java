@@ -110,9 +110,22 @@ public class CardCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Add an element to `expand` list. A list is initialized for the first call, and subsequent
-     * calls adds additional elements to the original list. See {@link CardCreateParams#expand} for
-     * the field documentation.
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * CardCreateParams#expand} for the field documentation.
+     */
+    public Builder addAllExpand(List<String> elements) {
+      if (this.expand == null) {
+        this.expand = new ArrayList<>();
+      }
+      this.expand.addAll(elements);
+      return this;
+    }
+
+    /**
+     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * CardCreateParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -123,8 +136,21 @@ public class CardCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Add a key/value pair to `metadata` map. A map is initialized for the first call, and
-     * subsequent calls adds additional key/value pairs to the original map. See {@link
+     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link CardCreateParams#metadata} for the field documentation.
+     */
+    public Builder putAllMetadata(Map<String, String> map) {
+      if (this.metadata == null) {
+        this.metadata = new HashMap<>();
+      }
+      this.metadata.putAll(map);
+      return this;
+    }
+
+    /**
+     * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
+     * and subsequent calls add additional key/value pairs to the original map. See {@link
      * CardCreateParams#metadata} for the field documentation.
      */
     public Builder putMetadata(String key, String value) {
@@ -249,9 +275,35 @@ public class CardCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Add an element to `allowedCategories` list. A list is initialized for the first call, and
-       * subsequent calls adds additional elements to the original list. See {@link
-       * AuthorizationControls#allowedCategories} for the field documentation.
+       * Add all elements to `allowedCategories` list. A list is initialized for the first
+       * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+       * {@link AuthorizationControls#allowedCategories} for the field documentation.
+       */
+      public Builder addAllAllowedCategory(List<AllowedCategory> elements) {
+        if (this.allowedCategories == null) {
+          this.allowedCategories = new ArrayList<>();
+        }
+        this.allowedCategories.addAll(elements);
+        return this;
+      }
+
+      /**
+       * Add all elements to `blockedCategories` list. A list is initialized for the first
+       * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+       * {@link AuthorizationControls#blockedCategories} for the field documentation.
+       */
+      public Builder addAllBlockedCategory(List<BlockedCategory> elements) {
+        if (this.blockedCategories == null) {
+          this.blockedCategories = new ArrayList<>();
+        }
+        this.blockedCategories.addAll(elements);
+        return this;
+      }
+
+      /**
+       * Add an element to `allowedCategories` list. A list is initialized for the first
+       * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+       * {@link AuthorizationControls#allowedCategories} for the field documentation.
        */
       public Builder addAllowedCategory(AllowedCategory element) {
         if (this.allowedCategories == null) {
@@ -262,9 +314,9 @@ public class CardCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Add an element to `blockedCategories` list. A list is initialized for the first call, and
-       * subsequent calls adds additional elements to the original list. See {@link
-       * AuthorizationControls#blockedCategories} for the field documentation.
+       * Add an element to `blockedCategories` list. A list is initialized for the first
+       * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+       * {@link AuthorizationControls#blockedCategories} for the field documentation.
        */
       public Builder addBlockedCategory(BlockedCategory element) {
         if (this.blockedCategories == null) {

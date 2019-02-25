@@ -150,8 +150,21 @@ public class BankAccountUpdateOnCustomerParams extends ApiRequestParams {
     }
 
     /**
-     * Add an element to `expand` list. A list is initialized for the first call, and subsequent
-     * calls adds additional elements to the original list. See {@link
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * BankAccountUpdateOnCustomerParams#expand} for the field documentation.
+     */
+    public Builder addAllExpand(List<String> elements) {
+      if (this.expand == null) {
+        this.expand = new ArrayList<>();
+      }
+      this.expand.addAll(elements);
+      return this;
+    }
+
+    /**
+     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
      * BankAccountUpdateOnCustomerParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
@@ -163,8 +176,21 @@ public class BankAccountUpdateOnCustomerParams extends ApiRequestParams {
     }
 
     /**
-     * Add a key/value pair to `metadata` map. A map is initialized for the first call, and
-     * subsequent calls adds additional key/value pairs to the original map. See {@link
+     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link BankAccountUpdateOnCustomerParams#metadata} for the field documentation.
+     */
+    public Builder putAllMetadata(Map<String, String> map) {
+      if (this.metadata == null) {
+        this.metadata = new HashMap<>();
+      }
+      this.metadata.putAll(map);
+      return this;
+    }
+
+    /**
+     * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
+     * and subsequent calls add additional key/value pairs to the original map. See {@link
      * BankAccountUpdateOnCustomerParams#metadata} for the field documentation.
      */
     public Builder putMetadata(String key, String value) {

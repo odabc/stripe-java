@@ -130,9 +130,48 @@ public class OrderListParams extends ApiRequestParams {
     }
 
     /**
-     * Add an element to `expand` list. A list is initialized for the first call, and subsequent
-     * calls adds additional elements to the original list. See {@link OrderListParams#expand} for
-     * the field documentation.
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * OrderListParams#expand} for the field documentation.
+     */
+    public Builder addAllExpand(List<String> elements) {
+      if (this.expand == null) {
+        this.expand = new ArrayList<>();
+      }
+      this.expand.addAll(elements);
+      return this;
+    }
+
+    /**
+     * Add all elements to `ids` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * OrderListParams#ids} for the field documentation.
+     */
+    public Builder addAllId(List<String> elements) {
+      if (this.ids == null) {
+        this.ids = new ArrayList<>();
+      }
+      this.ids.addAll(elements);
+      return this;
+    }
+
+    /**
+     * Add all elements to `upstreamIds` list. A list is initialized for the first `add/addAll`
+     * call, and subsequent calls adds additional elements to the original list. See {@link
+     * OrderListParams#upstreamIds} for the field documentation.
+     */
+    public Builder addAllUpstreamId(List<String> elements) {
+      if (this.upstreamIds == null) {
+        this.upstreamIds = new ArrayList<>();
+      }
+      this.upstreamIds.addAll(elements);
+      return this;
+    }
+
+    /**
+     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * OrderListParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -143,9 +182,9 @@ public class OrderListParams extends ApiRequestParams {
     }
 
     /**
-     * Add an element to `ids` list. A list is initialized for the first call, and subsequent calls
-     * adds additional elements to the original list. See {@link OrderListParams#ids} for the field
-     * documentation.
+     * Add an element to `ids` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * OrderListParams#ids} for the field documentation.
      */
     public Builder addId(String element) {
       if (this.ids == null) {
@@ -156,8 +195,8 @@ public class OrderListParams extends ApiRequestParams {
     }
 
     /**
-     * Add an element to `upstreamIds` list. A list is initialized for the first call, and
-     * subsequent calls adds additional elements to the original list. See {@link
+     * Add an element to `upstreamIds` list. A list is initialized for the first `add/addAll` call,
+     * and subsequent calls adds additional elements to the original list. See {@link
      * OrderListParams#upstreamIds} for the field documentation.
      */
     public Builder addUpstreamId(String element) {

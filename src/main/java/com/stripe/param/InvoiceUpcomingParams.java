@@ -192,9 +192,48 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     }
 
     /**
-     * Add an element to `expand` list. A list is initialized for the first call, and subsequent
-     * calls adds additional elements to the original list. See {@link InvoiceUpcomingParams#expand}
-     * for the field documentation.
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * InvoiceUpcomingParams#expand} for the field documentation.
+     */
+    public Builder addAllExpand(List<String> elements) {
+      if (this.expand == null) {
+        this.expand = new ArrayList<>();
+      }
+      this.expand.addAll(elements);
+      return this;
+    }
+
+    /**
+     * Add all elements to `invoiceItems` list. A list is initialized for the first `add/addAll`
+     * call, and subsequent calls adds additional elements to the original list. See {@link
+     * InvoiceUpcomingParams#invoiceItems} for the field documentation.
+     */
+    public Builder addAllInvoiceItem(List<InvoiceItem> elements) {
+      if (this.invoiceItems == null) {
+        this.invoiceItems = new ArrayList<>();
+      }
+      this.invoiceItems.addAll(elements);
+      return this;
+    }
+
+    /**
+     * Add all elements to `subscriptionItems` list. A list is initialized for the first
+     * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+     * {@link InvoiceUpcomingParams#subscriptionItems} for the field documentation.
+     */
+    public Builder addAllSubscriptionItem(List<SubscriptionItem> elements) {
+      if (this.subscriptionItems == null) {
+        this.subscriptionItems = new ArrayList<>();
+      }
+      this.subscriptionItems.addAll(elements);
+      return this;
+    }
+
+    /**
+     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * InvoiceUpcomingParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -205,8 +244,8 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     }
 
     /**
-     * Add an element to `invoiceItems` list. A list is initialized for the first call, and
-     * subsequent calls adds additional elements to the original list. See {@link
+     * Add an element to `invoiceItems` list. A list is initialized for the first `add/addAll` call,
+     * and subsequent calls adds additional elements to the original list. See {@link
      * InvoiceUpcomingParams#invoiceItems} for the field documentation.
      */
     public Builder addInvoiceItem(InvoiceItem element) {
@@ -218,8 +257,8 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     }
 
     /**
-     * Add an element to `subscriptionItems` list. A list is initialized for the first call, and
-     * subsequent calls adds additional elements to the original list. See {@link
+     * Add an element to `subscriptionItems` list. A list is initialized for the first `add/addAll`
+     * call, and subsequent calls adds additional elements to the original list. See {@link
      * InvoiceUpcomingParams#subscriptionItems} for the field documentation.
      */
     public Builder addSubscriptionItem(SubscriptionItem element) {
@@ -476,8 +515,21 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       }
 
       /**
-       * Add a key/value pair to `metadata` map. A map is initialized for the first call, and
-       * subsequent calls adds additional key/value pairs to the original map. See {@link
+       * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link InvoiceItem#metadata} for the field documentation.
+       */
+      public Builder putAllMetadata(Map<String, String> map) {
+        if (this.metadata == null) {
+          this.metadata = new HashMap<>();
+        }
+        this.metadata.putAll(map);
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
        * InvoiceItem#metadata} for the field documentation.
        */
       public Builder putMetadata(String key, String value) {
@@ -686,8 +738,21 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       }
 
       /**
-       * Add a key/value pair to `metadata` map. A map is initialized for the first call, and
-       * subsequent calls adds additional key/value pairs to the original map. See {@link
+       * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SubscriptionItem#metadata} for the field documentation.
+       */
+      public Builder putAllMetadata(Map<String, String> map) {
+        if (this.metadata == null) {
+          this.metadata = new HashMap<>();
+        }
+        this.metadata.putAll(map);
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
        * SubscriptionItem#metadata} for the field documentation.
        */
       public Builder putMetadata(String key, String value) {

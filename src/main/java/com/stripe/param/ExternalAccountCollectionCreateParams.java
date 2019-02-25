@@ -30,7 +30,7 @@ public class ExternalAccountCollectionCreateParams extends ApiRequestParams {
   @SerializedName("expand")
   List<String> expand;
 
-  /** This string to be replaced by DocSpecGenerator. */
+  /** Please refer to full [documentation](https://stripe.com/docs/api) instead. */
   @SerializedName("external_account")
   Object externalAccount;
 
@@ -80,8 +80,21 @@ public class ExternalAccountCollectionCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Add an element to `expand` list. A list is initialized for the first call, and subsequent
-     * calls adds additional elements to the original list. See {@link
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * ExternalAccountCollectionCreateParams#expand} for the field documentation.
+     */
+    public Builder addAllExpand(List<String> elements) {
+      if (this.expand == null) {
+        this.expand = new ArrayList<>();
+      }
+      this.expand.addAll(elements);
+      return this;
+    }
+
+    /**
+     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
      * ExternalAccountCollectionCreateParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
@@ -93,8 +106,21 @@ public class ExternalAccountCollectionCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Add a key/value pair to `metadata` map. A map is initialized for the first call, and
-     * subsequent calls adds additional key/value pairs to the original map. See {@link
+     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link ExternalAccountCollectionCreateParams#metadata} for the field documentation.
+     */
+    public Builder putAllMetadata(Map<String, String> map) {
+      if (this.metadata == null) {
+        this.metadata = new HashMap<>();
+      }
+      this.metadata.putAll(map);
+      return this;
+    }
+
+    /**
+     * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
+     * and subsequent calls add additional key/value pairs to the original map. See {@link
      * ExternalAccountCollectionCreateParams#metadata} for the field documentation.
      */
     public Builder putMetadata(String key, String value) {
@@ -132,13 +158,13 @@ public class ExternalAccountCollectionCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** This string to be replaced by DocSpecGenerator. */
+    /** Please refer to full [documentation](https://stripe.com/docs/api) instead. */
     public Builder setExternalAccount(String externalAccount) {
       this.externalAccount = externalAccount;
       return this;
     }
 
-    /** This string to be replaced by DocSpecGenerator. */
+    /** Please refer to full [documentation](https://stripe.com/docs/api) instead. */
     public Builder setExternalAccount(Map<String, Object> externalAccount) {
       this.externalAccount = externalAccount;
       return this;
