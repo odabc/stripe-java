@@ -3,6 +3,8 @@ package com.stripe.param;
 import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.assertNull;
 
+import com.google.common.collect.ImmutableMap;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -29,7 +31,17 @@ public class PaymentIntentCreateParamsTest {
   }
 
   @Test
-  public void testNullListWithoutAddElement() {
+  public void testAddAllElement() {
+    PaymentIntentCreateParams params = PaymentIntentCreateParams.builder()
+        .addAllExpand(Arrays.asList("application", "customer"))
+        .addAllExpand(Arrays.asList("on_behalf"))
+        .build();
+
+    assertEquals(Arrays.asList("application", "customer", "on_behalf"), params.getExpand());
+  }
+
+  @Test
+  public void testAddNoElementGetNullList() {
     PaymentIntentCreateParams params = PaymentIntentCreateParams.builder()
         .build();
 
@@ -51,7 +63,22 @@ public class PaymentIntentCreateParamsTest {
   }
 
   @Test
-  public void testNullMapWithoutPutKeyValue() {
+  public void testPutAllKeyValue() {
+    PaymentIntentCreateParams params = PaymentIntentCreateParams.builder()
+        .putAllMetadata(ImmutableMap.of("key1", "val1", "key2", "val2"))
+        .putAllMetadata(ImmutableMap.of("key3", "val3", "key4", "val4"))
+        .build();
+
+    Map<String, String> metadata = new HashMap<>();
+    metadata.put("key1", "val1");
+    metadata.put("key2", "val2");
+    metadata.put("key3", "val3");
+    metadata.put("key4", "val4");
+    assertEquals(metadata, params.getMetadata());
+  }
+
+  @Test
+  public void testPutNoKeyValueGetNullMap() {
     PaymentIntentCreateParams params = PaymentIntentCreateParams.builder()
         .build();
 
