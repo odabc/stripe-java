@@ -15,7 +15,7 @@ public class PaymentIntentCreateParamsTest {
 
   @Test
   public void testAddElement() {
-    PaymentIntentCreateParams params = PaymentIntentCreateParams.builder()
+    final PaymentIntentCreateParams params = PaymentIntentCreateParams.builder()
         .addPaymentMethodType("card")
         .addPaymentMethodType("card_present")
         .addExpand("application")
@@ -32,7 +32,7 @@ public class PaymentIntentCreateParamsTest {
 
   @Test
   public void testAddAllElement() {
-    PaymentIntentCreateParams params = PaymentIntentCreateParams.builder()
+    final PaymentIntentCreateParams params = PaymentIntentCreateParams.builder()
         .addAllExpand(Arrays.asList("application", "customer"))
         .addAllExpand(Arrays.asList("on_behalf"))
         .build();
@@ -42,7 +42,7 @@ public class PaymentIntentCreateParamsTest {
 
   @Test
   public void testAddNoElementGetNullList() {
-    PaymentIntentCreateParams params = PaymentIntentCreateParams.builder()
+    final PaymentIntentCreateParams params = PaymentIntentCreateParams.builder()
         .build();
 
     assertNull(params.getExpand());
@@ -51,7 +51,7 @@ public class PaymentIntentCreateParamsTest {
 
   @Test
   public void testPutKeyValue() {
-    PaymentIntentCreateParams params = PaymentIntentCreateParams.builder()
+    final PaymentIntentCreateParams params = PaymentIntentCreateParams.builder()
         .putMetadata("key1", "val1")
         .putMetadata("key2", "val2")
         .build();
@@ -64,7 +64,7 @@ public class PaymentIntentCreateParamsTest {
 
   @Test
   public void testPutAllKeyValue() {
-    PaymentIntentCreateParams params = PaymentIntentCreateParams.builder()
+    final PaymentIntentCreateParams params = PaymentIntentCreateParams.builder()
         .putAllMetadata(ImmutableMap.of("key1", "val1", "key2", "val2"))
         .putAllMetadata(ImmutableMap.of("key3", "val3", "key4", "val4"))
         .build();
@@ -79,7 +79,7 @@ public class PaymentIntentCreateParamsTest {
 
   @Test
   public void testPutNoKeyValueGetNullMap() {
-    PaymentIntentCreateParams params = PaymentIntentCreateParams.builder()
+    final PaymentIntentCreateParams params = PaymentIntentCreateParams.builder()
         .build();
 
     assertNull(params.getMetadata());
