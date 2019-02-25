@@ -125,6 +125,14 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
    * Returns a list of Issuing <code>Card</code> objects. The objects are sorted in descending order
    * by creation date, with the most recently created object appearing first.
    */
+  public static CardCollection list(CardListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /**
+   * Returns a list of Issuing <code>Card</code> objects. The objects are sorted in descending order
+   * by creation date, with the most recently created object appearing first.
+   */
   public static CardCollection list(CardListParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/issuing/cards");
@@ -141,6 +149,11 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/issuing/cards");
     return request(ApiResource.RequestMethod.POST, url, params, Card.class, options);
+  }
+
+  /** Creates an Issuing <code>Card</code> object. */
+  public static Card create(CardCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
   }
 
   /** Creates an Issuing <code>Card</code> object. */
@@ -199,6 +212,14 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
    * Updates the specified Issuing <code>Card</code> object by setting the values of the parameters
    * passed. Any parameters not provided will be left unchanged.
    */
+  public Card update(CardUpdateParams params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /**
+   * Updates the specified Issuing <code>Card</code> object by setting the values of the parameters
+   * passed. Any parameters not provided will be left unchanged.
+   */
   public Card update(CardUpdateParams params, RequestOptions options) throws StripeException {
     String url =
         String.format(
@@ -236,6 +257,15 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
             "%s%s",
             Stripe.getApiBase(), String.format("/v1/issuing/cards/%s/details", this.getId()));
     return request(ApiResource.RequestMethod.GET, url, params, CardDetails.class, options);
+  }
+
+  /**
+   * For virtual cards only. Retrieves an Issuing <code>Card_details</code> object that contains <a
+   * href="/docs/issuing/cards/management#virtual-card-info">the sensitive details</a> of a virtual
+   * card.
+   */
+  public CardDetails details(CardDetailsParams params) throws StripeException {
+    return details(params, (RequestOptions) null);
   }
 
   /**

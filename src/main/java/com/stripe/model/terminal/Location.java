@@ -84,6 +84,11 @@ public class Location extends ApiResource implements HasId {
   }
 
   /** Creates a new <code>Location</code> object. */
+  public static Location create(LocationCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /** Creates a new <code>Location</code> object. */
   public static Location create(LocationCreateParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/terminal/locations");
@@ -114,6 +119,14 @@ public class Location extends ApiResource implements HasId {
    * Updates a <code>Location</code> object by setting the values of the parameters passed. Any
    * parameters not provided will be left unchanged.
    */
+  public Location update(LocationUpdateParams params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /**
+   * Updates a <code>Location</code> object by setting the values of the parameters passed. Any
+   * parameters not provided will be left unchanged.
+   */
   public Location update(LocationUpdateParams params, RequestOptions options)
       throws StripeException {
     String url =
@@ -132,6 +145,11 @@ public class Location extends ApiResource implements HasId {
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/terminal/locations");
     return requestCollection(url, params, LocationCollection.class, options);
+  }
+
+  /** Returns a list of <code>Location</code> objects. */
+  public static LocationCollection list(LocationListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
   }
 
   /** Returns a list of <code>Location</code> objects. */

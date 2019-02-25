@@ -139,6 +139,16 @@ public class BalanceTransaction extends ApiResource implements HasId {
    * charges, transfers, and so forth). The transactions are returned in sorted order, with the most
    * recent transactions appearing first.
    */
+  public static BalanceTransactionCollection list(BalanceTransactionListParams params)
+      throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /**
+   * Returns a list of transactions that have contributed to the Stripe account balance (e.g.,
+   * charges, transfers, and so forth). The transactions are returned in sorted order, with the most
+   * recent transactions appearing first.
+   */
   public static BalanceTransactionCollection list(
       BalanceTransactionListParams params, RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/balance/history");

@@ -156,6 +156,15 @@ public class Review extends ApiResource implements HasId {
    * </code>. The objects are sorted in descending order by creation date, with the most recently
    * created object appearing first.
    */
+  public static ReviewCollection list(ReviewListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /**
+   * Returns a list of <code>Review</code> objects that have <code>open</code> set to <code>true
+   * </code>. The objects are sorted in descending order by creation date, with the most recently
+   * created object appearing first.
+   */
   public static ReviewCollection list(ReviewListParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/reviews");
@@ -209,6 +218,11 @@ public class Review extends ApiResource implements HasId {
         String.format(
             "%s%s", Stripe.getApiBase(), String.format("/v1/reviews/%s/approve", this.getId()));
     return request(ApiResource.RequestMethod.POST, url, params, Review.class, options);
+  }
+
+  /** Approves a <code>Review</code> object, closing it and removing it from the list of reviews. */
+  public Review approve(ReviewApproveParams params) throws StripeException {
+    return approve(params, (RequestOptions) null);
   }
 
   /** Approves a <code>Review</code> object, closing it and removing it from the list of reviews. */

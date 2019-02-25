@@ -143,6 +143,11 @@ public class Topup extends ApiResource implements BalanceTransactionSource, Meta
   }
 
   /** Top up the balance of an account. */
+  public static Topup create(TopupCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /** Top up the balance of an account. */
   public static Topup create(TopupCreateParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/topups");
@@ -159,6 +164,11 @@ public class Topup extends ApiResource implements BalanceTransactionSource, Meta
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/topups");
     return requestCollection(url, params, TopupCollection.class, options);
+  }
+
+  /** Returns a list of top-ups. */
+  public static TopupCollection list(TopupListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
   }
 
   /** Returns a list of top-ups. */
@@ -221,6 +231,11 @@ public class Topup extends ApiResource implements BalanceTransactionSource, Meta
   }
 
   /** Updates the metadata of a top-up. Other top-up details are not editable by design. */
+  public Topup update(TopupUpdateParams params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /** Updates the metadata of a top-up. Other top-up details are not editable by design. */
   public Topup update(TopupUpdateParams params, RequestOptions options) throws StripeException {
     String url =
         String.format("%s%s", Stripe.getApiBase(), String.format("/v1/topups/%s", this.getId()));
@@ -248,6 +263,11 @@ public class Topup extends ApiResource implements BalanceTransactionSource, Meta
         String.format(
             "%s%s", Stripe.getApiBase(), String.format("/v1/topups/%s/cancel", this.getId()));
     return request(ApiResource.RequestMethod.POST, url, params, Topup.class, options);
+  }
+
+  /** Cancels a top-up. Only pending top-ups can be canceled. */
+  public Topup cancel(TopupCancelParams params) throws StripeException {
+    return cancel(params, (RequestOptions) null);
   }
 
   /** Cancels a top-up. Only pending top-ups can be canceled. */

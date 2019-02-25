@@ -190,6 +190,12 @@ public class SubscriptionSchedule extends ApiResource
   }
 
   /** Retrieves the list of your subscription schedules. */
+  public static SubscriptionScheduleCollection list(SubscriptionScheduleListParams params)
+      throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** Retrieves the list of your subscription schedules. */
   public static SubscriptionScheduleCollection list(
       SubscriptionScheduleListParams params, RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/subscription_schedules");
@@ -207,6 +213,12 @@ public class SubscriptionSchedule extends ApiResource
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/subscription_schedules");
     return request(
         ApiResource.RequestMethod.POST, url, params, SubscriptionSchedule.class, options);
+  }
+
+  /** Creates a new subscription schedule object. */
+  public static SubscriptionSchedule create(SubscriptionScheduleCreateParams params)
+      throws StripeException {
+    return create(params, (RequestOptions) null);
   }
 
   /** Creates a new subscription schedule object. */
@@ -276,6 +288,12 @@ public class SubscriptionSchedule extends ApiResource
   }
 
   /** Updates an existing subscription schedule. */
+  public SubscriptionSchedule update(SubscriptionScheduleUpdateParams params)
+      throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /** Updates an existing subscription schedule. */
   public SubscriptionSchedule update(
       SubscriptionScheduleUpdateParams params, RequestOptions options) throws StripeException {
     String url =
@@ -327,6 +345,16 @@ public class SubscriptionSchedule extends ApiResource
             String.format("/v1/subscription_schedules/%s/cancel", this.getId()));
     return request(
         ApiResource.RequestMethod.POST, url, params, SubscriptionSchedule.class, options);
+  }
+
+  /**
+   * Cancels a subscription schedule and its associated subscription immediately (if the
+   * subscription schedule has an active subscription). A subscription schedule can only be canceled
+   * if its status is <code>not_started</code> or <code>active</code>.
+   */
+  public SubscriptionSchedule cancel(SubscriptionScheduleCancelParams params)
+      throws StripeException {
+    return cancel(params, (RequestOptions) null);
   }
 
   /**
@@ -403,6 +431,18 @@ public class SubscriptionSchedule extends ApiResource
    * associated with a subscription, releasing it will remove its <code>subscription</code> property
    * and set the subscription’s ID to the <code>released_subscription</code> property.
    */
+  public SubscriptionSchedule release(SubscriptionScheduleReleaseParams params)
+      throws StripeException {
+    return release(params, (RequestOptions) null);
+  }
+
+  /**
+   * Releases the subscription schedule immediately, which will stop scheduling of its phases, but
+   * leave any existing subscription in place. A schedule can only be released if its status is
+   * <code>not_started</code> or <code>active</code>. If the subscription schedule is currently
+   * associated with a subscription, releasing it will remove its <code>subscription</code> property
+   * and set the subscription’s ID to the <code>released_subscription</code> property.
+   */
   public SubscriptionSchedule release(
       SubscriptionScheduleReleaseParams params, RequestOptions options) throws StripeException {
     String url =
@@ -434,6 +474,12 @@ public class SubscriptionSchedule extends ApiResource
             Stripe.getApiBase(),
             String.format("/v1/subscription_schedules/%s/revisions", this.getId()));
     return requestCollection(url, params, SubscriptionScheduleRevisionCollection.class, options);
+  }
+
+  /** Retrieves the list of subscription schedule revisions for a subscription schedule. */
+  public SubscriptionScheduleRevisionCollection revisions(
+      SubscriptionScheduleRevisionsParams params) throws StripeException {
+    return revisions(params, (RequestOptions) null);
   }
 
   /** Retrieves the list of subscription schedule revisions for a subscription schedule. */

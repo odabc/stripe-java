@@ -78,6 +78,15 @@ public class ValueListItem extends ApiResource implements HasId {
    * Returns a list of <code>ValueListItem</code> objects. The objects are sorted in descending
    * order by creation date, with the most recently created object appearing first.
    */
+  public static ValueListItemCollection list(ValueListItemListParams params)
+      throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /**
+   * Returns a list of <code>ValueListItem</code> objects. The objects are sorted in descending
+   * order by creation date, with the most recently created object appearing first.
+   */
   public static ValueListItemCollection list(ValueListItemListParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/radar/value_list_items");
@@ -129,6 +138,14 @@ public class ValueListItem extends ApiResource implements HasId {
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/radar/value_list_items");
     return request(ApiResource.RequestMethod.POST, url, params, ValueListItem.class, options);
+  }
+
+  /**
+   * Creates a new <code>ValueListItem</code> object, which is added to the specified parent value
+   * list.
+   */
+  public static ValueListItem create(ValueListItemCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
   }
 
   /**

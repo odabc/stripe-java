@@ -59,6 +59,12 @@ public class ApplePayDomain extends ApiResource implements HasId {
   }
 
   /** List apple pay domains. */
+  public static ApplePayDomainCollection list(ApplePayDomainListParams params)
+      throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** List apple pay domains. */
   public static ApplePayDomainCollection list(
       ApplePayDomainListParams params, RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/apple_pay/domains");
@@ -75,6 +81,11 @@ public class ApplePayDomain extends ApiResource implements HasId {
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/apple_pay/domains");
     return request(ApiResource.RequestMethod.POST, url, params, ApplePayDomain.class, options);
+  }
+
+  /** Create an apple pay domain. */
+  public static ApplePayDomain create(ApplePayDomainCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
   }
 
   /** Create an apple pay domain. */

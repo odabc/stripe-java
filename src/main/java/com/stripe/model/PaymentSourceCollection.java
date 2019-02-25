@@ -25,6 +25,12 @@ public class PaymentSourceCollection extends StripeCollection<PaymentSource> {
   }
 
   /** List sources for a specified customer. */
+  public PaymentSourceCollection list(PaymentSourceCollectionListParams params)
+      throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** List sources for a specified customer. */
   public PaymentSourceCollection list(
       PaymentSourceCollectionListParams params, RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), this.getUrl());
@@ -89,6 +95,20 @@ public class PaymentSourceCollection extends StripeCollection<PaymentSource> {
     String url = String.format("%s%s", Stripe.getApiBase(), this.getUrl());
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, PaymentSource.class, options);
+  }
+
+  /**
+   * When you create a new credit card, you must specify a customer or recipient on which to create
+   * it.
+   *
+   * <p>If the card’s owner has no default card, then the new card will become the default. However,
+   * if the owner already has a default, then it will not change. To change the default, you should
+   * either <a href="/docs/api#update_customer">update the customer</a> to have a new <code>
+   * default_source</code>, or <a href="/docs/api#update_recipient">update the recipient</a> to have
+   * a new <code>default_card</code>.
+   */
+  public PaymentSource create(PaymentSourceCollectionCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
   }
 
   /**

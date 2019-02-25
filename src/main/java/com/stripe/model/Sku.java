@@ -174,6 +174,14 @@ public class Sku extends ApiResource implements HasId, MetadataStore<Sku> {
    * Returns a list of your SKUs. The SKUs are returned sorted by creation date, with the most
    * recently created SKUs appearing first.
    */
+  public static SkuCollection list(SkuListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /**
+   * Returns a list of your SKUs. The SKUs are returned sorted by creation date, with the most
+   * recently created SKUs appearing first.
+   */
   public static SkuCollection list(SkuListParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/skus");
@@ -211,6 +219,17 @@ public class Sku extends ApiResource implements HasId, MetadataStore<Sku> {
    * <p>Note that a SKU’s <code>attributes</code> are not editable. Instead, you would need to
    * deactivate the existing SKU and create a new one with the new attribute values.
    */
+  public Sku update(SkuUpdateParams params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /**
+   * Updates the specific SKU by setting the values of the parameters passed. Any parameters not
+   * provided will be left unchanged.
+   *
+   * <p>Note that a SKU’s <code>attributes</code> are not editable. Instead, you would need to
+   * deactivate the existing SKU and create a new one with the new attribute values.
+   */
   public Sku update(SkuUpdateParams params, RequestOptions options) throws StripeException {
     String url =
         String.format("%s%s", Stripe.getApiBase(), String.format("/v1/skus/%s", this.getId()));
@@ -227,6 +246,11 @@ public class Sku extends ApiResource implements HasId, MetadataStore<Sku> {
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/skus");
     return request(ApiResource.RequestMethod.POST, url, params, Sku.class, options);
+  }
+
+  /** Creates a new SKU associated with a product. */
+  public static Sku create(SkuCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
   }
 
   /** Creates a new SKU associated with a product. */

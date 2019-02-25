@@ -138,6 +138,16 @@ public class FeeRefund extends ApiResource
    *
    * <p>This request only accepts metadata as an argument.
    */
+  public FeeRefund update(FeeRefundUpdateParams params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /**
+   * Updates the specified application fee refund by setting the values of the parameters passed.
+   * Any parameters not provided will be left unchanged.
+   *
+   * <p>This request only accepts metadata as an argument.
+   */
   public FeeRefund update(FeeRefundUpdateParams params, RequestOptions options)
       throws StripeException {
     String url;

@@ -118,6 +118,11 @@ public class ThreeDSecure extends ApiResource implements HasId {
   }
 
   /** Initiate 3D Secure authentication. */
+  public static ThreeDSecure create(ThreeDSecureCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /** Initiate 3D Secure authentication. */
   public static ThreeDSecure create(ThreeDSecureCreateParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/3d_secure");

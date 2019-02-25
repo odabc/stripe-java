@@ -28,6 +28,12 @@ public class SubscriptionScheduleRevisionCollection
 
   /** Retrieves the list of subscription schedule revisions for a subscription schedule. */
   public SubscriptionScheduleRevisionCollection list(
+      SubscriptionScheduleRevisionCollectionListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** Retrieves the list of subscription schedule revisions for a subscription schedule. */
+  public SubscriptionScheduleRevisionCollection list(
       SubscriptionScheduleRevisionCollectionListParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), this.getUrl());

@@ -204,6 +204,20 @@ public class BankAccount extends ApiResource
    *
    * <p>Update a specified source for a given customer.
    */
+  public BankAccount update(BankAccountUpdateOnAccountParams params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /**
+   * Updates the metadata, account holder name, and account holder type of a bank account belonging
+   * to a <a href="/docs/connect/custom-accounts">Custom account</a>, and optionally sets it as the
+   * default for its currency. Other bank account details are not editable by design.
+   *
+   * <p>You can re-enable a disabled bank account by performing an update call without providing any
+   * arguments or changes.
+   *
+   * <p>Update a specified source for a given customer.
+   */
   public BankAccount update(BankAccountUpdateOnAccountParams params, RequestOptions options)
       throws StripeException {
     String url;
@@ -224,6 +238,20 @@ public class BankAccount extends ApiResource
           null);
     }
     return request(ApiResource.RequestMethod.POST, url, params, BankAccount.class, options);
+  }
+
+  /**
+   * Updates the metadata, account holder name, and account holder type of a bank account belonging
+   * to a <a href="/docs/connect/custom-accounts">Custom account</a>, and optionally sets it as the
+   * default for its currency. Other bank account details are not editable by design.
+   *
+   * <p>You can re-enable a disabled bank account by performing an update call without providing any
+   * arguments or changes.
+   *
+   * <p>Update a specified source for a given customer.
+   */
+  public BankAccount update(BankAccountUpdateOnCustomerParams params) throws StripeException {
+    return update(params, (RequestOptions) null);
   }
 
   /**
@@ -353,6 +381,11 @@ public class BankAccount extends ApiResource
           null);
     }
     return request(ApiResource.RequestMethod.POST, url, params, BankAccount.class, options);
+  }
+
+  /** Verify a specified bank account for a given customer. */
+  public BankAccount verify(BankAccountVerifyParams params) throws StripeException {
+    return verify(params, (RequestOptions) null);
   }
 
   /** Verify a specified bank account for a given customer. */

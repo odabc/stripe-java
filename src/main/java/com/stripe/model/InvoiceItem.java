@@ -199,6 +199,14 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
    * Returns a list of your invoice items. Invoice items are returned sorted by creation date, with
    * the most recently created invoice items appearing first.
    */
+  public static InvoiceItemCollection list(InvoiceItemListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /**
+   * Returns a list of your invoice items. Invoice items are returned sorted by creation date, with
+   * the most recently created invoice items appearing first.
+   */
   public static InvoiceItemCollection list(InvoiceItemListParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/invoiceitems");
@@ -221,6 +229,14 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/invoiceitems");
     return request(ApiResource.RequestMethod.POST, url, params, InvoiceItem.class, options);
+  }
+
+  /**
+   * Creates an item to be added to a draft invoice. If no invoice is specified, the item will be on
+   * the next invoice created for the customer specified.
+   */
+  public static InvoiceItem create(InvoiceItemCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
   }
 
   /**
@@ -282,6 +298,14 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
         String.format(
             "%s%s", Stripe.getApiBase(), String.format("/v1/invoiceitems/%s", this.getId()));
     return request(ApiResource.RequestMethod.POST, url, params, InvoiceItem.class, options);
+  }
+
+  /**
+   * Updates the amount or description of an invoice item on an upcoming invoice. Updating an
+   * invoice item is only possible before the invoice it’s attached to is closed.
+   */
+  public InvoiceItem update(InvoiceItemUpdateParams params) throws StripeException {
+    return update(params, (RequestOptions) null);
   }
 
   /**

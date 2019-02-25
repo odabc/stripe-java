@@ -85,6 +85,14 @@ public class Reader extends ApiResource implements HasId {
    * Updates a <code>Reader</code> object by setting the values of the parameters passed. Any
    * parameters not provided will be left unchanged.
    */
+  public Reader update(ReaderUpdateParams params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /**
+   * Updates a <code>Reader</code> object by setting the values of the parameters passed. Any
+   * parameters not provided will be left unchanged.
+   */
   public Reader update(ReaderUpdateParams params, RequestOptions options) throws StripeException {
     String url =
         String.format(
@@ -133,6 +141,11 @@ public class Reader extends ApiResource implements HasId {
   }
 
   /** Creates a new <code>Reader</code> object. */
+  public static Reader create(ReaderCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /** Creates a new <code>Reader</code> object. */
   public static Reader create(ReaderCreateParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/terminal/readers");
@@ -149,6 +162,11 @@ public class Reader extends ApiResource implements HasId {
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/terminal/readers");
     return requestCollection(url, params, ReaderCollection.class, options);
+  }
+
+  /** Returns a list of <code>Reader</code> objects. */
+  public static ReaderCollection list(ReaderListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
   }
 
   /** Returns a list of <code>Reader</code> objects. */

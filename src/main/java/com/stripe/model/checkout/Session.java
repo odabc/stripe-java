@@ -47,6 +47,11 @@ public class Session extends ApiResource implements HasId {
   }
 
   /** Creates a Session object. */
+  public static Session create(SessionCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /** Creates a Session object. */
   public static Session create(SessionCreateParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/checkout/sessions");

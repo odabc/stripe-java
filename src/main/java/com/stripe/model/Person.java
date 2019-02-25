@@ -132,6 +132,11 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
   }
 
   /** Updates an existing person. */
+  public Person update(PersonUpdateParams params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /** Updates an existing person. */
   public Person update(PersonUpdateParams params, RequestOptions options) throws StripeException {
     String url;
     if (this.getAccount() != null) {

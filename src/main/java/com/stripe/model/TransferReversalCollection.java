@@ -53,6 +53,21 @@ public class TransferReversalCollection extends StripeCollection<TransferReversa
    * when called on an already-reversed transfer, or when trying to reverse more money than is left
    * on a transfer.
    */
+  public TransferReversal create(TransferReversalCollectionCreateParams params)
+      throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /**
+   * When you create a new reversal, you must specify a transfer to create it on.
+   *
+   * <p>When reversing transfers, you can optionally reverse part of the transfer. You can do so as
+   * many times as you wish until the entire transfer has been reversed.
+   *
+   * <p>Once entirely reversed, a transfer can’t be reversed again. This method will return an error
+   * when called on an already-reversed transfer, or when trying to reverse more money than is left
+   * on a transfer.
+   */
   public TransferReversal create(
       TransferReversalCollectionCreateParams params, RequestOptions options)
       throws StripeException {
@@ -81,6 +96,17 @@ public class TransferReversalCollection extends StripeCollection<TransferReversa
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), this.getUrl());
     return ApiResource.requestCollection(url, params, TransferReversalCollection.class, options);
+  }
+
+  /**
+   * You can see a list of the reversals belonging to a specific transfer. Note that the 10 most
+   * recent reversals are always available by default on the transfer object. If you need more than
+   * those 10, you can use this API method and the <code>limit</code> and <code>starting_after
+   * </code> parameters to page through additional reversals.
+   */
+  public TransferReversalCollection list(TransferReversalCollectionListParams params)
+      throws StripeException {
+    return list(params, (RequestOptions) null);
   }
 
   /**

@@ -246,6 +246,15 @@ public class Refund extends ApiResource implements BalanceTransactionSource, Met
    * order, with the most recent refunds appearing first. For convenience, the 10 most recent
    * refunds are always available by default on the charge object.
    */
+  public static RefundCollection list(RefundListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /**
+   * Returns a list of all refunds you’ve previously created. The refunds are returned in sorted
+   * order, with the most recent refunds appearing first. For convenience, the 10 most recent
+   * refunds are always available by default on the charge object.
+   */
   public static RefundCollection list(RefundListParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/refunds");
@@ -262,6 +271,11 @@ public class Refund extends ApiResource implements BalanceTransactionSource, Met
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/refunds");
     return request(ApiResource.RequestMethod.POST, url, params, Refund.class, options);
+  }
+
+  /** Create a refund. */
+  public static Refund create(RefundCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
   }
 
   /** Create a refund. */
@@ -317,6 +331,16 @@ public class Refund extends ApiResource implements BalanceTransactionSource, Met
     String url =
         String.format("%s%s", Stripe.getApiBase(), String.format("/v1/refunds/%s", this.getId()));
     return request(ApiResource.RequestMethod.POST, url, params, Refund.class, options);
+  }
+
+  /**
+   * Updates the specified refund by setting the values of the parameters passed. Any parameters not
+   * provided will be left unchanged.
+   *
+   * <p>This request only accepts <code>metadata</code> as an argument.
+   */
+  public Refund update(RefundUpdateParams params) throws StripeException {
+    return update(params, (RequestOptions) null);
   }
 
   /**

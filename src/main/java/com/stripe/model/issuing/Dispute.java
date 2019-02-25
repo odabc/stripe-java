@@ -123,6 +123,14 @@ public class Dispute extends ApiResource implements HasId, MetadataStore<Dispute
    * Returns a list of Issuing <code>Dispute</code> objects. The objects are sorted in descending
    * order by creation date, with the most recently created object appearing first.
    */
+  public static DisputeCollection list(DisputeListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /**
+   * Returns a list of Issuing <code>Dispute</code> objects. The objects are sorted in descending
+   * order by creation date, with the most recently created object appearing first.
+   */
   public static DisputeCollection list(DisputeListParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/issuing/disputes");
@@ -139,6 +147,11 @@ public class Dispute extends ApiResource implements HasId, MetadataStore<Dispute
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/issuing/disputes");
     return request(ApiResource.RequestMethod.POST, url, params, Dispute.class, options);
+  }
+
+  /** Creates an Issuing <code>Dispute</code> object. */
+  public static Dispute create(DisputeCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
   }
 
   /** Creates an Issuing <code>Dispute</code> object. */
@@ -165,6 +178,14 @@ public class Dispute extends ApiResource implements HasId, MetadataStore<Dispute
         String.format(
             "%s%s", Stripe.getApiBase(), String.format("/v1/issuing/disputes/%s", this.getId()));
     return request(ApiResource.RequestMethod.POST, url, params, Dispute.class, options);
+  }
+
+  /**
+   * Updates the specified Issuing <code>Dispute</code> object by setting the values of the
+   * parameters passed. Any parameters not provided will be left unchanged.
+   */
+  public Dispute update(DisputeUpdateParams params) throws StripeException {
+    return update(params, (RequestOptions) null);
   }
 
   /**

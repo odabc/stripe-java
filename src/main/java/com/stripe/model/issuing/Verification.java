@@ -60,6 +60,11 @@ public class Verification extends ApiResource implements HasId {
   }
 
   /** Some actions (eg: updating a PIN) need confirmation from the cardholder. */
+  public static Verification create(VerificationCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /** Some actions (eg: updating a PIN) need confirmation from the cardholder. */
   public static Verification create(VerificationCreateParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/issuing/verifications");

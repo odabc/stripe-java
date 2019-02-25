@@ -123,6 +123,11 @@ public class FileLink extends ApiResource implements HasId, MetadataStore<FileLi
   }
 
   /** Creates a new file link object. */
+  public static FileLink create(FileLinkCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /** Creates a new file link object. */
   public static FileLink create(FileLinkCreateParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/file_links");
@@ -144,6 +149,11 @@ public class FileLink extends ApiResource implements HasId, MetadataStore<FileLi
   }
 
   /** Updates an existing file link object. Expired links can no longer be updated. */
+  public FileLink update(FileLinkUpdateParams params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /** Updates an existing file link object. Expired links can no longer be updated. */
   public FileLink update(FileLinkUpdateParams params, RequestOptions options)
       throws StripeException {
     String url =
@@ -162,6 +172,11 @@ public class FileLink extends ApiResource implements HasId, MetadataStore<FileLi
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/file_links");
     return requestCollection(url, params, FileLinkCollection.class, options);
+  }
+
+  /** Returns a list of file links. */
+  public static FileLinkCollection list(FileLinkListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
   }
 
   /** Returns a list of file links. */

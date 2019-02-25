@@ -23,6 +23,12 @@ public class BitcoinTransactionCollection extends StripeCollection<BitcoinTransa
   }
 
   /** List bitcoin transacitons for a given receiver. */
+  public BitcoinTransactionCollection list(BitcoinTransactionCollectionListParams params)
+      throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** List bitcoin transacitons for a given receiver. */
   public BitcoinTransactionCollection list(
       BitcoinTransactionCollectionListParams params, RequestOptions options)
       throws StripeException {

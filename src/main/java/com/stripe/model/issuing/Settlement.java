@@ -118,6 +118,14 @@ public class Settlement extends ApiResource implements HasId, MetadataStore<Sett
    * Returns a list of Issuing <code>Settlement</code> objects. The objects are sorted in descending
    * order by creation date, with the most recently created object appearing first.
    */
+  public static SettlementCollection list(SettlementListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /**
+   * Returns a list of Issuing <code>Settlement</code> objects. The objects are sorted in descending
+   * order by creation date, with the most recently created object appearing first.
+   */
   public static SettlementCollection list(SettlementListParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/issuing/settlements");
@@ -173,6 +181,14 @@ public class Settlement extends ApiResource implements HasId, MetadataStore<Sett
         String.format(
             "%s%s", Stripe.getApiBase(), String.format("/v1/issuing/settlements/%s", this.getId()));
     return request(ApiResource.RequestMethod.POST, url, params, Settlement.class, options);
+  }
+
+  /**
+   * Updates the specified Issuing <code>Settlement</code> object by setting the values of the
+   * parameters passed. Any parameters not provided will be left unchanged.
+   */
+  public Settlement update(SettlementUpdateParams params) throws StripeException {
+    return update(params, (RequestOptions) null);
   }
 
   /**

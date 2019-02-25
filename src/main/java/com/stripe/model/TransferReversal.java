@@ -195,6 +195,16 @@ public class TransferReversal extends ApiResource
    *
    * <p>This request only accepts metadata and description as arguments.
    */
+  public TransferReversal update(TransferReversalUpdateParams params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /**
+   * Updates the specified reversal by setting the values of the parameters passed. Any parameters
+   * not provided will be left unchanged.
+   *
+   * <p>This request only accepts metadata and description as arguments.
+   */
   public TransferReversal update(TransferReversalUpdateParams params, RequestOptions options)
       throws StripeException {
     String url;

@@ -178,6 +178,14 @@ public class Recipient extends ApiResource implements HasId, MetadataStore<Recip
    * Returns a list of your recipients. The recipients are returned sorted by creation date, with
    * the most recently created recipients appearing first.
    */
+  public static RecipientCollection list(RecipientListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /**
+   * Returns a list of your recipients. The recipients are returned sorted by creation date, with
+   * the most recently created recipients appearing first.
+   */
   public static RecipientCollection list(RecipientListParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/recipients");
@@ -200,6 +208,14 @@ public class Recipient extends ApiResource implements HasId, MetadataStore<Recip
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/recipients");
     return request(ApiResource.RequestMethod.POST, url, params, Recipient.class, options);
+  }
+
+  /**
+   * Creates a new <code>Recipient</code> object and verifies the recipient’s identity. Also
+   * verifies the recipient’s bank account information or debit card, if either is provided.
+   */
+  public static Recipient create(RecipientCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
   }
 
   /**
@@ -272,6 +288,17 @@ public class Recipient extends ApiResource implements HasId, MetadataStore<Recip
         String.format(
             "%s%s", Stripe.getApiBase(), String.format("/v1/recipients/%s", this.getId()));
     return request(ApiResource.RequestMethod.POST, url, params, Recipient.class, options);
+  }
+
+  /**
+   * Updates the specified recipient by setting the values of the parameters passed. Any parameters
+   * not provided will be left unchanged.
+   *
+   * <p>If you update the name or tax ID, the identity verification will automatically be rerun. If
+   * you update the bank account, the bank account validation will automatically be rerun.
+   */
+  public Recipient update(RecipientUpdateParams params) throws StripeException {
+    return update(params, (RequestOptions) null);
   }
 
   /**

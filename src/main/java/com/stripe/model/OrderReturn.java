@@ -128,6 +128,14 @@ public class OrderReturn extends ApiResource implements HasId {
    * Returns a list of your order returns. The returns are returned sorted by creation date, with
    * the most recently created return appearing first.
    */
+  public static OrderReturnCollection list(OrderReturnListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /**
+   * Returns a list of your order returns. The returns are returned sorted by creation date, with
+   * the most recently created return appearing first.
+   */
   public static OrderReturnCollection list(OrderReturnListParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/order_returns");

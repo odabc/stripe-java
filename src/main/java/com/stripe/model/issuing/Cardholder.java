@@ -101,6 +101,14 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
    * Returns a list of Issuing <code>Cardholder</code> objects. The objects are sorted in descending
    * order by creation date, with the most recently created object appearing first.
    */
+  public static CardholderCollection list(CardholderListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /**
+   * Returns a list of Issuing <code>Cardholder</code> objects. The objects are sorted in descending
+   * order by creation date, with the most recently created object appearing first.
+   */
   public static CardholderCollection list(CardholderListParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/issuing/cardholders");
@@ -117,6 +125,11 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/issuing/cardholders");
     return request(ApiResource.RequestMethod.POST, url, params, Cardholder.class, options);
+  }
+
+  /** Creates a new Issuing <code>Cardholder</code> object that can be issued cards. */
+  public static Cardholder create(CardholderCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
   }
 
   /** Creates a new Issuing <code>Cardholder</code> object that can be issued cards. */
@@ -175,6 +188,14 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
         String.format(
             "%s%s", Stripe.getApiBase(), String.format("/v1/issuing/cardholders/%s", this.getId()));
     return request(ApiResource.RequestMethod.POST, url, params, Cardholder.class, options);
+  }
+
+  /**
+   * Updates the specified Issuing <code>Cardholder</code> object by setting the values of the
+   * parameters passed. Any parameters not provided will be left unchanged.
+   */
+  public Cardholder update(CardholderUpdateParams params) throws StripeException {
+    return update(params, (RequestOptions) null);
   }
 
   /**

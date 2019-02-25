@@ -90,6 +90,14 @@ public class CardPin extends ApiResource {
    * Updates the PIN for a card, subject to cardholder verification. See <a
    * href="/docs/issuing/pin_management">Retrieve and update cardholder PIN</a>
    */
+  public static CardPin update(String card, CardPinUpdateParams params) throws StripeException {
+    return update(card, params, (RequestOptions) null);
+  }
+
+  /**
+   * Updates the PIN for a card, subject to cardholder verification. See <a
+   * href="/docs/issuing/pin_management">Retrieve and update cardholder PIN</a>
+   */
   public static CardPin update(String card, CardPinUpdateParams params, RequestOptions options)
       throws StripeException {
     String url =

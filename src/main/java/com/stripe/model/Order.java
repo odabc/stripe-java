@@ -192,6 +192,11 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
   }
 
   /** Creates a new order object. */
+  public static Order create(OrderCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /** Creates a new order object. */
   public static Order create(OrderCreateParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/orders");
@@ -214,6 +219,14 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/orders");
     return requestCollection(url, params, OrderCollection.class, options);
+  }
+
+  /**
+   * Returns a list of your orders. The orders are returned sorted by creation date, with the most
+   * recently created orders appearing first.
+   */
+  public static OrderCollection list(OrderListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
   }
 
   /**
@@ -284,6 +297,14 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
    * Updates the specific order by setting the values of the parameters passed. Any parameters not
    * provided will be left unchanged.
    */
+  public Order update(OrderUpdateParams params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /**
+   * Updates the specific order by setting the values of the parameters passed. Any parameters not
+   * provided will be left unchanged.
+   */
   public Order update(OrderUpdateParams params, RequestOptions options) throws StripeException {
     String url =
         String.format("%s%s", Stripe.getApiBase(), String.format("/v1/orders/%s", this.getId()));
@@ -311,6 +332,11 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
         String.format(
             "%s%s", Stripe.getApiBase(), String.format("/v1/orders/%s/pay", this.getId()));
     return request(ApiResource.RequestMethod.POST, url, params, Order.class, options);
+  }
+
+  /** Pay an order by providing a <code>source</code> to create a payment. */
+  public Order pay(OrderPayParams params) throws StripeException {
+    return pay(params, (RequestOptions) null);
   }
 
   /** Pay an order by providing a <code>source</code> to create a payment. */
@@ -363,6 +389,16 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
         String.format(
             "%s%s", Stripe.getApiBase(), String.format("/v1/orders/%s/returns", this.getId()));
     return request(ApiResource.RequestMethod.POST, url, params, OrderReturn.class, options);
+  }
+
+  /**
+   * Return all or part of an order. The order must have a status of <code>paid</code> or <code>
+   * fulfilled</code> before it can be returned. Once all items have been returned, the order will
+   * become <code>canceled</code> or <code>returned</code> depending on which status the order
+   * started in.
+   */
+  public OrderReturn returnOrder(OrderReturnOrderParams params) throws StripeException {
+    return returnOrder(params, (RequestOptions) null);
   }
 
   /**

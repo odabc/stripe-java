@@ -213,6 +213,14 @@ public class Transaction extends ApiResource
    * Returns a list of Issuing <code>Transaction</code> objects. The objects are sorted in
    * descending order by creation date, with the most recently created object appearing first.
    */
+  public static TransactionCollection list(TransactionListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /**
+   * Returns a list of Issuing <code>Transaction</code> objects. The objects are sorted in
+   * descending order by creation date, with the most recently created object appearing first.
+   */
   public static TransactionCollection list(TransactionListParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/issuing/transactions");
@@ -269,6 +277,14 @@ public class Transaction extends ApiResource
             "%s%s",
             Stripe.getApiBase(), String.format("/v1/issuing/transactions/%s", this.getId()));
     return request(ApiResource.RequestMethod.POST, url, params, Transaction.class, options);
+  }
+
+  /**
+   * Updates the specified Issuing <code>Transaction</code> object by setting the values of the
+   * parameters passed. Any parameters not provided will be left unchanged.
+   */
+  public Transaction update(TransactionUpdateParams params) throws StripeException {
+    return update(params, (RequestOptions) null);
   }
 
   /**

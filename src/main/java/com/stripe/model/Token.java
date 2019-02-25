@@ -112,6 +112,15 @@ public class Token extends ApiResource implements HasId {
    * with any API method in place of a bank account dictionary. This token can be used only once, by
    * attaching it to a <a href="#accounts">Custom account</a>.
    */
+  public static Token create(TokenCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /**
+   * Creates a single-use token that represents a bank account’s details. This token can be used
+   * with any API method in place of a bank account dictionary. This token can be used only once, by
+   * attaching it to a <a href="#accounts">Custom account</a>.
+   */
   public static Token create(TokenCreateParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/tokens");

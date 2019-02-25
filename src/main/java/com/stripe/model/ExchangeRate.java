@@ -60,6 +60,14 @@ public class ExchangeRate extends ApiResource implements HasId {
    * Returns a list of objects that contain the rates at which foreign currencies are converted to
    * one another. Only shows the currencies for which Stripe supports.
    */
+  public static ExchangeRateCollection list(ExchangeRateListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /**
+   * Returns a list of objects that contain the rates at which foreign currencies are converted to
+   * one another. Only shows the currencies for which Stripe supports.
+   */
   public static ExchangeRateCollection list(ExchangeRateListParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/exchange_rates");

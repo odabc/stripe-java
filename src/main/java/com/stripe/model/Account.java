@@ -221,6 +221,22 @@ public class Account extends ApiResource implements PaymentSource, MetadataStore
    * href="/docs/connect/updating-accounts">Connect</a> documentation to learn more about updating
    * accounts.
    */
+  public Account update(AccountUpdateParams params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /**
+   * Updates a connected <a href="/docs/connect/accounts">Express or Custom account</a> by setting
+   * the values of the parameters passed. Any parameters not provided are left unchanged. Most
+   * parameters can be changed only for Custom accounts. (These are marked <strong>Custom
+   * Only</strong> below.) Parameters marked <strong>Custom and Express</strong> are supported by
+   * both account types.
+   *
+   * <p>To update your own account, use the <a
+   * href="https://dashboard.stripe.com/account">Dashboard</a>. Refer to our <a
+   * href="/docs/connect/updating-accounts">Connect</a> documentation to learn more about updating
+   * accounts.
+   */
   public Account update(AccountUpdateParams params, RequestOptions options) throws StripeException {
     String url =
         String.format("%s%s", Stripe.getApiBase(), String.format("/v1/accounts/%s", this.getId()));
@@ -243,6 +259,14 @@ public class Account extends ApiResource implements PaymentSource, MetadataStore
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/accounts");
     return requestCollection(url, params, AccountCollection.class, options);
+  }
+
+  /**
+   * Returns a list of accounts connected to your platform via <a href="/docs/connect">Connect</a>.
+   * If you’re not a platform, the list is empty.
+   */
+  public static AccountCollection list(AccountListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
   }
 
   /**
@@ -281,6 +305,19 @@ public class Account extends ApiResource implements PaymentSource, MetadataStore
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/accounts");
     return request(ApiResource.RequestMethod.POST, url, params, Account.class, options);
+  }
+
+  /**
+   * With <a href="/docs/connect">Connect</a>, you can create Stripe accounts for your users. To do
+   * this, you’ll first need to <a
+   * href="https://dashboard.stripe.com/account/applications/settings">register your platform</a>.
+   *
+   * <p>For Standard accounts, parameters other than <code>country</code>, <code>email</code>, and
+   * <code>type</code> are used to prefill the account application that we ask the account holder to
+   * complete.
+   */
+  public static Account create(AccountCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
   }
 
   /**
@@ -381,6 +418,16 @@ public class Account extends ApiResource implements PaymentSource, MetadataStore
    * <p>Test-mode Custom and Express accounts can be rejected at any time. Accounts created using
    * live-mode keys may only be rejected once all balances are zero.
    */
+  public Account reject(AccountRejectParams params) throws StripeException {
+    return reject(params, (RequestOptions) null);
+  }
+
+  /**
+   * With <a href="/docs/connect">Connect</a>, you may flag accounts as suspicious.
+   *
+   * <p>Test-mode Custom and Express accounts can be rejected at any time. Accounts created using
+   * live-mode keys may only be rejected once all balances are zero.
+   */
   public Account reject(AccountRejectParams params, RequestOptions options) throws StripeException {
     String url =
         String.format(
@@ -414,6 +461,14 @@ public class Account extends ApiResource implements PaymentSource, MetadataStore
         String.format(
             "%s%s", Stripe.getApiBase(), String.format("/v1/accounts/%s/persons", this.getId()));
     return requestCollection(url, params, PersonCollection.class, options);
+  }
+
+  /**
+   * Returns a list of people associated with the account’s legal entity. The people are returned
+   * sorted by creation date, with the most recent people appearing first.
+   */
+  public PersonCollection persons(AccountPersonsParams params) throws StripeException {
+    return persons(params, (RequestOptions) null);
   }
 
   /**

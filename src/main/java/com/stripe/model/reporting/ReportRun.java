@@ -142,6 +142,14 @@ public class ReportRun extends ApiResource implements HasId {
    * Creates a new object and begin running the report. (Requires a <a
    * href="https://stripe.com/docs/keys#test-live-modes">live-mode API key</a>.)
    */
+  public static ReportRun create(ReportRunCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /**
+   * Creates a new object and begin running the report. (Requires a <a
+   * href="https://stripe.com/docs/keys#test-live-modes">live-mode API key</a>.)
+   */
   public static ReportRun create(ReportRunCreateParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/reporting/report_runs");
@@ -164,6 +172,14 @@ public class ReportRun extends ApiResource implements HasId {
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/reporting/report_runs");
     return requestCollection(url, params, ReportRunCollection.class, options);
+  }
+
+  /**
+   * Returns a list of Report Runs, with the most recent appearing first. (Requires a <a
+   * href="https://stripe.com/docs/keys#test-live-modes">live-mode API key</a>.)
+   */
+  public static ReportRunCollection list(ReportRunListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
   }
 
   /**

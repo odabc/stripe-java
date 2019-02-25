@@ -227,6 +227,15 @@ public class Transfer extends ApiResource
    * object. Your <a href="#balance">Stripe balance</a> must be able to cover the transfer amount,
    * or you’ll receive an “Insufficient Funds” error.
    */
+  public static Transfer create(TransferCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /**
+   * To send funds from your Stripe account to a connected account, you create a new transfer
+   * object. Your <a href="#balance">Stripe balance</a> must be able to cover the transfer amount,
+   * or you’ll receive an “Insufficient Funds” error.
+   */
   public static Transfer create(TransferCreateParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/transfers");
@@ -249,6 +258,14 @@ public class Transfer extends ApiResource
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/transfers");
     return requestCollection(url, params, TransferCollection.class, options);
+  }
+
+  /**
+   * Returns a list of existing transfers sent to connected accounts. The transfers are returned in
+   * sorted order, with the most recently created transfers appearing first.
+   */
+  public static TransferCollection list(TransferListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
   }
 
   /**
@@ -325,6 +342,16 @@ public class Transfer extends ApiResource
     String url =
         String.format("%s%s", Stripe.getApiBase(), String.format("/v1/transfers/%s", this.getId()));
     return request(ApiResource.RequestMethod.POST, url, params, Transfer.class, options);
+  }
+
+  /**
+   * Updates the specified transfer by setting the values of the parameters passed. Any parameters
+   * not provided will be left unchanged.
+   *
+   * <p>This request accepts only metadata as an argument.
+   */
+  public Transfer update(TransferUpdateParams params) throws StripeException {
+    return update(params, (RequestOptions) null);
   }
 
   /**

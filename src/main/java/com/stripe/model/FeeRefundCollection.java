@@ -56,6 +56,21 @@ public class FeeRefundCollection extends StripeCollection<FeeRefund> {
    * an error when called on an already-refunded application fee, or when trying to refund more
    * money than is left on an application fee.
    */
+  public FeeRefund create(FeeRefundCollectionCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /**
+   * Refunds an application fee that has previously been collected but not yet refunded. Funds will
+   * be refunded to the Stripe account from which the fee was originally collected.
+   *
+   * <p>You can optionally refund only part of an application fee. You can do so multiple times,
+   * until the entire fee has been refunded.
+   *
+   * <p>Once entirely refunded, an application fee can’t be refunded again. This method will raise
+   * an error when called on an already-refunded application fee, or when trying to refund more
+   * money than is left on an application fee.
+   */
   public FeeRefund create(FeeRefundCollectionCreateParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), this.getUrl());
@@ -83,6 +98,16 @@ public class FeeRefundCollection extends StripeCollection<FeeRefund> {
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), this.getUrl());
     return ApiResource.requestCollection(url, params, FeeRefundCollection.class, options);
+  }
+
+  /**
+   * You can see a list of the refunds belonging to a specific application fee. Note that the 10
+   * most recent refunds are always available by default on the application fee object. If you need
+   * more than those 10, you can use this API method and the <code>limit</code> and <code>
+   * starting_after</code> parameters to page through additional refunds.
+   */
+  public FeeRefundCollection list(FeeRefundCollectionListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
   }
 
   /**

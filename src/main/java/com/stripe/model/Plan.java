@@ -181,6 +181,11 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
   }
 
   /** Returns a list of your plans. */
+  public static PlanCollection list(PlanListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** Returns a list of your plans. */
   public static PlanCollection list(PlanListParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/plans");
@@ -203,6 +208,14 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/plans");
     return request(ApiResource.RequestMethod.POST, url, params, Plan.class, options);
+  }
+
+  /**
+   * You can create plans using the API, or in the Stripe <a
+   * href="https://dashboard.stripe.com/subscriptions/products">Dashboard</a>.
+   */
+  public static Plan create(PlanCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
   }
 
   /**
@@ -257,6 +270,15 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
     String url =
         String.format("%s%s", Stripe.getApiBase(), String.format("/v1/plans/%s", this.getId()));
     return request(ApiResource.RequestMethod.POST, url, params, Plan.class, options);
+  }
+
+  /**
+   * Updates the specified plan by setting the values of the parameters passed. Any parameters not
+   * provided are left unchanged. By design, you cannot change a plan’s ID, amount, currency, or
+   * billing cycle.
+   */
+  public Plan update(PlanUpdateParams params) throws StripeException {
+    return update(params, (RequestOptions) null);
   }
 
   /**

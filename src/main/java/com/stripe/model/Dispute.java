@@ -144,6 +144,11 @@ public class Dispute extends ApiResource
   }
 
   /** Returns a list of your disputes. */
+  public static DisputeCollection list(DisputeListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** Returns a list of your disputes. */
   public static DisputeCollection list(DisputeListParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/disputes");
@@ -216,6 +221,20 @@ public class Dispute extends ApiResource
    * winning your dispute. To figure out which evidence fields to provide, see our <a
    * href="/docs/disputes/categories">guide to dispute types</a>.
    */
+  public Dispute update(DisputeUpdateParams params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /**
+   * When you get a dispute, contacting your customer is always the best first step. If that doesn’t
+   * work, you can submit evidence to help us resolve the dispute in your favor. You can do this in
+   * your <a href="https://dashboard.stripe.com/disputes">dashboard</a>, but if you prefer, you can
+   * use the API to submit evidence programmatically.
+   *
+   * <p>Depending on your dispute type, different evidence fields will give you a better chance of
+   * winning your dispute. To figure out which evidence fields to provide, see our <a
+   * href="/docs/disputes/categories">guide to dispute types</a>.
+   */
   public Dispute update(DisputeUpdateParams params, RequestOptions options) throws StripeException {
     String url =
         String.format("%s%s", Stripe.getApiBase(), String.format("/v1/disputes/%s", this.getId()));
@@ -267,6 +286,17 @@ public class Dispute extends ApiResource
         String.format(
             "%s%s", Stripe.getApiBase(), String.format("/v1/disputes/%s/close", this.getId()));
     return request(ApiResource.RequestMethod.POST, url, params, Dispute.class, options);
+  }
+
+  /**
+   * Closing the dispute for a charge indicates that you do not have any evidence to submit and are
+   * essentially dismissing the dispute, acknowledging it as lost.
+   *
+   * <p>The status of the dispute will change from <code>needs_response</code> to <code>lost</code>.
+   * <em>Closing a dispute is irreversible</em>.
+   */
+  public Dispute close(DisputeCloseParams params) throws StripeException {
+    return close(params, (RequestOptions) null);
   }
 
   /**

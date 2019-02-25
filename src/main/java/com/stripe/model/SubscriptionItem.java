@@ -82,6 +82,12 @@ public class SubscriptionItem extends ApiResource
   }
 
   /** Returns a list of your subscription items for a given subscription. */
+  public static SubscriptionItemCollection list(SubscriptionItemListParams params)
+      throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** Returns a list of your subscription items for a given subscription. */
   public static SubscriptionItemCollection list(
       SubscriptionItemListParams params, RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/subscription_items");
@@ -131,6 +137,12 @@ public class SubscriptionItem extends ApiResource
   }
 
   /** Adds a new item to an existing subscription. No existing items will be changed or replaced. */
+  public static SubscriptionItem create(SubscriptionItemCreateParams params)
+      throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /** Adds a new item to an existing subscription. No existing items will be changed or replaced. */
   public static SubscriptionItem create(SubscriptionItemCreateParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/subscription_items");
@@ -149,6 +161,11 @@ public class SubscriptionItem extends ApiResource
         String.format(
             "%s%s", Stripe.getApiBase(), String.format("/v1/subscription_items/%s", this.getId()));
     return request(ApiResource.RequestMethod.POST, url, params, SubscriptionItem.class, options);
+  }
+
+  /** Updates the plan or quantity of an item on a current subscription. */
+  public SubscriptionItem update(SubscriptionItemUpdateParams params) throws StripeException {
+    return update(params, (RequestOptions) null);
   }
 
   /** Updates the plan or quantity of an item on a current subscription. */
@@ -194,6 +211,14 @@ public class SubscriptionItem extends ApiResource
         String.format(
             "%s%s", Stripe.getApiBase(), String.format("/v1/subscription_items/%s", this.getId()));
     return request(ApiResource.RequestMethod.DELETE, url, params, SubscriptionItem.class, options);
+  }
+
+  /**
+   * Deletes an item from the subscription. Removing a subscription item from a subscription will
+   * not cancel the subscription.
+   */
+  public SubscriptionItem delete(SubscriptionItemDeleteParams params) throws StripeException {
+    return delete(params, (RequestOptions) null);
   }
 
   /**
@@ -255,6 +280,21 @@ public class SubscriptionItem extends ApiResource
             Stripe.getApiBase(),
             String.format("/v1/subscription_items/%s/usage_record_summaries", this.getId()));
     return requestCollection(url, params, UsageRecordSummaryCollection.class, options);
+  }
+
+  /**
+   * For the specified subscription item, returns a list of summary objects. Each object in the list
+   * provides usage information that’s been summarized from multiple usage records and over a
+   * subscription billing period (e.g., 15 usage records in the billing plan’s month of September).
+   *
+   * <p>The list is sorted in reverse-chronological order (newest first). The first list item
+   * represents the most current usage period that hasn’t ended yet. Since new usage records can
+   * still be added, the returned summary information for the subscription item’s ID should be seen
+   * as unstable until the subscription billing period ends.
+   */
+  public UsageRecordSummaryCollection usageRecordSummaries(
+      SubscriptionItemUsageRecordSummariesParams params) throws StripeException {
+    return usageRecordSummaries(params, (RequestOptions) null);
   }
 
   /**

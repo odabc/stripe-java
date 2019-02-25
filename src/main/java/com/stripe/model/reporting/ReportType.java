@@ -128,6 +128,14 @@ public class ReportType extends ApiResource implements HasId {
    * Returns a full list of Report Types. (Requires a <a
    * href="https://stripe.com/docs/keys#test-live-modes">live-mode API key</a>.)
    */
+  public static ReportTypeCollection list(ReportTypeListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /**
+   * Returns a full list of Report Types. (Requires a <a
+   * href="https://stripe.com/docs/keys#test-live-modes">live-mode API key</a>.)
+   */
   public static ReportTypeCollection list(ReportTypeListParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/reporting/report_types");

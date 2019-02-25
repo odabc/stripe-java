@@ -157,6 +157,15 @@ public class BitcoinReceiver extends ApiResource implements PaymentSource {
    * Returns a list of your receivers. Receivers are returned sorted by creation date, with the most
    * recently created receivers appearing first.
    */
+  public static BitcoinReceiverCollection list(BitcoinReceiverListParams params)
+      throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /**
+   * Returns a list of your receivers. Receivers are returned sorted by creation date, with the most
+   * recently created receivers appearing first.
+   */
   public static BitcoinReceiverCollection list(
       BitcoinReceiverListParams params, RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/bitcoin/receivers");

@@ -99,6 +99,14 @@ public class ValueList extends ApiResource implements HasId, MetadataStore<Value
    * Returns a list of <code>ValueList</code> objects. The objects are sorted in descending order by
    * creation date, with the most recently created object appearing first.
    */
+  public static ValueListCollection list(ValueListListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /**
+   * Returns a list of <code>ValueList</code> objects. The objects are sorted in descending order by
+   * creation date, with the most recently created object appearing first.
+   */
   public static ValueListCollection list(ValueListListParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/radar/value_lists");
@@ -148,6 +156,11 @@ public class ValueList extends ApiResource implements HasId, MetadataStore<Value
   }
 
   /** Creates a new <code>ValueList</code> object, which can then be referenced in rules. */
+  public static ValueList create(ValueListCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /** Creates a new <code>ValueList</code> object, which can then be referenced in rules. */
   public static ValueList create(ValueListCreateParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/radar/value_lists");
@@ -172,6 +185,14 @@ public class ValueList extends ApiResource implements HasId, MetadataStore<Value
         String.format(
             "%s%s", Stripe.getApiBase(), String.format("/v1/radar/value_lists/%s", this.getId()));
     return request(ApiResource.RequestMethod.POST, url, params, ValueList.class, options);
+  }
+
+  /**
+   * Updates a <code>ValueList</code> object by setting the values of the parameters passed. Any
+   * parameters not provided will be left unchanged. Note that <code>item_type</code> is immutable.
+   */
+  public ValueList update(ValueListUpdateParams params) throws StripeException {
+    return update(params, (RequestOptions) null);
   }
 
   /**

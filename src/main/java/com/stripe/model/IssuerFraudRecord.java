@@ -103,6 +103,12 @@ public class IssuerFraudRecord extends ApiResource implements HasId {
   }
 
   /** Returns a list of issuer fraud records. */
+  public static IssuerFraudRecordCollection list(IssuerFraudRecordListParams params)
+      throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** Returns a list of issuer fraud records. */
   public static IssuerFraudRecordCollection list(
       IssuerFraudRecordListParams params, RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/issuer_fraud_records");

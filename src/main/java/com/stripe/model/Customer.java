@@ -167,6 +167,14 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
    * Returns a list of your customers. The customers are returned sorted by creation date, with the
    * most recent customers appearing first.
    */
+  public static CustomerCollection list(CustomerListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /**
+   * Returns a list of your customers. The customers are returned sorted by creation date, with the
+   * most recent customers appearing first.
+   */
   public static CustomerCollection list(CustomerListParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/customers");
@@ -183,6 +191,11 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/customers");
     return request(ApiResource.RequestMethod.POST, url, params, Customer.class, options);
+  }
+
+  /** Creates a new customer object. */
+  public static Customer create(CustomerCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
   }
 
   /** Creates a new customer object. */
@@ -266,6 +279,23 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
     String url =
         String.format("%s%s", Stripe.getApiBase(), String.format("/v1/customers/%s", this.getId()));
     return request(ApiResource.RequestMethod.POST, url, params, Customer.class, options);
+  }
+
+  /**
+   * Updates the specified customer by setting the values of the parameters passed. Any parameters
+   * not provided will be left unchanged. For example, if you pass the <strong>source</strong>
+   * parameter, that becomes the customer’s active source (e.g., a card) to be used for all charges
+   * in the future. When you update a customer to a new valid card source by passing the
+   * <strong>source</strong> parameter: for each of the customer’s current subscriptions, if the
+   * subscription bills automatically and is in the <code>past_due</code> state, then the latest
+   * unclosed invoice for the subscription will be retried. This retry will not count as an
+   * automatic retry, and will not affect the next regularly scheduled payment for the invoice.
+   * Changing the <strong>default_source</strong> for a customer will not trigger this behavior.
+   *
+   * <p>This request accepts mostly the same arguments as the customer creation call.
+   */
+  public Customer update(CustomerUpdateParams params) throws StripeException {
+    return update(params, (RequestOptions) null);
   }
 
   /**

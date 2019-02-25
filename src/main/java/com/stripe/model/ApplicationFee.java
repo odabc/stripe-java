@@ -217,6 +217,15 @@ public class ApplicationFee extends ApiResource implements BalanceTransactionSou
    * Returns a list of application fees you’ve previously collected. The application fees are
    * returned in sorted order, with the most recent fees appearing first.
    */
+  public static ApplicationFeeCollection list(ApplicationFeeListParams params)
+      throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /**
+   * Returns a list of application fees you’ve previously collected. The application fees are
+   * returned in sorted order, with the most recent fees appearing first.
+   */
   public static ApplicationFeeCollection list(
       ApplicationFeeListParams params, RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/application_fees");

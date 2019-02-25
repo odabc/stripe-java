@@ -50,6 +50,15 @@ public class ConnectionToken extends ApiResource {
    * from Stripe, proxied through your server. On your backend, add an endpoint that creates and
    * returns a connection token.
    */
+  public static ConnectionToken create(ConnectionTokenCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /**
+   * To connect to a reader the Stripe Terminal SDK needs to retrieve a short-lived connection token
+   * from Stripe, proxied through your server. On your backend, add an endpoint that creates and
+   * returns a connection token.
+   */
   public static ConnectionToken create(ConnectionTokenCreateParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/terminal/connection_tokens");

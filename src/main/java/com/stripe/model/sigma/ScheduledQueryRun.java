@@ -85,6 +85,12 @@ public class ScheduledQueryRun extends ApiResource implements HasId {
   }
 
   /** Returns a list of scheduled query runs. */
+  public static ScheduledQueryRunCollection list(ScheduledQueryRunListParams params)
+      throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** Returns a list of scheduled query runs. */
   public static ScheduledQueryRunCollection list(
       ScheduledQueryRunListParams params, RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/sigma/scheduled_query_runs");

@@ -270,6 +270,11 @@ public class Source extends ApiResource implements PaymentSource, MetadataStore<
   }
 
   /** Creates a new source object. */
+  public static Source create(SourceCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /** Creates a new source object. */
   public static Source create(SourceCreateParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/sources");
@@ -310,6 +315,18 @@ public class Source extends ApiResource implements PaymentSource, MetadataStore<
    * also possible to update type specific information for selected payment methods. Please refer to
    * our <a href="/docs/sources">payment method guides</a> for more detail.
    */
+  public Source update(SourceUpdateParams params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /**
+   * Updates the specified source by setting the values of the parameters passed. Any parameters not
+   * provided will be left unchanged.
+   *
+   * <p>This request accepts the <code>metadata</code> and <code>owner</code> as arguments. It is
+   * also possible to update type specific information for selected payment methods. Please refer to
+   * our <a href="/docs/sources">payment method guides</a> for more detail.
+   */
   public Source update(SourceUpdateParams params, RequestOptions options) throws StripeException {
     String url =
         String.format("%s%s", Stripe.getApiBase(), String.format("/v1/sources/%s", this.getId()));
@@ -327,6 +344,11 @@ public class Source extends ApiResource implements PaymentSource, MetadataStore<
         String.format(
             "%s%s", Stripe.getApiBase(), String.format("/v1/sources/%s/verify", this.getId()));
     return request(ApiResource.RequestMethod.POST, url, params, Source.class, options);
+  }
+
+  /** Verify a given source. */
+  public Source verify(SourceVerifyParams params) throws StripeException {
+    return verify(params, (RequestOptions) null);
   }
 
   /** Verify a given source. */
@@ -356,6 +378,12 @@ public class Source extends ApiResource implements PaymentSource, MetadataStore<
             "%s%s",
             Stripe.getApiBase(), String.format("/v1/sources/%s/source_transactions", this.getId()));
     return requestCollection(url, params, SourceTransactionCollection.class, options);
+  }
+
+  /** List source transactions for a given source. */
+  public SourceTransactionCollection sourceTransactions(SourceSourceTransactionsParams params)
+      throws StripeException {
+    return sourceTransactions(params, (RequestOptions) null);
   }
 
   /** List source transactions for a given source. */
