@@ -7,6 +7,12 @@ import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.param.AccountCreateParams;
+import com.stripe.param.AccountListParams;
+import com.stripe.param.AccountPersonsParams;
+import com.stripe.param.AccountRejectParams;
+import com.stripe.param.AccountRetrieveParams;
+import com.stripe.param.AccountUpdateParams;
 import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
@@ -29,38 +35,23 @@ public class Account extends ApiResource implements PaymentSource, MetadataStore
   @SerializedName("application_url")
   String applicationUrl;
 
-  /**
-   * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) A logo for this account (at
-   * least 128px x 128px).
-   */
-  @SerializedName("business_logo")
-  @Getter(lombok.AccessLevel.NONE)
-  @Setter(lombok.AccessLevel.NONE)
-  ExpandableField<File> businessLogo;
+  /** Optional information related to the business. */
+  @SerializedName("business_profile")
+  BusinessProfile businessProfile;
 
-  /**
-   * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) A larger logo for the
-   * account that will be used in Checkout instead of the smaller logo and without the account's
-   * name next to it if provided. Must be at least 128px x 128px.
-   */
-  @SerializedName("business_logo_large")
-  String businessLogoLarge;
+  /** The business type. Can be `individual` or `company`. */
+  @SerializedName("business_type")
+  String businessType;
 
-  /** The publicly visible name of the business. */
-  @SerializedName("business_name")
-  String businessName;
-
-  /** A CSS hex color value representing the primary branding color for this account. */
-  @SerializedName("business_primary_color")
-  String businessPrimaryColor;
-
-  /** The publicly visible website of the business. */
-  @SerializedName("business_url")
-  String businessUrl;
+  @SerializedName("capabilities")
+  Capabilities capabilities;
 
   /** Whether the account can create live charges. */
   @SerializedName("charges_enabled")
   Boolean chargesEnabled;
+
+  @SerializedName("company")
+  Company company;
 
   /** The account's country. */
   @SerializedName("country")
@@ -69,21 +60,6 @@ public class Account extends ApiResource implements PaymentSource, MetadataStore
   /** Time at which the object was created. Measured in seconds since the Unix epoch. */
   @SerializedName("created")
   Long created;
-
-  /**
-   * A Boolean indicating if Stripe should try to reclaim negative balances from an attached bank
-   * account. See our [Understanding Connect Account Balances](/docs/connect/account-balances)
-   * documentation for details.
-   */
-  @SerializedName("debit_negative_balances")
-  Boolean debitNegativeBalances;
-
-  /**
-   * Account-level settings to automatically decline certain types of charges regardless of the
-   * decision of the card issuer.
-   */
-  @SerializedName("decline_charge_on")
-  DeclineChargeOn declineChargeOn;
 
   /**
    * Three-letter ISO currency code representing the default currency for the account. This must be
@@ -103,13 +79,6 @@ public class Account extends ApiResource implements PaymentSource, MetadataStore
   @SerializedName("details_submitted")
   Boolean detailsSubmitted;
 
-  /**
-   * The display name for this account. This is used on the Stripe Dashboard to differentiate
-   * between accounts.
-   */
-  @SerializedName("display_name")
-  String displayName;
-
   /** The primary user's email address. */
   @SerializedName("email")
   String email;
@@ -123,15 +92,8 @@ public class Account extends ApiResource implements PaymentSource, MetadataStore
   @SerializedName("id")
   String id;
 
-  @SerializedName("keys")
-  Keys keys;
-
-  /**
-   * Information about the legal entity itself, including about the associated account
-   * representative.
-   */
-  @SerializedName("legal_entity")
-  LegalEntity legalEntity;
+  @SerializedName("individual")
+  Person individual;
 
   /**
    * Set of key-value pairs that you can attach to an object. This can be useful for storing
@@ -145,61 +107,16 @@ public class Account extends ApiResource implements PaymentSource, MetadataStore
   @SerializedName("object")
   String object;
 
-  /**
-   * Details on when funds from charges are available, and when they are paid out to an external
-   * account. See our [Setting Bank and Debit Card
-   * Payouts](/docs/connect/bank-transfers#payout-information) documentation for details.
-   */
-  @SerializedName("payout_schedule")
-  PayoutSchedule payoutSchedule;
-
-  /**
-   * The text that appears on the bank account statement for payouts. If not set, this defaults to
-   * the platform's bank descriptor as set in the Dashboard.
-   */
-  @SerializedName("payout_statement_descriptor")
-  String payoutStatementDescriptor;
-
   /** Whether Stripe can send payouts to this account. */
   @SerializedName("payouts_enabled")
   Boolean payoutsEnabled;
 
-  /**
-   * Internal-only description of the product sold or service provided by the business. It's used by
-   * Stripe for risk and underwriting purposes.
-   */
-  @SerializedName("product_description")
-  String productDescription;
+  @SerializedName("requirements")
+  Requirements requirements;
 
-  /**
-   * The default text that appears on credit card statements when a charge is made [directly on the
-   * account](/docs/connect/direct-charges).
-   */
-  @SerializedName("statement_descriptor")
-  String statementDescriptor;
-
-  /** A publicly shareable support mailing address for the business. */
-  @SerializedName("support_address")
-  Address supportAddress;
-
-  /** A publicly shareable support email address for the business. */
-  @SerializedName("support_email")
-  String supportEmail;
-
-  /** A publicly shareable support phone number for the business. */
-  @SerializedName("support_phone")
-  String supportPhone;
-
-  /** A publicly available website for handling support issues. */
-  @SerializedName("support_url")
-  String supportUrl;
-
-  /**
-   * The timezone used in the Stripe Dashboard for this account. A list of possible time zone values
-   * is maintained at the [IANA Time Zone Database](http://www.iana.org/time-zones).
-   */
-  @SerializedName("timezone")
-  String timezone;
+  /** Account options for customizing how the account functions within Stripe. */
+  @SerializedName("settings")
+  Settings settings;
 
   @SerializedName("tos_acceptance")
   TosAcceptance tosAcceptance;
@@ -207,27 +124,6 @@ public class Account extends ApiResource implements PaymentSource, MetadataStore
   /** The Stripe account type. Can be `standard`, `express`, or `custom`. */
   @SerializedName("type")
   String type;
-
-  @SerializedName("verification")
-  Requirements verification;
-
-  /** Get id of expandable `businessLogo` object. */
-  public String getBusinessLogo() {
-    return (this.businessLogo != null) ? this.businessLogo.getId() : null;
-  }
-
-  public void setBusinessLogo(String id) {
-    this.businessLogo = ApiResource.setExpandableFieldId(id, this.businessLogo);
-  }
-
-  /** Get expanded `businessLogo`. */
-  public File getBusinessLogoObject() {
-    return (this.businessLogo != null) ? this.businessLogo.getExpanded() : null;
-  }
-
-  public void setBusinessLogoObject(File expandableObject) {
-    this.businessLogo = new ExpandableField<File>(expandableObject.getId(), expandableObject);
-  }
 
   /** Retrieves the details of an account. */
   public static Account retrieve() throws StripeException {
@@ -247,6 +143,13 @@ public class Account extends ApiResource implements PaymentSource, MetadataStore
   }
 
   /** Retrieves the details of an account. */
+  public static Account retrieve(AccountRetrieveParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/account");
+    return request(ApiResource.RequestMethod.GET, url, params, Account.class, options);
+  }
+
+  /** Retrieves the details of an account. */
   public static Account retrieve(String account) throws StripeException {
     return retrieve(account, (Map<String, Object>) null, (RequestOptions) null);
   }
@@ -259,6 +162,14 @@ public class Account extends ApiResource implements PaymentSource, MetadataStore
   /** Retrieves the details of an account. */
   public static Account retrieve(String account, Map<String, Object> params, RequestOptions options)
       throws StripeException {
+    String url =
+        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/accounts/%s", account));
+    return request(ApiResource.RequestMethod.GET, url, params, Account.class, options);
+  }
+
+  /** Retrieves the details of an account. */
+  public static Account retrieve(
+      String account, AccountRetrieveParams params, RequestOptions options) throws StripeException {
     String url =
         String.format("%s%s", Stripe.getApiBase(), String.format("/v1/accounts/%s", account));
     return request(ApiResource.RequestMethod.GET, url, params, Account.class, options);
@@ -299,6 +210,40 @@ public class Account extends ApiResource implements PaymentSource, MetadataStore
   }
 
   /**
+   * Updates a connected <a href="/docs/connect/accounts">Express or Custom account</a> by setting
+   * the values of the parameters passed. Any parameters not provided are left unchanged. Most
+   * parameters can be changed only for Custom accounts. (These are marked <strong>Custom
+   * Only</strong> below.) Parameters marked <strong>Custom and Express</strong> are supported by
+   * both account types.
+   *
+   * <p>To update your own account, use the <a
+   * href="https://dashboard.stripe.com/account">Dashboard</a>. Refer to our <a
+   * href="/docs/connect/updating-accounts">Connect</a> documentation to learn more about updating
+   * accounts.
+   */
+  public Account update(AccountUpdateParams params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /**
+   * Updates a connected <a href="/docs/connect/accounts">Express or Custom account</a> by setting
+   * the values of the parameters passed. Any parameters not provided are left unchanged. Most
+   * parameters can be changed only for Custom accounts. (These are marked <strong>Custom
+   * Only</strong> below.) Parameters marked <strong>Custom and Express</strong> are supported by
+   * both account types.
+   *
+   * <p>To update your own account, use the <a
+   * href="https://dashboard.stripe.com/account">Dashboard</a>. Refer to our <a
+   * href="/docs/connect/updating-accounts">Connect</a> documentation to learn more about updating
+   * accounts.
+   */
+  public Account update(AccountUpdateParams params, RequestOptions options) throws StripeException {
+    String url =
+        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/accounts/%s", this.getId()));
+    return request(ApiResource.RequestMethod.POST, url, params, Account.class, options);
+  }
+
+  /**
    * Returns a list of accounts connected to your platform via <a href="/docs/connect">Connect</a>.
    * If you’re not a platform, the list is empty.
    */
@@ -311,6 +256,24 @@ public class Account extends ApiResource implements PaymentSource, MetadataStore
    * If you’re not a platform, the list is empty.
    */
   public static AccountCollection list(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/accounts");
+    return requestCollection(url, params, AccountCollection.class, options);
+  }
+
+  /**
+   * Returns a list of accounts connected to your platform via <a href="/docs/connect">Connect</a>.
+   * If you’re not a platform, the list is empty.
+   */
+  public static AccountCollection list(AccountListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /**
+   * Returns a list of accounts connected to your platform via <a href="/docs/connect">Connect</a>.
+   * If you’re not a platform, the list is empty.
+   */
+  public static AccountCollection list(AccountListParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/accounts");
     return requestCollection(url, params, AccountCollection.class, options);
@@ -339,6 +302,34 @@ public class Account extends ApiResource implements PaymentSource, MetadataStore
    * complete.
    */
   public static Account create(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/accounts");
+    return request(ApiResource.RequestMethod.POST, url, params, Account.class, options);
+  }
+
+  /**
+   * With <a href="/docs/connect">Connect</a>, you can create Stripe accounts for your users. To do
+   * this, you’ll first need to <a
+   * href="https://dashboard.stripe.com/account/applications/settings">register your platform</a>.
+   *
+   * <p>For Standard accounts, parameters other than <code>country</code>, <code>email</code>, and
+   * <code>type</code> are used to prefill the account application that we ask the account holder to
+   * complete.
+   */
+  public static Account create(AccountCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /**
+   * With <a href="/docs/connect">Connect</a>, you can create Stripe accounts for your users. To do
+   * this, you’ll first need to <a
+   * href="https://dashboard.stripe.com/account/applications/settings">register your platform</a>.
+   *
+   * <p>For Standard accounts, parameters other than <code>country</code>, <code>email</code>, and
+   * <code>type</code> are used to prefill the account application that we ask the account holder to
+   * complete.
+   */
+  public static Account create(AccountCreateParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/accounts");
     return request(ApiResource.RequestMethod.POST, url, params, Account.class, options);
@@ -422,6 +413,29 @@ public class Account extends ApiResource implements PaymentSource, MetadataStore
   }
 
   /**
+   * With <a href="/docs/connect">Connect</a>, you may flag accounts as suspicious.
+   *
+   * <p>Test-mode Custom and Express accounts can be rejected at any time. Accounts created using
+   * live-mode keys may only be rejected once all balances are zero.
+   */
+  public Account reject(AccountRejectParams params) throws StripeException {
+    return reject(params, (RequestOptions) null);
+  }
+
+  /**
+   * With <a href="/docs/connect">Connect</a>, you may flag accounts as suspicious.
+   *
+   * <p>Test-mode Custom and Express accounts can be rejected at any time. Accounts created using
+   * live-mode keys may only be rejected once all balances are zero.
+   */
+  public Account reject(AccountRejectParams params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s", Stripe.getApiBase(), String.format("/v1/accounts/%s/reject", this.getId()));
+    return request(ApiResource.RequestMethod.POST, url, params, Account.class, options);
+  }
+
+  /**
    * Returns a list of people associated with the account’s legal entity. The people are returned
    * sorted by creation date, with the most recent people appearing first.
    */
@@ -449,6 +463,144 @@ public class Account extends ApiResource implements PaymentSource, MetadataStore
     return requestCollection(url, params, PersonCollection.class, options);
   }
 
+  /**
+   * Returns a list of people associated with the account’s legal entity. The people are returned
+   * sorted by creation date, with the most recent people appearing first.
+   */
+  public PersonCollection persons(AccountPersonsParams params) throws StripeException {
+    return persons(params, (RequestOptions) null);
+  }
+
+  /**
+   * Returns a list of people associated with the account’s legal entity. The people are returned
+   * sorted by creation date, with the most recent people appearing first.
+   */
+  public PersonCollection persons(AccountPersonsParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s", Stripe.getApiBase(), String.format("/v1/accounts/%s/persons", this.getId()));
+    return requestCollection(url, params, PersonCollection.class, options);
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class BusinessProfile extends StripeObject {
+    /**
+     * The merchant category code for the account. MCCs are used to classify businesses based on the
+     * goods or services they provide.
+     */
+    @SerializedName("mcc")
+    String mcc;
+
+    /** The customer-facing business name. */
+    @SerializedName("name")
+    String name;
+
+    /**
+     * Internal-only description of the product sold or service provided by the business. It's used
+     * by Stripe for risk and underwriting purposes.
+     */
+    @SerializedName("product_description")
+    String productDescription;
+
+    /** A publicly available mailing address for sending support issues to. */
+    @SerializedName("support_address")
+    Address supportAddress;
+
+    /** A publicly available email address for sending support issues to. */
+    @SerializedName("support_email")
+    String supportEmail;
+
+    /** A publicly available phone number to call with support issues. */
+    @SerializedName("support_phone")
+    String supportPhone;
+
+    /** A publicly available website for handling support issues. */
+    @SerializedName("support_url")
+    String supportUrl;
+
+    /** The business's publicly available website. */
+    @SerializedName("url")
+    String url;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Capabilities extends StripeObject {
+    /**
+     * The status of the card payments capability of the account, or whether the account can
+     * directly process credit and debit card charges.
+     */
+    @SerializedName("card_payments")
+    String cardPayments;
+
+    /** The status of the legacy payments capability of the account. */
+    @SerializedName("legacy_payments")
+    String legacyPayments;
+
+    /**
+     * The status of the platform payments capability of the account, or whether your platform can
+     * process charges on behalf of the account.
+     */
+    @SerializedName("platform_payments")
+    String platformPayments;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Company extends StripeObject {
+    @SerializedName("address")
+    Address address;
+
+    /** The Kana variation of the company's primary address (Japan only). */
+    @SerializedName("address_kana")
+    Person.JapanAddress addressKana;
+
+    /** The Kanji variation of the company's primary address (Japan only). */
+    @SerializedName("address_kanji")
+    Person.JapanAddress addressKanji;
+
+    /** Whether information was collected from the company's directors. */
+    @SerializedName("directors_provided")
+    Boolean directorsProvided;
+
+    /** The company's legal name. */
+    @SerializedName("name")
+    String name;
+
+    /** The Kana variation of the company's legal name Japan only). */
+    @SerializedName("name_kana")
+    String nameKana;
+
+    /** The Kanji variation of the company's legal name (Japan only). */
+    @SerializedName("name_kanji")
+    String nameKanji;
+
+    /** Whether the company's owners have been provided. */
+    @SerializedName("owners_provided")
+    Boolean ownersProvided;
+
+    /** The company's phone number (used for verification). */
+    @SerializedName("phone")
+    String phone;
+
+    /** Whether the company's business ID number was provided. */
+    @SerializedName("tax_id_provided")
+    Boolean taxIdProvided;
+
+    /** The jurisdiction in which the `tax_id` is registered (Germany-based companies only). */
+    @SerializedName("tax_id_registrar")
+    String taxIdRegistrar;
+
+    /** Whether the company's business VAT number was provided. */
+    @SerializedName("vat_id_provided")
+    Boolean vatIdProvided;
+  }
+
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -471,32 +623,13 @@ public class Account extends ApiResource implements PaymentSource, MetadataStore
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Keys extends StripeObject {
-    /**
-     * Key used to identify your account with Stripe. It can be publicly placed in your front-end or
-     * mobile client.
-     */
-    @SerializedName("publishable")
-    String publishable;
-
-    /**
-     * Confidential key used to perform API requests to Stripe. It should be kept confidential and
-     * only stored on your own servers.
-     */
-    @SerializedName("secret")
-    String secret;
-  }
-
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
   public static class PayoutSchedule extends StripeObject {
     /** The number of days charges for the account will be held before being paid out. */
     @SerializedName("delay_days")
     Long delayDays;
 
     /**
-     * How frequently funds will be paid out. One of `manual` (transfers only created via API call),
+     * How frequently funds will be paid out. One of `manual` (payouts only created via API call),
      * `daily`, `weekly`, or `monthly`.
      */
     @SerializedName("interval")
@@ -522,28 +655,200 @@ public class Account extends ApiResource implements PaymentSource, MetadataStore
   @EqualsAndHashCode(callSuper = false)
   public static class Requirements extends StripeObject {
     /**
+     * The date the fields in `currently_due` must be collected by to keep payouts enabled for the
+     * account. These fields might block payouts sooner if the next threshold is reached before
+     * these fields are collected.
+     */
+    @SerializedName("current_deadline")
+    Long currentDeadline;
+
+    /**
+     * The fields that need to be collected to keep the account enabled. If not collected by the
+     * `current_deadline`, these fields will appear in `past_due` as well, and the account will be
+     * disabled.
+     */
+    @SerializedName("currently_due")
+    List<String> currentlyDue;
+
+    /**
      * If the account is disabled, this string describes why the account can’t create charges or
-     * receive payouts. Can be `rejected.fraud`, `rejected.terms_of_service`, `rejected.listed`,
-     * `rejected.other`, `fields_needed`, `listed`, `under_review`, or `other`.
+     * receive payouts. Can be `requirements.past_due`, `requirements.pending_verification`,
+     * `rejected.fraud`, `rejected.terms_of_service`, `rejected.listed`, `rejected.other`, `listed`,
+     * `under_review`, or `other`.
      */
     @SerializedName("disabled_reason")
     String disabledReason;
 
     /**
-     * By what time the `fields_needed` must be provided. If this date is in the past, the account
-     * is already in bad standing, and providing `fields_needed` is necessary to re-enable payouts
-     * and prevent other consequences. If this date is in the future, `fields_needed` must be
-     * provided to ensure the account remains in good standing.
+     * The fields that need to be collected assuming all volume thresholds are reached. As they
+     * become required, these fields will appear in `currently_due` as well, and the
+     * `current_deadline` will be set.
      */
-    @SerializedName("due_by")
-    Long dueBy;
+    @SerializedName("eventually_due")
+    List<String> eventuallyDue;
 
     /**
-     * Field names that need to be provided for the account to remain in good standing. Nested
-     * fields are separated by `.` (for example, `legal_entity.first_name`).
+     * The fields that weren't collected by the `current_deadline`. These fields need to be
+     * collected to re-enable the account.
      */
-    @SerializedName("fields_needed")
-    List<String> fieldsNeeded;
+    @SerializedName("past_due")
+    List<String> pastDue;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Settings extends StripeObject {
+    @SerializedName("branding")
+    SettingsBranding branding;
+
+    @SerializedName("card_payments")
+    SettingsCardPayments cardPayments;
+
+    @SerializedName("dashboard")
+    SettingsDashboard dashboard;
+
+    @SerializedName("payments")
+    SettingsPayments payments;
+
+    @SerializedName("payouts")
+    SettingsPayouts payouts;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class SettingsBranding extends StripeObject {
+    /**
+     * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) An icon for the account.
+     * Must be square and at least 128px x 128px.
+     */
+    @SerializedName("icon")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<File> icon;
+
+    /**
+     * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) A logo for the account
+     * that will be used in Checkout instead of the icon and without the account's name next to it
+     * if provided. Must be at least 128px x 128px.
+     */
+    @SerializedName("logo")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<File> logo;
+
+    /** A CSS hex color value representing the primary branding color for this account. */
+    @SerializedName("primary_color")
+    String primaryColor;
+
+    /** Get id of expandable `icon` object. */
+    public String getIcon() {
+      return (this.icon != null) ? this.icon.getId() : null;
+    }
+
+    public void setIcon(String id) {
+      this.icon = ApiResource.setExpandableFieldId(id, this.icon);
+    }
+
+    /** Get expanded `icon`. */
+    public File getIconObject() {
+      return (this.icon != null) ? this.icon.getExpanded() : null;
+    }
+
+    public void setIconObject(File expandableObject) {
+      this.icon = new ExpandableField<File>(expandableObject.getId(), expandableObject);
+    }
+
+    /** Get id of expandable `logo` object. */
+    public String getLogo() {
+      return (this.logo != null) ? this.logo.getId() : null;
+    }
+
+    public void setLogo(String id) {
+      this.logo = ApiResource.setExpandableFieldId(id, this.logo);
+    }
+
+    /** Get expanded `logo`. */
+    public File getLogoObject() {
+      return (this.logo != null) ? this.logo.getExpanded() : null;
+    }
+
+    public void setLogoObject(File expandableObject) {
+      this.logo = new ExpandableField<File>(expandableObject.getId(), expandableObject);
+    }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class SettingsCardPayments extends StripeObject {
+    @SerializedName("decline_on")
+    DeclineChargeOn declineOn;
+
+    /**
+     * The default text that appears on credit card statements when a charge is made. This field
+     * prefixes any dynamic `statement_descriptor` specified on the charge.
+     * `statement_descriptor_prefix` is useful for maximizing descriptor space for the dynamic
+     * portion.
+     */
+    @SerializedName("statement_descriptor_prefix")
+    String statementDescriptorPrefix;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class SettingsDashboard extends StripeObject {
+    /**
+     * The display name for this account. This is used on the Stripe Dashboard to differentiate
+     * between accounts.
+     */
+    @SerializedName("display_name")
+    String displayName;
+
+    /**
+     * The timezone used in the Stripe Dashboard for this account. A list of possible time zone
+     * values is maintained at the [IANA Time Zone Database](http://www.iana.org/time-zones).
+     */
+    @SerializedName("timezone")
+    String timezone;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class SettingsPayments extends StripeObject {
+    /**
+     * The default text that appears on credit card statements when a charge is made. This field
+     * prefixes any dynamic `statement_descriptor` specified on the charge.
+     */
+    @SerializedName("statement_descriptor")
+    String statementDescriptor;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class SettingsPayouts extends StripeObject {
+    /**
+     * A Boolean indicating if Stripe should try to reclaim negative balances from an attached bank
+     * account. See our [Understanding Connect Account
+     * Balances](https://stripe.com/docs/connect/account-balances) documentation for details.
+     * Default value is `true` for Express accounts and `false` for Custom accounts.
+     */
+    @SerializedName("debit_negative_balances")
+    Boolean debitNegativeBalances;
+
+    @SerializedName("schedule")
+    PayoutSchedule schedule;
+
+    /**
+     * The text that appears on the bank account statement for payouts. If not set, this defaults to
+     * the platform's bank descriptor as set in the Dashboard.
+     */
+    @SerializedName("statement_descriptor")
+    String statementDescriptor;
   }
 
   @Getter

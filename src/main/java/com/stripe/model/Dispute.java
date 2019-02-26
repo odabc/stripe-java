@@ -7,6 +7,10 @@ import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.param.DisputeCloseParams;
+import com.stripe.param.DisputeListParams;
+import com.stripe.param.DisputeRetrieveParams;
+import com.stripe.param.DisputeUpdateParams;
 import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
@@ -92,11 +96,11 @@ public class Dispute extends ApiResource
   String object;
 
   /**
-   * Reason given by cardholder for dispute. Possible values are `duplicate`, `fraudulent`,
-   * `subscription_canceled`, `product_unacceptable`, `product_not_received`, `unrecognized`,
-   * `credit_not_processed`, `general`, `incorrect_account_details`, `insufficient_funds`,
-   * `bank_cannot_process`, `debit_not_authorized`, or `customer_initiated`. Read more about
-   * [dispute reasons](/docs/disputes/categories).
+   * Reason given by cardholder for dispute. Possible values are `bank_cannot_process`,
+   * `check_returned`, `credit_not_processed`, `customer_initiated`, `debit_not_authorized`,
+   * `duplicate`, `fraudulent`, `general`, `incorrect_account_details`, `insufficient_funds`,
+   * `product_not_received`, `product_unacceptable`, `subscription_canceled`, or `unrecognized`.
+   * Read more about [dispute reasons](https://stripe.com/docs/disputes/categories).
    */
   @SerializedName("reason")
   String reason;
@@ -139,6 +143,18 @@ public class Dispute extends ApiResource
     return requestCollection(url, params, DisputeCollection.class, options);
   }
 
+  /** Returns a list of your disputes. */
+  public static DisputeCollection list(DisputeListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** Returns a list of your disputes. */
+  public static DisputeCollection list(DisputeListParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/disputes");
+    return requestCollection(url, params, DisputeCollection.class, options);
+  }
+
   /** Retrieves the dispute with the given ID. */
   public static Dispute retrieve(String dispute) throws StripeException {
     return retrieve(dispute, (Map<String, Object>) null, (RequestOptions) null);
@@ -152,6 +168,14 @@ public class Dispute extends ApiResource
   /** Retrieves the dispute with the given ID. */
   public static Dispute retrieve(String dispute, Map<String, Object> params, RequestOptions options)
       throws StripeException {
+    String url =
+        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/disputes/%s", dispute));
+    return request(ApiResource.RequestMethod.GET, url, params, Dispute.class, options);
+  }
+
+  /** Retrieves the dispute with the given ID. */
+  public static Dispute retrieve(
+      String dispute, DisputeRetrieveParams params, RequestOptions options) throws StripeException {
     String url =
         String.format("%s%s", Stripe.getApiBase(), String.format("/v1/disputes/%s", dispute));
     return request(ApiResource.RequestMethod.GET, url, params, Dispute.class, options);
@@ -182,6 +206,36 @@ public class Dispute extends ApiResource
    * href="/docs/disputes/categories">guide to dispute types</a>.
    */
   public Dispute update(Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url =
+        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/disputes/%s", this.getId()));
+    return request(ApiResource.RequestMethod.POST, url, params, Dispute.class, options);
+  }
+
+  /**
+   * When you get a dispute, contacting your customer is always the best first step. If that doesn’t
+   * work, you can submit evidence to help us resolve the dispute in your favor. You can do this in
+   * your <a href="https://dashboard.stripe.com/disputes">dashboard</a>, but if you prefer, you can
+   * use the API to submit evidence programmatically.
+   *
+   * <p>Depending on your dispute type, different evidence fields will give you a better chance of
+   * winning your dispute. To figure out which evidence fields to provide, see our <a
+   * href="/docs/disputes/categories">guide to dispute types</a>.
+   */
+  public Dispute update(DisputeUpdateParams params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /**
+   * When you get a dispute, contacting your customer is always the best first step. If that doesn’t
+   * work, you can submit evidence to help us resolve the dispute in your favor. You can do this in
+   * your <a href="https://dashboard.stripe.com/disputes">dashboard</a>, but if you prefer, you can
+   * use the API to submit evidence programmatically.
+   *
+   * <p>Depending on your dispute type, different evidence fields will give you a better chance of
+   * winning your dispute. To figure out which evidence fields to provide, see our <a
+   * href="/docs/disputes/categories">guide to dispute types</a>.
+   */
+  public Dispute update(DisputeUpdateParams params, RequestOptions options) throws StripeException {
     String url =
         String.format("%s%s", Stripe.getApiBase(), String.format("/v1/disputes/%s", this.getId()));
     return request(ApiResource.RequestMethod.POST, url, params, Dispute.class, options);
@@ -228,6 +282,31 @@ public class Dispute extends ApiResource
    * <em>Closing a dispute is irreversible</em>.
    */
   public Dispute close(Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s", Stripe.getApiBase(), String.format("/v1/disputes/%s/close", this.getId()));
+    return request(ApiResource.RequestMethod.POST, url, params, Dispute.class, options);
+  }
+
+  /**
+   * Closing the dispute for a charge indicates that you do not have any evidence to submit and are
+   * essentially dismissing the dispute, acknowledging it as lost.
+   *
+   * <p>The status of the dispute will change from <code>needs_response</code> to <code>lost</code>.
+   * <em>Closing a dispute is irreversible</em>.
+   */
+  public Dispute close(DisputeCloseParams params) throws StripeException {
+    return close(params, (RequestOptions) null);
+  }
+
+  /**
+   * Closing the dispute for a charge indicates that you do not have any evidence to submit and are
+   * essentially dismissing the dispute, acknowledging it as lost.
+   *
+   * <p>The status of the dispute will change from <code>needs_response</code> to <code>lost</code>.
+   * <em>Closing a dispute is irreversible</em>.
+   */
+  public Dispute close(DisputeCloseParams params, RequestOptions options) throws StripeException {
     String url =
         String.format(
             "%s%s", Stripe.getApiBase(), String.format("/v1/disputes/%s/close", this.getId()));

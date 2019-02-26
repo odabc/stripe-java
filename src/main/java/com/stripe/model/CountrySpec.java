@@ -7,6 +7,8 @@ import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.param.CountrySpecListParams;
+import com.stripe.param.CountrySpecRetrieveParams;
 import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
@@ -68,6 +70,18 @@ public class CountrySpec extends ApiResource implements HasId {
     return requestCollection(url, params, CountrySpecCollection.class, options);
   }
 
+  /** Lists all Country Spec objects available in the API. */
+  public static CountrySpecCollection list(CountrySpecListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** Lists all Country Spec objects available in the API. */
+  public static CountrySpecCollection list(CountrySpecListParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/country_specs");
+    return requestCollection(url, params, CountrySpecCollection.class, options);
+  }
+
   /** Returns a Country Spec for a given Country code. */
   public static CountrySpec retrieve(String country) throws StripeException {
     return retrieve(country, (Map<String, Object>) null, (RequestOptions) null);
@@ -87,17 +101,13 @@ public class CountrySpec extends ApiResource implements HasId {
     return request(ApiResource.RequestMethod.GET, url, params, CountrySpec.class, options);
   }
 
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class VerificationFieldDetails extends StripeObject {
-    /** Additional fields which are only required for some users. */
-    @SerializedName("additional")
-    List<String> additional;
-
-    /** Fields which every account must eventually provide. */
-    @SerializedName("minimum")
-    List<String> minimum;
+  /** Returns a Country Spec for a given Country code. */
+  public static CountrySpec retrieve(
+      String country, CountrySpecRetrieveParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/country_specs/%s", country));
+    return request(ApiResource.RequestMethod.GET, url, params, CountrySpec.class, options);
   }
 
   @Getter
@@ -105,9 +115,22 @@ public class CountrySpec extends ApiResource implements HasId {
   @EqualsAndHashCode(callSuper = false)
   public static class VerificationFields extends StripeObject {
     @SerializedName("company")
-    VerificationFieldDetails company;
+    Details company;
 
     @SerializedName("individual")
-    VerificationFieldDetails individual;
+    Details individual;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Details extends StripeObject {
+      /** Additional fields which are only required for some users. */
+      @SerializedName("additional")
+      List<String> additional;
+
+      /** Fields which every account must eventually provide. */
+      @SerializedName("minimum")
+      List<String> minimum;
+    }
   }
 }
