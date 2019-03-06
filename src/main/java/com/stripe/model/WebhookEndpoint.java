@@ -21,6 +21,10 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class WebhookEndpoint extends ApiResource implements HasId {
+  /** The API version events are rendered as for this webhook endpoint. */
+  @SerializedName("api_version")
+  String apiVersion;
+
   /** The ID of the associated Connect application. */
   @SerializedName("application")
   String application;

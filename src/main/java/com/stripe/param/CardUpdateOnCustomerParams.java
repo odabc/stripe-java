@@ -12,14 +12,6 @@ import lombok.Getter;
 
 @Getter
 public class CardUpdateOnCustomerParams extends ApiRequestParams {
-  /** The name of the person or business that owns the bank account. */
-  @SerializedName("account_holder_name")
-  String accountHolderName;
-
-  /** The type of entity that holds the account. This can be either `individual` or `company`. */
-  @SerializedName("account_holder_type")
-  AccountHolderType accountHolderType;
-
   /** City/District/Suburb/Town/Village. */
   @SerializedName("address_city")
   String addressCity;
@@ -63,12 +55,7 @@ public class CardUpdateOnCustomerParams extends ApiRequestParams {
   @SerializedName("name")
   String name;
 
-  @SerializedName("owner")
-  Owner owner;
-
   private CardUpdateOnCustomerParams(
-      String accountHolderName,
-      AccountHolderType accountHolderType,
       String addressCity,
       String addressCountry,
       String addressLine1,
@@ -79,10 +66,7 @@ public class CardUpdateOnCustomerParams extends ApiRequestParams {
       String expYear,
       List<String> expand,
       Map<String, String> metadata,
-      String name,
-      Owner owner) {
-    this.accountHolderName = accountHolderName;
-    this.accountHolderType = accountHolderType;
+      String name) {
     this.addressCity = addressCity;
     this.addressCountry = addressCountry;
     this.addressLine1 = addressLine1;
@@ -94,7 +78,6 @@ public class CardUpdateOnCustomerParams extends ApiRequestParams {
     this.expand = expand;
     this.metadata = metadata;
     this.name = name;
-    this.owner = owner;
   }
 
   public static Builder builder() {
@@ -102,10 +85,6 @@ public class CardUpdateOnCustomerParams extends ApiRequestParams {
   }
 
   public static class Builder {
-    private String accountHolderName;
-
-    private AccountHolderType accountHolderType;
-
     private String addressCity;
 
     private String addressCountry;
@@ -128,13 +107,9 @@ public class CardUpdateOnCustomerParams extends ApiRequestParams {
 
     private String name;
 
-    private Owner owner;
-
     /** Finalize and obtain parameter instance from this builder. */
     public CardUpdateOnCustomerParams build() {
       return new CardUpdateOnCustomerParams(
-          this.accountHolderName,
-          this.accountHolderType,
           this.addressCity,
           this.addressCountry,
           this.addressLine1,
@@ -145,8 +120,7 @@ public class CardUpdateOnCustomerParams extends ApiRequestParams {
           this.expYear,
           this.expand,
           this.metadata,
-          this.name,
-          this.owner);
+          this.name);
     }
 
     /**
@@ -198,18 +172,6 @@ public class CardUpdateOnCustomerParams extends ApiRequestParams {
         this.metadata = new HashMap<>();
       }
       this.metadata.put(key, value);
-      return this;
-    }
-
-    /** The name of the person or business that owns the bank account. */
-    public Builder setAccountHolderName(String accountHolderName) {
-      this.accountHolderName = accountHolderName;
-      return this;
-    }
-
-    /** The type of entity that holds the account. This can be either `individual` or `company`. */
-    public Builder setAccountHolderType(AccountHolderType accountHolderType) {
-      this.accountHolderType = accountHolderType;
       return this;
     }
 
@@ -265,184 +227,6 @@ public class CardUpdateOnCustomerParams extends ApiRequestParams {
     public Builder setName(String name) {
       this.name = name;
       return this;
-    }
-
-    public Builder setOwner(Owner owner) {
-      this.owner = owner;
-      return this;
-    }
-  }
-
-  @Getter
-  public static class Owner {
-    /** Owner's address. */
-    @SerializedName("address")
-    Address address;
-
-    /** Owner's email address. */
-    @SerializedName("email")
-    String email;
-
-    /** Owner's full name. */
-    @SerializedName("name")
-    String name;
-
-    /** Owner's phone number. */
-    @SerializedName("phone")
-    String phone;
-
-    private Owner(Address address, String email, String name, String phone) {
-      this.address = address;
-      this.email = email;
-      this.name = name;
-      this.phone = phone;
-    }
-
-    public static Builder builder() {
-      return new com.stripe.param.CardUpdateOnCustomerParams.Owner.Builder();
-    }
-
-    public static class Builder {
-      private Address address;
-
-      private String email;
-
-      private String name;
-
-      private String phone;
-
-      /** Finalize and obtain parameter instance from this builder. */
-      public Owner build() {
-        return new Owner(this.address, this.email, this.name, this.phone);
-      }
-
-      /** Owner's address. */
-      public Builder setAddress(Address address) {
-        this.address = address;
-        return this;
-      }
-
-      /** Owner's email address. */
-      public Builder setEmail(String email) {
-        this.email = email;
-        return this;
-      }
-
-      /** Owner's full name. */
-      public Builder setName(String name) {
-        this.name = name;
-        return this;
-      }
-
-      /** Owner's phone number. */
-      public Builder setPhone(String phone) {
-        this.phone = phone;
-        return this;
-      }
-    }
-
-    @Getter
-    public static class Address {
-      @SerializedName("city")
-      String city;
-
-      @SerializedName("country")
-      String country;
-
-      @SerializedName("line1")
-      String line1;
-
-      @SerializedName("line2")
-      String line2;
-
-      @SerializedName("postal_code")
-      String postalCode;
-
-      @SerializedName("state")
-      String state;
-
-      private Address(
-          String city,
-          String country,
-          String line1,
-          String line2,
-          String postalCode,
-          String state) {
-        this.city = city;
-        this.country = country;
-        this.line1 = line1;
-        this.line2 = line2;
-        this.postalCode = postalCode;
-        this.state = state;
-      }
-
-      public static Builder builder() {
-        return new com.stripe.param.CardUpdateOnCustomerParams.Owner.Address.Builder();
-      }
-
-      public static class Builder {
-        private String city;
-
-        private String country;
-
-        private String line1;
-
-        private String line2;
-
-        private String postalCode;
-
-        private String state;
-
-        /** Finalize and obtain parameter instance from this builder. */
-        public Address build() {
-          return new Address(
-              this.city, this.country, this.line1, this.line2, this.postalCode, this.state);
-        }
-
-        public Builder setCity(String city) {
-          this.city = city;
-          return this;
-        }
-
-        public Builder setCountry(String country) {
-          this.country = country;
-          return this;
-        }
-
-        public Builder setLine1(String line1) {
-          this.line1 = line1;
-          return this;
-        }
-
-        public Builder setLine2(String line2) {
-          this.line2 = line2;
-          return this;
-        }
-
-        public Builder setPostalCode(String postalCode) {
-          this.postalCode = postalCode;
-          return this;
-        }
-
-        public Builder setState(String state) {
-          this.state = state;
-          return this;
-        }
-      }
-    }
-  }
-
-  public enum AccountHolderType implements ApiRequestParams.Enum {
-    @SerializedName("company")
-    COMPANY("company"),
-
-    @SerializedName("individual")
-    INDIVIDUAL("individual");
-
-    @Getter private final String value;
-
-    AccountHolderType(String value) {
-      this.value = value;
     }
   }
 }

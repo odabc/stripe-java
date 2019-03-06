@@ -20,41 +20,9 @@ public class BankAccountUpdateOnAccountParams extends ApiRequestParams {
   @SerializedName("account_holder_type")
   AccountHolderType accountHolderType;
 
-  /** City/District/Suburb/Town/Village. */
-  @SerializedName("address_city")
-  String addressCity;
-
-  /** Billing address country, if provided when creating card. */
-  @SerializedName("address_country")
-  String addressCountry;
-
-  /** Address line 1 (Street address/PO Box/Company name). */
-  @SerializedName("address_line1")
-  String addressLine1;
-
-  /** Address line 2 (Apartment/Suite/Unit/Building). */
-  @SerializedName("address_line2")
-  String addressLine2;
-
-  /** State/County/Province/Region. */
-  @SerializedName("address_state")
-  String addressState;
-
-  /** ZIP or postal code. */
-  @SerializedName("address_zip")
-  String addressZip;
-
   /** When set to true, this becomes the default external account for its currency. */
   @SerializedName("default_for_currency")
   Boolean defaultForCurrency;
-
-  /** Two digit number representing the card’s expiration month. */
-  @SerializedName("exp_month")
-  String expMonth;
-
-  /** Four digit number representing the card’s expiration year. */
-  @SerializedName("exp_year")
-  String expYear;
 
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
@@ -63,39 +31,17 @@ public class BankAccountUpdateOnAccountParams extends ApiRequestParams {
   @SerializedName("metadata")
   Map<String, String> metadata;
 
-  /** Cardholder name. */
-  @SerializedName("name")
-  String name;
-
   private BankAccountUpdateOnAccountParams(
       String accountHolderName,
       AccountHolderType accountHolderType,
-      String addressCity,
-      String addressCountry,
-      String addressLine1,
-      String addressLine2,
-      String addressState,
-      String addressZip,
       Boolean defaultForCurrency,
-      String expMonth,
-      String expYear,
       List<String> expand,
-      Map<String, String> metadata,
-      String name) {
+      Map<String, String> metadata) {
     this.accountHolderName = accountHolderName;
     this.accountHolderType = accountHolderType;
-    this.addressCity = addressCity;
-    this.addressCountry = addressCountry;
-    this.addressLine1 = addressLine1;
-    this.addressLine2 = addressLine2;
-    this.addressState = addressState;
-    this.addressZip = addressZip;
     this.defaultForCurrency = defaultForCurrency;
-    this.expMonth = expMonth;
-    this.expYear = expYear;
     this.expand = expand;
     this.metadata = metadata;
-    this.name = name;
   }
 
   public static Builder builder() {
@@ -107,47 +53,20 @@ public class BankAccountUpdateOnAccountParams extends ApiRequestParams {
 
     private AccountHolderType accountHolderType;
 
-    private String addressCity;
-
-    private String addressCountry;
-
-    private String addressLine1;
-
-    private String addressLine2;
-
-    private String addressState;
-
-    private String addressZip;
-
     private Boolean defaultForCurrency;
-
-    private String expMonth;
-
-    private String expYear;
 
     private List<String> expand;
 
     private Map<String, String> metadata;
-
-    private String name;
 
     /** Finalize and obtain parameter instance from this builder. */
     public BankAccountUpdateOnAccountParams build() {
       return new BankAccountUpdateOnAccountParams(
           this.accountHolderName,
           this.accountHolderType,
-          this.addressCity,
-          this.addressCountry,
-          this.addressLine1,
-          this.addressLine2,
-          this.addressState,
-          this.addressZip,
           this.defaultForCurrency,
-          this.expMonth,
-          this.expYear,
           this.expand,
-          this.metadata,
-          this.name);
+          this.metadata);
     }
 
     /**
@@ -214,63 +133,9 @@ public class BankAccountUpdateOnAccountParams extends ApiRequestParams {
       return this;
     }
 
-    /** City/District/Suburb/Town/Village. */
-    public Builder setAddressCity(String addressCity) {
-      this.addressCity = addressCity;
-      return this;
-    }
-
-    /** Billing address country, if provided when creating card. */
-    public Builder setAddressCountry(String addressCountry) {
-      this.addressCountry = addressCountry;
-      return this;
-    }
-
-    /** Address line 1 (Street address/PO Box/Company name). */
-    public Builder setAddressLine1(String addressLine1) {
-      this.addressLine1 = addressLine1;
-      return this;
-    }
-
-    /** Address line 2 (Apartment/Suite/Unit/Building). */
-    public Builder setAddressLine2(String addressLine2) {
-      this.addressLine2 = addressLine2;
-      return this;
-    }
-
-    /** State/County/Province/Region. */
-    public Builder setAddressState(String addressState) {
-      this.addressState = addressState;
-      return this;
-    }
-
-    /** ZIP or postal code. */
-    public Builder setAddressZip(String addressZip) {
-      this.addressZip = addressZip;
-      return this;
-    }
-
     /** When set to true, this becomes the default external account for its currency. */
     public Builder setDefaultForCurrency(Boolean defaultForCurrency) {
       this.defaultForCurrency = defaultForCurrency;
-      return this;
-    }
-
-    /** Two digit number representing the card’s expiration month. */
-    public Builder setExpMonth(String expMonth) {
-      this.expMonth = expMonth;
-      return this;
-    }
-
-    /** Four digit number representing the card’s expiration year. */
-    public Builder setExpYear(String expYear) {
-      this.expYear = expYear;
-      return this;
-    }
-
-    /** Cardholder name. */
-    public Builder setName(String name) {
-      this.name = name;
       return this;
     }
   }

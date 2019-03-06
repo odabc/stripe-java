@@ -17,8 +17,9 @@ public class SessionCreateParams extends ApiRequestParams {
   String cancelUrl;
 
   /**
-   * The reference to identify a payment made with Checkout. This reference will be echoed back in
-   * Checkout webhooks.
+   * A unique string to reference the Checkout Session. This can be a customer ID, a cart ID, or
+   * similar. It is included in the checkout_beta.session_succeeded webhook and can be used to
+   * fulfill the purchase.
    */
   @SerializedName("client_reference_id")
   String clientReferenceId;
@@ -210,8 +211,9 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The reference to identify a payment made with Checkout. This reference will be echoed back in
-     * Checkout webhooks.
+     * A unique string to reference the Checkout Session. This can be a customer ID, a cart ID, or
+     * similar. It is included in the checkout_beta.session_succeeded webhook and can be used to
+     * fulfill the purchase.
      */
     public Builder setClientReferenceId(String clientReferenceId) {
       this.clientReferenceId = clientReferenceId;
@@ -258,7 +260,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
   @Getter
   public static class LineItem {
-    /** Amount intended to be collected by this Checkout Session. */
+    /** Per item amount to be collected. */
     @SerializedName("amount")
     Long amount;
 
@@ -349,7 +351,7 @@ public class SessionCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** Amount intended to be collected by this Checkout Session. */
+      /** Per item amount to be collected. */
       public Builder setAmount(Long amount) {
         this.amount = amount;
         return this;
@@ -396,6 +398,10 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("application_fee_amount")
     Long applicationFeeAmount;
 
+    /** Capture method of this PaymentIntent, one of `automatic` or `manual`. */
+    @SerializedName("capture_method")
+    CaptureMethod captureMethod;
+
     /** An arbitrary string attached to the object. Often useful for displaying to users. */
     @SerializedName("description")
     String description;
@@ -439,6 +445,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
     private PaymentIntentData(
         Long applicationFeeAmount,
+        CaptureMethod captureMethod,
         String description,
         Map<String, String> metadata,
         String onBehalfOf,
@@ -447,6 +454,7 @@ public class SessionCreateParams extends ApiRequestParams {
         String statementDescriptor,
         TransferData transferData) {
       this.applicationFeeAmount = applicationFeeAmount;
+      this.captureMethod = captureMethod;
       this.description = description;
       this.metadata = metadata;
       this.onBehalfOf = onBehalfOf;
@@ -462,6 +470,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
     public static class Builder {
       private Long applicationFeeAmount;
+
+      private CaptureMethod captureMethod;
 
       private String description;
 
@@ -481,6 +491,7 @@ public class SessionCreateParams extends ApiRequestParams {
       public PaymentIntentData build() {
         return new PaymentIntentData(
             this.applicationFeeAmount,
+            this.captureMethod,
             this.description,
             this.metadata,
             this.onBehalfOf,
@@ -525,6 +536,12 @@ public class SessionCreateParams extends ApiRequestParams {
        */
       public Builder setApplicationFeeAmount(Long applicationFeeAmount) {
         this.applicationFeeAmount = applicationFeeAmount;
+        return this;
+      }
+
+      /** Capture method of this PaymentIntent, one of `automatic` or `manual`. */
+      public Builder setCaptureMethod(CaptureMethod captureMethod) {
+        this.captureMethod = captureMethod;
         return this;
       }
 
@@ -796,6 +813,20 @@ public class SessionCreateParams extends ApiRequestParams {
           this.destination = destination;
           return this;
         }
+      }
+    }
+
+    public enum CaptureMethod implements ApiRequestParams.Enum {
+      @SerializedName("automatic")
+      AUTOMATIC("automatic"),
+
+      @SerializedName("manual")
+      MANUAL("manual");
+
+      @Getter private final String value;
+
+      CaptureMethod(String value) {
+        this.value = value;
       }
     }
   }

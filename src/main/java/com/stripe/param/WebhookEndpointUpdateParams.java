@@ -298,15 +298,6 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     @SerializedName("customer.discount.updated")
     CUSTOMER__DISCOUNT__UPDATED("customer.discount.updated"),
 
-    @SerializedName("customer.payment_method.created")
-    CUSTOMER__PAYMENT_METHOD__CREATED("customer.payment_method.created"),
-
-    @SerializedName("customer.payment_method.deleted")
-    CUSTOMER__PAYMENT_METHOD__DELETED("customer.payment_method.deleted"),
-
-    @SerializedName("customer.payment_method.updated")
-    CUSTOMER__PAYMENT_METHOD__UPDATED("customer.payment_method.updated"),
-
     @SerializedName("customer.source.contact_cardholder")
     CUSTOMER__SOURCE__CONTACT_CARDHOLDER("customer.source.contact_cardholder"),
 
@@ -465,6 +456,15 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
 
     @SerializedName("payment_intent.succeeded")
     PAYMENT_INTENT__SUCCEEDED("payment_intent.succeeded"),
+
+    @SerializedName("payment_method.attached")
+    PAYMENT_METHOD__ATTACHED("payment_method.attached"),
+
+    @SerializedName("payment_method.card_automatically_updated")
+    PAYMENT_METHOD__CARD_AUTOMATICALLY_UPDATED("payment_method.card_automatically_updated"),
+
+    @SerializedName("payment_method.detached")
+    PAYMENT_METHOD__DETACHED("payment_method.detached"),
 
     @SerializedName("payment_provider_balance_transaction.created")
     PAYMENT_PROVIDER_BALANCE_TRANSACTION__CREATED("payment_provider_balance_transaction.created"),

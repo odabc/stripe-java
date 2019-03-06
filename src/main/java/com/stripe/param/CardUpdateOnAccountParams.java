@@ -12,14 +12,6 @@ import lombok.Getter;
 
 @Getter
 public class CardUpdateOnAccountParams extends ApiRequestParams {
-  /** The name of the person or business that owns the bank account. */
-  @SerializedName("account_holder_name")
-  String accountHolderName;
-
-  /** The type of entity that holds the account. This can be either `individual` or `company`. */
-  @SerializedName("account_holder_type")
-  AccountHolderType accountHolderType;
-
   /** City/District/Suburb/Town/Village. */
   @SerializedName("address_city")
   String addressCity;
@@ -68,8 +60,6 @@ public class CardUpdateOnAccountParams extends ApiRequestParams {
   String name;
 
   private CardUpdateOnAccountParams(
-      String accountHolderName,
-      AccountHolderType accountHolderType,
       String addressCity,
       String addressCountry,
       String addressLine1,
@@ -82,8 +72,6 @@ public class CardUpdateOnAccountParams extends ApiRequestParams {
       List<String> expand,
       Map<String, String> metadata,
       String name) {
-    this.accountHolderName = accountHolderName;
-    this.accountHolderType = accountHolderType;
     this.addressCity = addressCity;
     this.addressCountry = addressCountry;
     this.addressLine1 = addressLine1;
@@ -103,10 +91,6 @@ public class CardUpdateOnAccountParams extends ApiRequestParams {
   }
 
   public static class Builder {
-    private String accountHolderName;
-
-    private AccountHolderType accountHolderType;
-
     private String addressCity;
 
     private String addressCountry;
@@ -134,8 +118,6 @@ public class CardUpdateOnAccountParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public CardUpdateOnAccountParams build() {
       return new CardUpdateOnAccountParams(
-          this.accountHolderName,
-          this.accountHolderType,
           this.addressCity,
           this.addressCountry,
           this.addressLine1,
@@ -202,18 +184,6 @@ public class CardUpdateOnAccountParams extends ApiRequestParams {
       return this;
     }
 
-    /** The name of the person or business that owns the bank account. */
-    public Builder setAccountHolderName(String accountHolderName) {
-      this.accountHolderName = accountHolderName;
-      return this;
-    }
-
-    /** The type of entity that holds the account. This can be either `individual` or `company`. */
-    public Builder setAccountHolderType(AccountHolderType accountHolderType) {
-      this.accountHolderType = accountHolderType;
-      return this;
-    }
-
     /** City/District/Suburb/Town/Village. */
     public Builder setAddressCity(String addressCity) {
       this.addressCity = addressCity;
@@ -272,23 +242,6 @@ public class CardUpdateOnAccountParams extends ApiRequestParams {
     public Builder setName(String name) {
       this.name = name;
       return this;
-    }
-  }
-
-  public enum AccountHolderType implements ApiRequestParams.Enum {
-    @SerializedName("")
-    EMPTY(""),
-
-    @SerializedName("company")
-    COMPANY("company"),
-
-    @SerializedName("individual")
-    INDIVIDUAL("individual");
-
-    @Getter private final String value;
-
-    AccountHolderType(String value) {
-      this.value = value;
     }
   }
 }

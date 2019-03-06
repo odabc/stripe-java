@@ -58,9 +58,8 @@ public class AccountCreateParams extends ApiRequestParams {
   String defaultCurrency;
 
   /**
-   * The email address of the account holder. For Standard accounts, Stripe will email your user
-   * with instructions on how to set up their account. For Custom accounts, this is only to make the
-   * account easier to identify to you: Stripe will never directly email your users.
+   * The email address of the account holder. For Custom accounts, this is only to make the account
+   * easier to identify to you: Stripe will never directly email your users.
    */
   @SerializedName("email")
   String email;
@@ -101,9 +100,9 @@ public class AccountCreateParams extends ApiRequestParams {
   Map<String, String> metadata;
 
   /**
-   * The set of capabilities you want to unlock for this account. Each capability will be inactive
-   * until you have provided its specific requirements and Stripe has verified them. An account may
-   * have some of its requested capabilities be active and some be inactive.
+   * The set of capabilities you want to unlock for this account (US only). Each capability will be
+   * inactive until you have provided its specific requirements and Stripe has verified them. An
+   * account may have some of its requested capabilities be active and some be inactive.
    */
   @SerializedName("requested_capabilities")
   List<RequestedCapability> requestedCapabilities;
@@ -120,11 +119,8 @@ public class AccountCreateParams extends ApiRequestParams {
   TosAcceptance tosAcceptance;
 
   /**
-   * Whether you'd like to create a [Standard or Custom](https://stripe.com/docs/connect/accounts)
-   * account. Standard accounts are normal Stripe accounts: Stripe will email the account holder to
-   * set up a username and password, and will handle all account management directly with them.
-   * Custom accounts have extra parameters available to them, and require that you, the platform,
-   * handle all communication with the account holder. Possible values are `standard` and `custom`.
+   * The type of Stripe account to create. Currently must be `custom`, as only [Custom
+   * accounts](https://stripe.com/docs/connect/custom-accounts) may be created via the API.
    */
   @SerializedName("type")
   Type type;
@@ -375,9 +371,8 @@ public class AccountCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The email address of the account holder. For Standard accounts, Stripe will email your user
-     * with instructions on how to set up their account. For Custom accounts, this is only to make
-     * the account easier to identify to you: Stripe will never directly email your users.
+     * The email address of the account holder. For Custom accounts, this is only to make the
+     * account easier to identify to you: Stripe will never directly email your users.
      */
     public Builder setEmail(String email) {
       this.email = email;
@@ -446,12 +441,8 @@ public class AccountCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Whether you'd like to create a [Standard or Custom](https://stripe.com/docs/connect/accounts)
-     * account. Standard accounts are normal Stripe accounts: Stripe will email the account holder
-     * to set up a username and password, and will handle all account management directly with them.
-     * Custom accounts have extra parameters available to them, and require that you, the platform,
-     * handle all communication with the account holder. Possible values are `standard` and
-     * `custom`.
+     * The type of Stripe account to create. Currently must be `custom`, as only [Custom
+     * accounts](https://stripe.com/docs/connect/custom-accounts) may be created via the API.
      */
     public Builder setType(Type type) {
       this.type = type;

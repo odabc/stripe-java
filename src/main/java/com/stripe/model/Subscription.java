@@ -419,11 +419,11 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    * left in place and collected at the end of the period. But if the subscription is set to cancel
    * immediately, pending prorations will be removed.
    *
-   * <p>By default, upon subscription cancellation, Stripe will close all unpaid invoices for the
-   * customer. This is designed to prevent unexpected payment attempts after the customer has
-   * canceled a subscription. However, you can reopen the invoices manually after subscription
-   * cancellation to have us proceed with payment collection. Or, you could even re-attempt payment
-   * yourself on all unpaid invoices before allowing the customer to cancel the subscription at all.
+   * <p>By default, upon subscription cancellation, Stripe will stop automatic collection of all
+   * finalized invoices for the customer. This is intended to prevent unexpected payment attempts
+   * after the customer has canceled a subscription. However, you can resume automatic collection of
+   * the invoices manually after subscription cancellation to have us proceed. Or, you could check
+   * for unpaid invoices before allowing the customer to cancel the subscription at all.
    */
   public Subscription cancel() throws StripeException {
     return cancel((Map<String, Object>) null, (RequestOptions) null);
@@ -439,11 +439,11 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    * left in place and collected at the end of the period. But if the subscription is set to cancel
    * immediately, pending prorations will be removed.
    *
-   * <p>By default, upon subscription cancellation, Stripe will close all unpaid invoices for the
-   * customer. This is designed to prevent unexpected payment attempts after the customer has
-   * canceled a subscription. However, you can reopen the invoices manually after subscription
-   * cancellation to have us proceed with payment collection. Or, you could even re-attempt payment
-   * yourself on all unpaid invoices before allowing the customer to cancel the subscription at all.
+   * <p>By default, upon subscription cancellation, Stripe will stop automatic collection of all
+   * finalized invoices for the customer. This is intended to prevent unexpected payment attempts
+   * after the customer has canceled a subscription. However, you can resume automatic collection of
+   * the invoices manually after subscription cancellation to have us proceed. Or, you could check
+   * for unpaid invoices before allowing the customer to cancel the subscription at all.
    */
   public Subscription cancel(Map<String, Object> params) throws StripeException {
     return cancel(params, (RequestOptions) null);
@@ -459,11 +459,11 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    * left in place and collected at the end of the period. But if the subscription is set to cancel
    * immediately, pending prorations will be removed.
    *
-   * <p>By default, upon subscription cancellation, Stripe will close all unpaid invoices for the
-   * customer. This is designed to prevent unexpected payment attempts after the customer has
-   * canceled a subscription. However, you can reopen the invoices manually after subscription
-   * cancellation to have us proceed with payment collection. Or, you could even re-attempt payment
-   * yourself on all unpaid invoices before allowing the customer to cancel the subscription at all.
+   * <p>By default, upon subscription cancellation, Stripe will stop automatic collection of all
+   * finalized invoices for the customer. This is intended to prevent unexpected payment attempts
+   * after the customer has canceled a subscription. However, you can resume automatic collection of
+   * the invoices manually after subscription cancellation to have us proceed. Or, you could check
+   * for unpaid invoices before allowing the customer to cancel the subscription at all.
    */
   public Subscription cancel(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -483,11 +483,11 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    * left in place and collected at the end of the period. But if the subscription is set to cancel
    * immediately, pending prorations will be removed.
    *
-   * <p>By default, upon subscription cancellation, Stripe will close all unpaid invoices for the
-   * customer. This is designed to prevent unexpected payment attempts after the customer has
-   * canceled a subscription. However, you can reopen the invoices manually after subscription
-   * cancellation to have us proceed with payment collection. Or, you could even re-attempt payment
-   * yourself on all unpaid invoices before allowing the customer to cancel the subscription at all.
+   * <p>By default, upon subscription cancellation, Stripe will stop automatic collection of all
+   * finalized invoices for the customer. This is intended to prevent unexpected payment attempts
+   * after the customer has canceled a subscription. However, you can resume automatic collection of
+   * the invoices manually after subscription cancellation to have us proceed. Or, you could check
+   * for unpaid invoices before allowing the customer to cancel the subscription at all.
    */
   public Subscription cancel(SubscriptionCancelParams params) throws StripeException {
     return cancel(params, (RequestOptions) null);
@@ -503,11 +503,11 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    * left in place and collected at the end of the period. But if the subscription is set to cancel
    * immediately, pending prorations will be removed.
    *
-   * <p>By default, upon subscription cancellation, Stripe will close all unpaid invoices for the
-   * customer. This is designed to prevent unexpected payment attempts after the customer has
-   * canceled a subscription. However, you can reopen the invoices manually after subscription
-   * cancellation to have us proceed with payment collection. Or, you could even re-attempt payment
-   * yourself on all unpaid invoices before allowing the customer to cancel the subscription at all.
+   * <p>By default, upon subscription cancellation, Stripe will stop automatic collection of all
+   * finalized invoices for the customer. This is intended to prevent unexpected payment attempts
+   * after the customer has canceled a subscription. However, you can resume automatic collection of
+   * the invoices manually after subscription cancellation to have us proceed. Or, you could check
+   * for unpaid invoices before allowing the customer to cancel the subscription at all.
    */
   public Subscription cancel(SubscriptionCancelParams params, RequestOptions options)
       throws StripeException {

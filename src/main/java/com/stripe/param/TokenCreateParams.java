@@ -12,6 +12,7 @@ import lombok.Getter;
 
 @Getter
 public class TokenCreateParams extends ApiRequestParams {
+  /** Information for the account this token will represent. */
   @SerializedName("account")
   Account account;
 
@@ -57,6 +58,7 @@ public class TokenCreateParams extends ApiRequestParams {
   @SerializedName("payment_user_agent")
   String paymentUserAgent;
 
+  /** The PII this token will represent. */
   @SerializedName("pii")
   Pii pii;
 
@@ -204,6 +206,7 @@ public class TokenCreateParams extends ApiRequestParams {
       return this;
     }
 
+    /** Information for the account this token will represent. */
     public Builder setAccount(Account account) {
       this.account = account;
       return this;
@@ -293,6 +296,7 @@ public class TokenCreateParams extends ApiRequestParams {
       return this;
     }
 
+    /** The PII this token will represent. */
     public Builder setPii(Pii pii) {
       this.pii = pii;
       return this;
@@ -326,15 +330,24 @@ public class TokenCreateParams extends ApiRequestParams {
 
   @Getter
   public static class Account {
+    /** The business type. Can be `individual` or `company`. */
     @SerializedName("business_type")
     String businessType;
 
+    /** Information about the company or business. */
     @SerializedName("company")
     Company company;
 
+    /** Information about the person represented by the account. */
     @SerializedName("individual")
     Individual individual;
 
+    /**
+     * Whether the user described by the data in the token has been shown [the Stripe Connected
+     * Account
+     * Agreement](https://stripe.com/docs/connect/account-tokens#stripe-connected-account-agreement).
+     * When creating an account token to create a new Connect account, this value must be `true`.
+     */
     @SerializedName("tos_shown_and_accepted")
     Boolean tosShownAndAccepted;
 
@@ -365,21 +378,30 @@ public class TokenCreateParams extends ApiRequestParams {
             this.businessType, this.company, this.individual, this.tosShownAndAccepted);
       }
 
+      /** The business type. Can be `individual` or `company`. */
       public Builder setBusinessType(String businessType) {
         this.businessType = businessType;
         return this;
       }
 
+      /** Information about the company or business. */
       public Builder setCompany(Company company) {
         this.company = company;
         return this;
       }
 
+      /** Information about the person represented by the account. */
       public Builder setIndividual(Individual individual) {
         this.individual = individual;
         return this;
       }
 
+      /**
+       * Whether the user described by the data in the token has been shown [the Stripe Connected
+       * Account
+       * Agreement](https://stripe.com/docs/connect/account-tokens#stripe-connected-account-agreement).
+       * When creating an account token to create a new Connect account, this value must be `true`.
+       */
       public Builder setTosShownAndAccepted(Boolean tosShownAndAccepted) {
         this.tosShownAndAccepted = tosShownAndAccepted;
         return this;
@@ -2421,19 +2443,12 @@ public class TokenCreateParams extends ApiRequestParams {
 
   @Getter
   public static class Pii {
+    /** The `id_number` for the PII, in string form. */
     @SerializedName("id_number")
     String idNumber;
 
-    @SerializedName("ssn_last_4")
-    String ssnLast4;
-
-    @SerializedName("tax_id")
-    String taxId;
-
-    private Pii(String idNumber, String ssnLast4, String taxId) {
+    private Pii(String idNumber) {
       this.idNumber = idNumber;
-      this.ssnLast4 = ssnLast4;
-      this.taxId = taxId;
     }
 
     public static Builder builder() {
@@ -2443,27 +2458,14 @@ public class TokenCreateParams extends ApiRequestParams {
     public static class Builder {
       private String idNumber;
 
-      private String ssnLast4;
-
-      private String taxId;
-
       /** Finalize and obtain parameter instance from this builder. */
       public Pii build() {
-        return new Pii(this.idNumber, this.ssnLast4, this.taxId);
+        return new Pii(this.idNumber);
       }
 
+      /** The `id_number` for the PII, in string form. */
       public Builder setIdNumber(String idNumber) {
         this.idNumber = idNumber;
-        return this;
-      }
-
-      public Builder setSsnLast4(String ssnLast4) {
-        this.ssnLast4 = ssnLast4;
-        return this;
-      }
-
-      public Builder setTaxId(String taxId) {
-        this.taxId = taxId;
         return this;
       }
     }

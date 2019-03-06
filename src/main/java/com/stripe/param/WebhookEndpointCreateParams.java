@@ -11,6 +11,13 @@ import lombok.Getter;
 @Getter
 public class WebhookEndpointCreateParams extends ApiRequestParams {
   /**
+   * Events sent to this endpoint will be generated with this Stripe Version instead of your
+   * account's default Stripe Version.
+   */
+  @SerializedName("api_version")
+  ApiVersion apiVersion;
+
+  /**
    * Whether this endpoint should receive events from connected accounts (`true`), or your account
    * (`false`).
    */
@@ -32,7 +39,12 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
   String url;
 
   private WebhookEndpointCreateParams(
-      Boolean connect, List<EnabledEvent> enabledEvents, List<String> expand, String url) {
+      ApiVersion apiVersion,
+      Boolean connect,
+      List<EnabledEvent> enabledEvents,
+      List<String> expand,
+      String url) {
+    this.apiVersion = apiVersion;
     this.connect = connect;
     this.enabledEvents = enabledEvents;
     this.expand = expand;
@@ -44,6 +56,8 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
   }
 
   public static class Builder {
+    private ApiVersion apiVersion;
+
     private Boolean connect;
 
     private List<EnabledEvent> enabledEvents;
@@ -55,7 +69,7 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public WebhookEndpointCreateParams build() {
       return new WebhookEndpointCreateParams(
-          this.connect, this.enabledEvents, this.expand, this.url);
+          this.apiVersion, this.connect, this.enabledEvents, this.expand, this.url);
     }
 
     /**
@@ -111,6 +125,15 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     }
 
     /**
+     * Events sent to this endpoint will be generated with this Stripe Version instead of your
+     * account's default Stripe Version.
+     */
+    public Builder setApiVersion(ApiVersion apiVersion) {
+      this.apiVersion = apiVersion;
+      return this;
+    }
+
+    /**
      * Whether this endpoint should receive events from connected accounts (`true`), or your account
      * (`false`).
      */
@@ -123,6 +146,272 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     public Builder setUrl(String url) {
       this.url = url;
       return this;
+    }
+  }
+
+  public enum ApiVersion implements ApiRequestParams.Enum {
+    @SerializedName("2011-01-01")
+    VERSION_2011_01_01("2011-01-01"),
+
+    @SerializedName("2011-06-21")
+    VERSION_2011_06_21("2011-06-21"),
+
+    @SerializedName("2011-06-28")
+    VERSION_2011_06_28("2011-06-28"),
+
+    @SerializedName("2011-08-01")
+    VERSION_2011_08_01("2011-08-01"),
+
+    @SerializedName("2011-09-15")
+    VERSION_2011_09_15("2011-09-15"),
+
+    @SerializedName("2011-11-17")
+    VERSION_2011_11_17("2011-11-17"),
+
+    @SerializedName("2012-02-23")
+    VERSION_2012_02_23("2012-02-23"),
+
+    @SerializedName("2012-03-25")
+    VERSION_2012_03_25("2012-03-25"),
+
+    @SerializedName("2012-06-18")
+    VERSION_2012_06_18("2012-06-18"),
+
+    @SerializedName("2012-06-28")
+    VERSION_2012_06_28("2012-06-28"),
+
+    @SerializedName("2012-07-09")
+    VERSION_2012_07_09("2012-07-09"),
+
+    @SerializedName("2012-09-24")
+    VERSION_2012_09_24("2012-09-24"),
+
+    @SerializedName("2012-10-26")
+    VERSION_2012_10_26("2012-10-26"),
+
+    @SerializedName("2012-11-07")
+    VERSION_2012_11_07("2012-11-07"),
+
+    @SerializedName("2013-02-11")
+    VERSION_2013_02_11("2013-02-11"),
+
+    @SerializedName("2013-02-13")
+    VERSION_2013_02_13("2013-02-13"),
+
+    @SerializedName("2013-07-05")
+    VERSION_2013_07_05("2013-07-05"),
+
+    @SerializedName("2013-08-12")
+    VERSION_2013_08_12("2013-08-12"),
+
+    @SerializedName("2013-08-13")
+    VERSION_2013_08_13("2013-08-13"),
+
+    @SerializedName("2013-10-29")
+    VERSION_2013_10_29("2013-10-29"),
+
+    @SerializedName("2013-12-03")
+    VERSION_2013_12_03("2013-12-03"),
+
+    @SerializedName("2014-01-31")
+    VERSION_2014_01_31("2014-01-31"),
+
+    @SerializedName("2014-03-13")
+    VERSION_2014_03_13("2014-03-13"),
+
+    @SerializedName("2014-03-28")
+    VERSION_2014_03_28("2014-03-28"),
+
+    @SerializedName("2014-05-19")
+    VERSION_2014_05_19("2014-05-19"),
+
+    @SerializedName("2014-06-13")
+    VERSION_2014_06_13("2014-06-13"),
+
+    @SerializedName("2014-06-17")
+    VERSION_2014_06_17("2014-06-17"),
+
+    @SerializedName("2014-07-22")
+    VERSION_2014_07_22("2014-07-22"),
+
+    @SerializedName("2014-07-26")
+    VERSION_2014_07_26("2014-07-26"),
+
+    @SerializedName("2014-08-04")
+    VERSION_2014_08_04("2014-08-04"),
+
+    @SerializedName("2014-08-20")
+    VERSION_2014_08_20("2014-08-20"),
+
+    @SerializedName("2014-09-08")
+    VERSION_2014_09_08("2014-09-08"),
+
+    @SerializedName("2014-10-07")
+    VERSION_2014_10_07("2014-10-07"),
+
+    @SerializedName("2014-11-05")
+    VERSION_2014_11_05("2014-11-05"),
+
+    @SerializedName("2014-11-20")
+    VERSION_2014_11_20("2014-11-20"),
+
+    @SerializedName("2014-12-08")
+    VERSION_2014_12_08("2014-12-08"),
+
+    @SerializedName("2014-12-17")
+    VERSION_2014_12_17("2014-12-17"),
+
+    @SerializedName("2014-12-22")
+    VERSION_2014_12_22("2014-12-22"),
+
+    @SerializedName("2015-01-11")
+    VERSION_2015_01_11("2015-01-11"),
+
+    @SerializedName("2015-01-26")
+    VERSION_2015_01_26("2015-01-26"),
+
+    @SerializedName("2015-02-10")
+    VERSION_2015_02_10("2015-02-10"),
+
+    @SerializedName("2015-02-16")
+    VERSION_2015_02_16("2015-02-16"),
+
+    @SerializedName("2015-02-18")
+    VERSION_2015_02_18("2015-02-18"),
+
+    @SerializedName("2015-03-24")
+    VERSION_2015_03_24("2015-03-24"),
+
+    @SerializedName("2015-04-07")
+    VERSION_2015_04_07("2015-04-07"),
+
+    @SerializedName("2015-06-15")
+    VERSION_2015_06_15("2015-06-15"),
+
+    @SerializedName("2015-07-07")
+    VERSION_2015_07_07("2015-07-07"),
+
+    @SerializedName("2015-07-13")
+    VERSION_2015_07_13("2015-07-13"),
+
+    @SerializedName("2015-07-28")
+    VERSION_2015_07_28("2015-07-28"),
+
+    @SerializedName("2015-08-07")
+    VERSION_2015_08_07("2015-08-07"),
+
+    @SerializedName("2015-08-19")
+    VERSION_2015_08_19("2015-08-19"),
+
+    @SerializedName("2015-09-03")
+    VERSION_2015_09_03("2015-09-03"),
+
+    @SerializedName("2015-09-08")
+    VERSION_2015_09_08("2015-09-08"),
+
+    @SerializedName("2015-09-23")
+    VERSION_2015_09_23("2015-09-23"),
+
+    @SerializedName("2015-10-01")
+    VERSION_2015_10_01("2015-10-01"),
+
+    @SerializedName("2015-10-12")
+    VERSION_2015_10_12("2015-10-12"),
+
+    @SerializedName("2015-10-16")
+    VERSION_2015_10_16("2015-10-16"),
+
+    @SerializedName("2016-02-03")
+    VERSION_2016_02_03("2016-02-03"),
+
+    @SerializedName("2016-02-19")
+    VERSION_2016_02_19("2016-02-19"),
+
+    @SerializedName("2016-02-22")
+    VERSION_2016_02_22("2016-02-22"),
+
+    @SerializedName("2016-02-23")
+    VERSION_2016_02_23("2016-02-23"),
+
+    @SerializedName("2016-02-29")
+    VERSION_2016_02_29("2016-02-29"),
+
+    @SerializedName("2016-03-07")
+    VERSION_2016_03_07("2016-03-07"),
+
+    @SerializedName("2016-06-15")
+    VERSION_2016_06_15("2016-06-15"),
+
+    @SerializedName("2016-07-06")
+    VERSION_2016_07_06("2016-07-06"),
+
+    @SerializedName("2016-10-19")
+    VERSION_2016_10_19("2016-10-19"),
+
+    @SerializedName("2017-01-27")
+    VERSION_2017_01_27("2017-01-27"),
+
+    @SerializedName("2017-02-14")
+    VERSION_2017_02_14("2017-02-14"),
+
+    @SerializedName("2017-04-06")
+    VERSION_2017_04_06("2017-04-06"),
+
+    @SerializedName("2017-05-25")
+    VERSION_2017_05_25("2017-05-25"),
+
+    @SerializedName("2017-06-05")
+    VERSION_2017_06_05("2017-06-05"),
+
+    @SerializedName("2017-08-15")
+    VERSION_2017_08_15("2017-08-15"),
+
+    @SerializedName("2017-12-14")
+    VERSION_2017_12_14("2017-12-14"),
+
+    @SerializedName("2018-01-23")
+    VERSION_2018_01_23("2018-01-23"),
+
+    @SerializedName("2018-02-05")
+    VERSION_2018_02_05("2018-02-05"),
+
+    @SerializedName("2018-02-06")
+    VERSION_2018_02_06("2018-02-06"),
+
+    @SerializedName("2018-02-28")
+    VERSION_2018_02_28("2018-02-28"),
+
+    @SerializedName("2018-05-21")
+    VERSION_2018_05_21("2018-05-21"),
+
+    @SerializedName("2018-07-27")
+    VERSION_2018_07_27("2018-07-27"),
+
+    @SerializedName("2018-08-23")
+    VERSION_2018_08_23("2018-08-23"),
+
+    @SerializedName("2018-09-06")
+    VERSION_2018_09_06("2018-09-06"),
+
+    @SerializedName("2018-09-24")
+    VERSION_2018_09_24("2018-09-24"),
+
+    @SerializedName("2018-10-31")
+    VERSION_2018_10_31("2018-10-31"),
+
+    @SerializedName("2018-11-08")
+    VERSION_2018_11_08("2018-11-08"),
+
+    @SerializedName("2019-02-11")
+    VERSION_2019_02_11("2019-02-11"),
+
+    @SerializedName("2019-02-19")
+    VERSION_2019_02_19("2019-02-19");
+
+    @Getter private final String value;
+
+    ApiVersion(String value) {
+      this.value = value;
     }
   }
 
@@ -304,15 +593,6 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     @SerializedName("customer.discount.updated")
     CUSTOMER__DISCOUNT__UPDATED("customer.discount.updated"),
 
-    @SerializedName("customer.payment_method.created")
-    CUSTOMER__PAYMENT_METHOD__CREATED("customer.payment_method.created"),
-
-    @SerializedName("customer.payment_method.deleted")
-    CUSTOMER__PAYMENT_METHOD__DELETED("customer.payment_method.deleted"),
-
-    @SerializedName("customer.payment_method.updated")
-    CUSTOMER__PAYMENT_METHOD__UPDATED("customer.payment_method.updated"),
-
     @SerializedName("customer.source.contact_cardholder")
     CUSTOMER__SOURCE__CONTACT_CARDHOLDER("customer.source.contact_cardholder"),
 
@@ -471,6 +751,15 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
 
     @SerializedName("payment_intent.succeeded")
     PAYMENT_INTENT__SUCCEEDED("payment_intent.succeeded"),
+
+    @SerializedName("payment_method.attached")
+    PAYMENT_METHOD__ATTACHED("payment_method.attached"),
+
+    @SerializedName("payment_method.card_automatically_updated")
+    PAYMENT_METHOD__CARD_AUTOMATICALLY_UPDATED("payment_method.card_automatically_updated"),
+
+    @SerializedName("payment_method.detached")
+    PAYMENT_METHOD__DETACHED("payment_method.detached"),
 
     @SerializedName("payment_provider_balance_transaction.created")
     PAYMENT_PROVIDER_BALANCE_TRANSACTION__CREATED("payment_provider_balance_transaction.created"),
