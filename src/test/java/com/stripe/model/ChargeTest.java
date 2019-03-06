@@ -63,10 +63,6 @@ public class ChargeTest extends BaseStripeTest {
     assertNotNull(customer);
     assertNotNull(customer.getId());
     assertEquals(charge.getCustomer(), customer.getId());
-    final Account destination = charge.getDestinationObject();
-    assertNotNull(destination);
-    assertNotNull(destination.getId());
-    assertEquals(charge.getDestination(), destination.getId());
     final Dispute dispute = charge.getDisputeObject();
     assertNotNull(dispute);
     assertNotNull(dispute.getId());
