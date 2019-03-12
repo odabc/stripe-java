@@ -40,6 +40,11 @@ public class ApiRequestParamsTest {
     }
   }
 
+  private static class ConcreteApiRequestBooleanParams extends ApiRequestParams {
+    private Boolean boolVal;
+    private boolean boolPrimitiveVal;
+  }
+
   @Test
   public void testToMapWithEmptyEnumToNull() {
     ConcreteApiRequestParams paramRequest = new ConcreteApiRequestParams();
@@ -63,5 +68,18 @@ public class ApiRequestParamsTest {
 
     assertEquals(1, paramMap.size());
     assertEquals(ParamCode.OTHER.getValue(), paramMap.get("foo"));
+  }
+
+  @Test
+  public void testToMapWithUnInitializedBoolean() {
+    // uninitialized boolean object doesn't get mistaken to be a false value in the param map
+    // but primitive boolean does has default value of false
+    ConcreteApiRequestBooleanParams paramRequest = new ConcreteApiRequestBooleanParams();
+    assertNull(paramRequest.boolVal);
+    assertFalse(paramRequest.boolPrimitiveVal);
+
+    Map<String, Object> paramMap = paramRequest.toMap();
+    assertEquals(1, paramMap.size());
+    assertEquals(false, paramMap.get("bool_primitive_val"));
   }
 }
